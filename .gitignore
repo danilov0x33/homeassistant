@@ -1,0 +1,24 @@
+!*.yaml
+!.gitignore
+!*.md
+
+# Ignore folders.
+.storage
+.cloud
+.google.token
+.uuid
+esphome/
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+gateway.txt
+*.token
+*.db
+*.log
+*.jpg
+*.mp4
+home-assistant_v2.*
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+core.*
+core
