@@ -1,0 +1,6 @@
+|
+  ha-card {
+    color: #00BFFF;
+    font-weight: bold;
+    font-size: 16px;
+  }

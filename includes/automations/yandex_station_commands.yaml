@@ -1,0 +1,35 @@
+- trigger:
+    platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Какая температура в зале
+  action: 
+    - service: script.turn_on
+      entity_id: script.yandex_tts_esp001_sensor_temperature
+
+- trigger:
+    platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Какая влажность в зале
+  action: 
+    - service: script.turn_on
+      entity_id: script.yandex_tts_esp001_sensor_humidity
+
+- trigger:
+    platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Сделай телевизор погромче
+  action: 
+    - service: script.turn_on
+      entity_id: script.mi_remote_controller_01_samsung_volume_up
+
+- trigger:
+    platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Сделай телевизор потише
+  action: 
+    - service: script.turn_on
+      entity_id: script.mi_remote_controller_01_samsung_volume_down

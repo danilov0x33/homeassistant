@@ -8,6 +8,10 @@
 .google.token
 .uuid
 esphome/
+custom_components/
+www/
+tts/
+themes/
 
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
 gateway.txt
@@ -16,6 +20,7 @@ gateway.txt
 *.log
 *.jpg
 *.mp4
+.yandex_station.json
 home-assistant_v2.*
 ip_bans.yaml
 secrets.yaml

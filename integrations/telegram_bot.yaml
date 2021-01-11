@@ -1,0 +1,4 @@
+  - platform: polling
+    api_key: !secret telegram_danilov_main_ha_bot_secret_key
+    allowed_chat_ids:
+      - !secret telegram_danilov_info_group_id

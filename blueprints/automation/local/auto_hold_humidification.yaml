@@ -1,0 +1,89 @@
+blueprint:
+  name: Auto hold humidification
+  description: Автоматическое удержание увлежнения воздуха
+  domain: automation
+  input:
+    sensor_humidity:
+      name: Датчик влажности
+      selector: 
+        entity:
+          domain: sensor
+    humidity_percent:
+      name: Влажность
+      default: 50
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: "%"
+    humidity_entity:
+      name: Увлажнитель
+      selector: 
+        target:
+    can_turn_on_humidity_entity_binary_sensor:
+      name: Можно ли включить увлажнитель
+      selector: 
+        entity:
+          domain: binary_sensor
+    # timer:
+    #   name: Таймер ожидания ручного выключения
+    #   selector:
+    #     entity:
+    #       domain: timer
+
+#mode: restart
+#max_exceeded: silent
+
+trigger:
+  - platform: time_pattern
+    minutes: "/5"
+  - platform: state
+    entity_id: !input can_turn_on_humidity_entity_binary_sensor
+
+variables:
+  humidity_percent: !input humidity_percent
+  sensor_humidity: !input sensor_humidity
+  min_humidity_percent: > 
+    {% if humidity_percent - 5 < 0 %}
+      0
+    {% else %}
+      {{ humidity_percent - 5 }}
+    {% endif %}
+  max_humidity_percent: > 
+    {% if humidity_percent + 5 > 100 %}
+      100
+    {% else %}
+      {{ humidity_percent + 5 }}
+    {% endif %}
+
+action:
+  choose:
+    # Включение увлажнителя
+    - conditions:
+      - condition: template
+        value_template: "{{ states(sensor_humidity) | float <= min_humidity_percent }}"
+      - condition: state
+        entity_id: !input can_turn_on_humidity_entity_binary_sensor
+        state: 'on'
+      - condition: state
+        entity_id: !input humidity_entity
+        state: 'off'
+      sequence:
+        - service: homeassistant.turn_on
+          entity_id: !input humidity_entity
+
+    # Выключение увлажнителя
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: template
+          value_template: "{{ states(sensor_humidity) | float >= max_humidity_percent }}"
+        - condition: state
+          entity_id: !input can_turn_on_humidity_entity_binary_sensor
+          state: 'off'
+      - condition: state
+        entity_id: !input humidity_entity
+        state: 'on'
+      sequence:
+        - service: homeassistant.turn_off
+          entity_id: !input humidity_entity

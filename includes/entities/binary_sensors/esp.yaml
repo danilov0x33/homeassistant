@@ -1,0 +1,7 @@
+- platform: mqtt
+  name: "humidifier_01_water_state"
+  state_topic: "danilov_smart_devices/humidifier_01/sensor/water"
+  payload_on: "1"
+  payload_off: "0"
+  availability:
+    - topic: "danilov_smart_devices/humidifier_01/available"

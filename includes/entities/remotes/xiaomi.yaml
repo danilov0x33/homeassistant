@@ -1,0 +1,6 @@
+- platform: xiaomi_miio
+  name: "mi_remote_controller_01"
+  host: 192.168.1.69
+  token: d0f4b90268e73772908d287f01f17cde
+  timeout: 30
+  hidden: false

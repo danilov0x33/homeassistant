@@ -1,0 +1,12 @@
+db_url: !secret db_main_url
+purge_keep_days: 3
+auto_purge: true
+
+include:
+  # domains:
+  #   - sensor
+  #   - binary_sensor
+  entity_globs:
+    - binary_sensor.*
+    - sensor.*
+    - switch.*

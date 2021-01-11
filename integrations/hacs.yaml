@@ -1,0 +1,2 @@
+token: !secret HACS_github
+appdaemon: true

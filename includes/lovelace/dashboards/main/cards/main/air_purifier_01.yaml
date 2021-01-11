@@ -1,0 +1,29 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: >
+      **Очиститель воздуха**
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        tap_action: 
+          action: call-service
+          service: script.air_purifier_01_power_on_off
+        name: Вкл/Выкл
+        icon: mdi:power
+        size: 50%
+      - type: custom:button-card
+        tap_action: 
+          action: call-service
+          service: script.air_purifier_01_anion_on_off
+        name: Ионизация
+        icon: mdi:weather-lightning
+        size: 50%
+      - type: custom:button-card
+        tap_action: 
+          action: call-service
+          service: script.air_purifier_01_speed
+        name: Скорость
+        icon: mdi:fan-chevron-up
+        size: 50%

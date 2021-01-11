@@ -1,0 +1,60 @@
+title: Главная
+icon: mdi:home-assistant
+cards: #!include_dir_list ../cards/house
+  - type: vertical-stack
+    cards:
+      - !include ../cards/main/weather.yaml
+
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            style: !include ../../../components/title_style.yaml 
+            content: >
+              **Сенсор в зале**
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                hour24: true
+                entities: 
+                  - entity: sensor.esp001_sensor_bme280_temperature
+              - type: custom:mini-graph-card
+                line_color: blue
+                hour24: true
+                entities: 
+                - entity: sensor.esp001_sensor_bme280_humidity
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                line_color: red
+                hour24: true
+                entities: 
+                  - entity: sensor.esp001_sensor_bme280_pressure
+              - type: custom:mini-graph-card
+                hour24: true
+                entities: 
+                  - entity: sensor.illumination_7c49eb1d4ecf
+
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            style: !include ../../../components/title_style.yaml 
+            content: >
+              **Сенсоры на кухне**
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: binary_sensor.0x00158d000123129b_contact
+
+  - type: vertical-stack
+    cards:
+      - !include ../cards/main/humidifier_01.yaml
+      - !include ../cards/main/tyua_switch_01.yaml
+      - type: entities
+        show_header_toggle: false
+        entities:          
+          - entity: switch.0x00158d0001bbf9cf
+    
+  - type: vertical-stack
+    cards:
+      - !include ../cards/main/air_purifier_01.yaml
+      - !include ../cards/main/samsung_tv.yaml

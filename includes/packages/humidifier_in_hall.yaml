@@ -1,0 +1,40 @@
+# Работа polaris увлажнителя в зале.
+humidifier_in_hall_polaris_package:
+
+  automation:
+    alias: humidifier_polaris_in_hall
+    description: Автоматическая работа увлажнителя Polaris
+    initial_state: true
+    use_blueprint:
+      path: local/auto_hold_humidification.yaml
+      input:
+        sensor_humidity: sensor.esp001_sensor_bme280_humidity
+        humidity_percent: 50
+        can_turn_on_humidity_entity_binary_sensor: binary_sensor.humidifier_01_water_state
+        humidity_entity: switch.humidifier_01_state_on_off
+
+# Работа xiaomi увлажнителя в зале.
+humidifier_in_hall_xiaomi_package:
+
+  binary_sensor:
+    - platform: template
+      sensors:
+        check_water_state_on_humidifier_xiaomi_in_hall:
+          value_template: >-
+            {% if is_state_attr('fan.xiaomi_air_humidifier_1', 'no_water', false) %}
+              on
+            {% else %}
+              off
+            {% endif %}
+
+  automation:
+    alias: humidifier_xiaomi_in_hall
+    description: Автоматическая работа увлажнителя Xiaomi
+    initial_state: true
+    use_blueprint:
+      path: local/auto_hold_humidification.yaml
+      input:
+        sensor_humidity: sensor.esp001_sensor_bme280_humidity
+        humidity_percent: 50
+        can_turn_on_humidity_entity_binary_sensor: binary_sensor.check_water_state_on_humidifier_xiaomi_in_hall
+        humidity_entity: fan.xiaomi_air_humidifier_1

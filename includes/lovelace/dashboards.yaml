@@ -1,0 +1,6 @@
+main-dashboard:
+  mode: yaml
+  title: Главная
+  icon: mdi:home
+  show_in_sidebar: true
+  filename: includes/lovelace/dashboards/main/dashboard.yaml

@@ -1,0 +1,25 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: >
+      **Сенсор в зале**
+  - type: horizontal-stack
+    cards:
+      - type: custom:mini-graph-card
+        hour24: true
+        entities: 
+          - entity: sensor.esp001_sensor_bme280_temperature
+            name: Температура комнаты
+      - type: custom:mini-graph-card
+        line_color: blue
+        hour24: true
+        entities: 
+        - entity: sensor.esp001_sensor_bme280_humidity
+          name: Влажность комнаты
+      - type: custom:mini-graph-card
+        line_color: red
+        hour24: true
+        entities: 
+          - entity: sensor.esp001_sensor_bme280_pressure
+            name: Давление комнаты

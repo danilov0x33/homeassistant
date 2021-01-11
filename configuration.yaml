@@ -1,12 +1,59 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Danilov Home Assistant
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude_coord
+  longitude: !secret longitude_coord
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Moscow
 
-# Configure a default setup of Home Assistant (frontend, api, etc)
-default_config:
+  #allowlist_external_dirs:
+  #  - /config
 
-# Text to speech
-tts:
-  - platform: google_translate
+  customize: !include_dir_merge_named includes/entities/customizations
+  packages: !include_dir_merge_named includes/packages
 
-group: !include groups.yaml
+# Configurations
+lovelace: !include integrations/lovelace.yaml
+frontend: !include integrations/frontend.yaml
+recorder: !include integrations/recorder.yaml
+history: ~
+logbook: ~
+map: ~
+media_source: ~
+mobile_app: ~
+person: ~
+ssdp: ~
+stream: ~
+sun: ~
+system_health: ~
+tag: ~
+updater: ~
+zone: ~
+cloud: ~
+
+# Integrations
+hacs: !include integrations/hacs.yaml
+influxdb: !include integrations/influxdb.yaml
+telegram_bot: !include integrations/telegram_bot.yaml
+xiaomi_aqara: !include integrations/xiaomi_aqara.yaml
+yandex_smart_home: !include integrations/yandex_smart_home.yaml
+yandex_station: !include integrations/yandex_station.yaml
+
 automation: !include automations.yaml
-script: !include scripts.yaml
-scene: !include scenes.yaml
+automation split: !include_dir_merge_list includes/automations
+script: !include_dir_merge_named includes/scripts
+
+# Entities
+sensor: !include_dir_merge_list includes/entities/sensors
+binary_sensor: !include_dir_merge_list includes/entities/binary_sensors
+switch: !include_dir_merge_list includes/entities/switches
+remote: !include_dir_merge_list includes/entities/remotes
+notify: !include_dir_merge_list includes/entities/notifies
+timer: !include_dir_merge_list includes/entities/timers
+input_boolean: !include_dir_merge_list includes/entities/input_booleans
+fan: !include_dir_merge_list includes/entities/fans

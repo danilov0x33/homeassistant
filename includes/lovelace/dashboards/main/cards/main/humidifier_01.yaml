@@ -1,0 +1,15 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: >
+      **Увлажнитель в зале**
+  - type:  entities
+    show_header_toggle: false
+    entities:          
+      - entity: binary_sensor.humidifier_01_water_state
+        name: "Наличие воды"
+      - entity: switch.humidifier_01_state_on_off
+        name: "Вкл/Выкл"
+      - entity: switch.humidifier_01_state_low_high
+        name: "Максимальная мощность"

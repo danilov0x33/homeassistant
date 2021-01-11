@@ -1,0 +1,9 @@
+binary_sensor.0x00158d000123129b_contact:
+  friendly_name: Окно на кухне
+  device_class: window
+  
+sensor.illumination_7c49eb1d4ecf:
+  friendly_name: Освещённость в зале
+
+switch.0x00158d0001bbf9cf:
+  friendly_name: Ёлка

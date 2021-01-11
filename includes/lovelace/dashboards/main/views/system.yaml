@@ -1,0 +1,73 @@
+title: Система
+icon: mdi:cpu-32-bit
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: markdown
+        style: !include ../../../components/title_style.yaml
+        content: >
+         **Монитор системы**
+
+      - type: entities
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - entity: sensor.date
+            name: Текущая дата  -
+            icon: mdi:calendar-month
+          - entity: sensor.time
+            name: Текущее время - 
+            icon: mdi:clock-outline
+    
+      - type: gauge
+        name: Загрузка CPU
+        unit: '%'
+        entity: sensor.processor_use
+        severity:
+            green: 0
+            yellow: 60
+            red: 85
+
+      - type: gauge
+        name: Загрузка ОЗУ
+        unit: '%'
+        entity: sensor.memory_use_percent
+        severity:
+            green: 0
+            yellow: 60
+            red: 85
+              
+      - type: gauge
+        name: Температура процессора
+        unit: '°C'
+        entity: sensor.cpu_temp
+        severity:
+            green: 0
+            yellow: 60
+            red: 85
+
+
+
+      - type: gauge
+        name: Диск заполнен
+        unit: '%'
+        entity: sensor.disk_use_percent
+        severity:
+            green: 0
+            yellow: 60
+            red: 85  
+                    
+      - type: gauge
+        name: Свободное место
+        unit: 'Гб'
+        entity: sensor.disk_free
+        severity:
+            red: 2
+            yellow: 6
+            green: 8
+            
+      - type: gauge
+        name: Объем базы Home Assistant
+        unit: 'Мб'
+        entity: sensor.home_assistant_v2_db
+
