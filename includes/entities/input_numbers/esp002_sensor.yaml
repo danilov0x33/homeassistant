@@ -1,0 +1,11 @@
+esp002_sensor_hot_water_count_input_number:
+  initial: 0
+  min: 0
+  max: 60000
+  step: 1
+
+esp002_sensor_cold_water_count_input_number:
+  initial: 0
+  min: 0
+  max: 60000
+  step: 1

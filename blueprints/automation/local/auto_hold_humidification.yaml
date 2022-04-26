@@ -25,20 +25,13 @@ blueprint:
       selector: 
         entity:
           domain: binary_sensor
-    # timer:
-    #   name: Таймер ожидания ручного выключения
-    #   selector:
-    #     entity:
-    #       domain: timer
-
-#mode: restart
-#max_exceeded: silent
 
 trigger:
   - platform: time_pattern
     minutes: "/5"
   - platform: state
     entity_id: !input can_turn_on_humidity_entity_binary_sensor
+    to: 'on'
 
 variables:
   humidity_percent: !input humidity_percent
@@ -68,6 +61,9 @@ action:
       - condition: state
         entity_id: !input humidity_entity
         state: 'off'
+      - condition: time
+        after: '08:00:00'
+        before: '23:00:00'
       sequence:
         - service: homeassistant.turn_on
           entity_id: !input humidity_entity
@@ -81,6 +77,9 @@ action:
         - condition: state
           entity_id: !input can_turn_on_humidity_entity_binary_sensor
           state: 'off'
+        - condition: time
+          after: '23:00:00'
+          before: '08:00:00'
       - condition: state
         entity_id: !input humidity_entity
         state: 'on'

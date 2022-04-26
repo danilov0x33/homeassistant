@@ -3,7 +3,6 @@ notify_when_cold_package:
 
   input_boolean:
     notify_when_cold_package_is_notify:
-      initial: off
 
   script:
     notify_when_cold_package_notify_to_telegram:
@@ -15,7 +14,7 @@ notify_when_cold_package:
 
   automation:
     - alias: notify_when_cold_package_send_notify_automation
-      initial_state: true
+      initial_state: false
       trigger:
         - platform: template
           value_template: "{{ states('sensor.pogoda_temperature') | float <= -15 }}"
@@ -30,7 +29,7 @@ notify_when_cold_package:
           entity_id: input_boolean.notify_when_cold_package_is_notify
 
     - alias: notify_when_cold_package_switch_automation
-      initial_state: true
+      initial_state: false
       trigger:
         - platform: template
           value_template: "{{ states('sensor.pogoda_temperature') | float >= -10 }}"

@@ -1,8 +1,16 @@
 host: a0d7b954-influxdb
 port: 8086
 
-database: homeassistant
+database: home_assistant
 username: !secret influxdb_username
 password: !secret influxdb_password
 max_retries: 3
 default_measurement: state
+include:
+  entities:
+    - switch.switch1
+component_config_glob:
+  sensor.*humidity:
+    override_measurement: humidity
+  sensor.*temperature:
+    override_measurement: temperature

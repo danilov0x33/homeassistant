@@ -1,0 +1,13 @@
+# - platform: mqtt
+#   name: "0x00158d0003a44095_state"
+#   state_topic: "zigbee2mqtt/0x00158d0003a44095"
+#   value_template: "{{ value_json.state }}"
+#   payload_on: "LOCK"
+#   payload_off: "UNLOCK"
+
+# - platform: mqtt
+#   name: "0x00158d0003a44095_reverse"
+#   state_topic: "zigbee2mqtt/0x00158d0003a44095"
+#   value_template: "{{ value_json.reverse }}"
+#   payload_on: "LOCK"
+#   payload_off: "UNLOCK"

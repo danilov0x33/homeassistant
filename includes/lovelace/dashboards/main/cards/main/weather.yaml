@@ -1,8 +1,3 @@
-type: vertical-stack
-cards:
-- type: markdown
-  style: !include ../../../../components/title_style.yaml
-  content: >
-    **Погода**
-- type: weather-forecast
-  entity: weather.pogoda
+type: weather-forecast
+entity: weather.home_assistant
+show_forecast: false

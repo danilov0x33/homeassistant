@@ -12,6 +12,8 @@ custom_components/
 www/
 tts/
 themes/
+zigbee2mqtt/
+image/
 
 
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
@@ -19,6 +21,7 @@ gateway.txt
 *.token
 *.db
 *.log
+*.log.*
 *.jpg
 *.mp4
 .yandex_station.json
@@ -28,3 +31,4 @@ secrets.yaml
 known_devices.yaml
 core.*
 core
+.HA_VERSION

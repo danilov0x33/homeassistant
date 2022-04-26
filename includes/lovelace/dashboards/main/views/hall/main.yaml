@@ -1,0 +1,69 @@
+title: Зал
+icon: mdi:television-classic
+type: custom:masonry-layout
+layout:
+  max_cols: 5
+  min_height: 2
+cards:
+  - type: custom:layout-card
+    layout_type: vertical
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: >
+          **Сенсоры**
+      - type: custom:layout-card
+        cards:
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: binary_sensor.0x00158d000123129b_contact
+          - !include ../../cards/hall/esp001_sensor.yaml
+  - type: custom:layout-card
+    layout_type: vertical
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: >
+          **Телевизор**
+      - type: custom:layout-card
+        cards:
+          - !include ../../cards/hall/samsung_tv.yaml
+  - type: custom:layout-card
+    layout_type: vertical
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: >
+          **Освещение**
+      - type: custom:layout-card
+        cards:
+          - type: entities
+            entities:
+              - entity: light.yeelight_arwen_550c
+                name: Основная
+              - entity: light.yeelight_arwen_550c_ambilight
+                name: Дополнительная
+              - entity: light.yeelight_arwen_550c_nightlight
+                name: Ночная
+            name: Подсветка
+  - type: custom:layout-card
+    layout_type: vertical
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: >
+          **Сетевой фильтр под телевизором**
+      - type: custom:layout-card
+        cards:
+          - !include ../../cards/hall/tyua_switch_01.yaml
+  - type: custom:layout-card
+    layout_type: vertical
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: >
+          **Робопылесос**
+      - type: custom:layout-card
+        cards:
+          - !include ../../cards/hall/vacuum.yaml

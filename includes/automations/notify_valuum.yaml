@@ -1,0 +1,26 @@
+- id: Отправить сообщение о том, что необходимо установить водяной бак
+  alias: notify_when_need_add_waterbox
+  initial_state: true
+  trigger:
+    - platform: time
+      at: "14:45:00"
+    - platform: time
+      at: "19:45:00"
+  condition: "{{ state_attr('vacuum.dreame_bot_l10_pro_vacuum', 'waterbox') == 'removed'}}"
+  action:
+    - service: notify.telegram_main_bot
+      data:
+        message: "Нужно установить бак с водой для робота-пылесоса"
+
+- id: Отправить сообщение о том, что необходимо убрать водяной бак
+  alias: notify_when_need_remove_waterbox
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: vacuum.dreame_bot_l10_pro_vacuum
+      attribute: waterbox
+      to: "completed"
+  action:
+    - service: notify.telegram_main_bot
+      data:
+        message: "Нужно удалить бак с водой у робота-пылесоса"

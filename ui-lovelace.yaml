@@ -1,2 +1,2 @@
-title: Home Assistant - сервер
-views: []
+#title: Home Assistant
+!include includes/lovelace/dashboards/main/dashboard.yaml

@@ -1,0 +1,5 @@
+type: entities
+title: "Входной замок"
+entities:
+  - entity: binary_sensor.0x00158d0003a44095_reverse
+  - entity: binary_sensor.0x00158d0003a44095_state

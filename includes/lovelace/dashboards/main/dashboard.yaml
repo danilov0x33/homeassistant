@@ -1,5 +1,9 @@
 views:
   - !include ./views/main.yaml
-  - !include ./views/system.yaml
-  - !include ./views/services.yaml
-  - !include ./views/batteries.yaml
+  - !include ./views/corridor/main.yaml
+  - !include ./views/hall/main.yaml
+  - !include ./views/loggia/main.yaml
+  - !include ./views/kitchen/main.yaml
+  - !include ./views/bathroom/main.yaml
+  - !include ./views/bedroom/main.yaml
+  - !include ./views/cameras/main.yaml

@@ -1,12 +1,11 @@
 sensor.esp001_sensor_bme280_temperature:
-  friendly_name: Температура в зале
-  unit_of_measurement: "%"
+  friendly_name: Температура в комнате
+  unit_of_measurement: "°C"
 
 sensor.esp001_sensor_bme280_humidity:
-  friendly_name: Влажность в зале
+  friendly_name: Влажность в комнате
+  unit_of_measurement: "%"
 
 sensor.esp001_sensor_bme280_pressure:
-  friendly_name: Давление в зале
-
-binary_sensor.humidifier_01_water_state:
-  friendly_name: Наличие воды в увлажнителе Polaris
+  friendly_name: Давление в комнате
+  unit_of_measurement: "hPa"

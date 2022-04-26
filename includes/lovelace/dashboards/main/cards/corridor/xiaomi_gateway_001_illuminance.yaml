@@ -1,0 +1,4 @@
+type: custom:mini-graph-card
+hour24: true
+entities:
+  - entity: sensor.xiaomi_gateway_001_illuminance

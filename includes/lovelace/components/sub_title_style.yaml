@@ -1,0 +1,7 @@
+|
+  ha-card {
+    text-align: left;
+    color: #00BFFF;
+    font-weight: bold;
+    font-size: 16px;
+  }

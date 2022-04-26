@@ -1,15 +1,15 @@
 yandex_tts_esp001_sensor_temperature:
   alias: Температура с esp001_sensor
   sequence:
-  - service: tts.yandex_station_say
-    entity_id: media_player.yandex_station_ff98f029442e6b666cd8c9b8
-    data_template:
-      message: Температура в зале {{ states("sensor.esp001_sensor_bme280_temperature") }} градуса.
+    - service: tts.yandex_station_say
+      entity_id: media_player.yandex_station_mini_001
+      data_template:
+        message: Температура в зале {{ states("sensor.esp001_sensor_bme280_temperature") }} градуса.
 
 yandex_tts_esp001_sensor_humidity:
   alias: Температура с esp001_sensor
   sequence:
-  - service: tts.yandex_station_say
-    entity_id: media_player.yandex_station_ff98f029442e6b666cd8c9b8
-    data_template:
-      message: Влажность в зале {{ states("sensor.esp001_sensor_bme280_humidity") }} процента.
+    - service: tts.yandex_station_say
+      entity_id: media_player.yandex_station_mini_001
+      data_template:
+        message: Влажность в зале {{ states("sensor.esp001_sensor_bme280_humidity") }} процента.

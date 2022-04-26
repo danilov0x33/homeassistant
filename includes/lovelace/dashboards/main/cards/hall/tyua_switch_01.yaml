@@ -1,0 +1,8 @@
+type: vertical-stack
+cards:
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: switch.tuya_switch_001_1
+      - entity: switch.tuya_switch_001_2
+      - entity: switch.tuya_switch_001_3

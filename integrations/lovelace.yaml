@@ -8,5 +8,11 @@ resources:
     type: module
   - url: /hacsfiles/button-card/button-card.js
     type: module
+  - url: /hacsfiles/vacuum-card/vacuum-card.js
+    type: module
+  - url: /hacsfiles/lovelace-layout-card/layout-card.js
+    type: module
+  - url: /local/laundry.js
+    type: js
 
 dashboards: !include ../includes/lovelace/dashboards.yaml

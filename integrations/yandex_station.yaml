@@ -1,3 +1,0 @@
-username: !secret yandex_station_username
-password: !secret yandex_station_password
-intents: !include ../includes/yandex_station_intents.yaml
