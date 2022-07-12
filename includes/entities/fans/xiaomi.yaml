@@ -1,5 +1,0 @@
-#  - platform: xiaomi_miio_airpurifier
-#    name: Xiaomi Air Humidifier 1
-#    host: 192.168.1.61
-#    token: !secret xiaomi_humidifier_1_key
-#    model: deerma.humidifier.jsq

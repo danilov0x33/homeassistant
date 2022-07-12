@@ -1,7 +1,0 @@
-type: vertical-stack
-cards:
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - entity: switch.tuya_thermostat_switch
-        name: Вкл/Выкл

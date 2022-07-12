@@ -1,0 +1,13 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Сенсоры
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        entities:
+          - entity: binary_sensor.0x00158d0002922709_water_leak
+            name: Датчик протечки воды

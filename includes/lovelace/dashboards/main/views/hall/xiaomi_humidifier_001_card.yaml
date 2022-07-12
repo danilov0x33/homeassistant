@@ -1,0 +1,9 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Увлажнитель
+  - type: humidifier
+    entity: humidifier.xiaomi_humidifier_001
+    name: Увлажнитель

@@ -1,0 +1,171 @@
+# Мобильный кондиционер
+# nMwmUwlk0mk0mEsms5mEsmM2AIaagKkAP4A/zYAs5gBxQCDgDnMQBDAI6YgEUBpIGBAEQC84DPA0eAh4XfgD+ETwHXgY+AxMwgA= # ON/OFF
+# nMwmUwlk0mkzmEsm0wmEsmM2mgBCzUBUgB/ms5AP8A+QOPAQkAjwCPA98F7wIPBm8ELwGdAMKYzaYgM+Bn4KuAZXMIAA # Fan
+# nMwmUwlk0mkzmEsm0wmEsmM2mgBBAIlNQDCAH8CA5qAWQA/gcSAg4AZTGbTEBngW4Aa4BGAZvAhuaTkBDwEPBD8MvgO/CIwLRwGNAIKYQAA= # Night
+# nMwmUwlk0mk0mEsms5mEsmM2AIKbTAAwgFSAQMAfwB4mYB+gceAgoDOAEeAR4HrgIeC/4A9ABlMZtMQMvAhsBjwdvAy8BjphAA== # UP
+# nMwmUwlk0mkzmEsm0wmEsmM2mgBCzUBUgB3ms5AH0B+AEzALIAc5jNpiBxoJMAEeAR4O3grSENwFHgheAz4DPgReAg4f5hskAx4BCTCAAA== # DOWN
+
+remote_hall_package:
+  homeassistant:
+    customize:
+      switch.air_conditioner_01_power:
+        frendly_name: Вкл/Выкл кондиционера
+      switch.air_conditioner_01_night:
+        frendly_name: Ночной режим кондиционера
+
+  remote:
+    - platform: xiaomi_miio
+      name: "mi_remote_controller_001"
+      host: 192.168.3.20
+      token: 5e628f7b8b5aa438a6ba1852c4ff3217
+      timeout: 30
+      hidden: false
+
+  script:
+    learn_mi_remote_controller_01_command:
+      alias: Обучение Xiaomi IR Base
+      sequence:
+        - service: xiaomi_miio.remote_learn_command
+          data:
+            entity_id: remote.mi_remote_controller_01
+
+  input_number:
+    air_conditioner_01_fan_speed:
+      name: Скорость вентилятора
+      initial: 4
+      min: 1
+      max: 4
+      step: 1
+
+    air_conditioner_01_temperature_level:
+      name: Температура
+      initial: 24
+      min: 18
+      max: 32
+      step: 1
+
+  template:
+    binary_sensor:
+      - name: air_conditioner_01_available
+        state: "{{ states('sensor.kasa_switch_001_current')|float > 0.1 }}"
+
+      - name: air_conditioner_01_night_available
+        state: "{{ is_state('binary_sensor.air_conditioner_01_available', 'on') and states('sensor.kasa_switch_001_current')|float < 0.3 }}"
+
+  switch:
+    - platform: template
+      switches:
+        air_conditioner_01_power:
+          friendly_name: "Питание кондиционера"
+          value_template: "{{ is_state('binary_sensor.air_conditioner_01_available', 'on') }}"
+          turn_on:
+            service: remote.send_command
+            entity_id: remote.mi_remote_controller_01
+            data:
+              command:
+                - nMwmUwlk0mk0mEsms5mEsmM2AIaagKkAP4A/zYAs5gBxQCDgDnMQBDAI6YgEUBpIGBAEQC84DPA0eAh4XfgD+ETwHXgY+AxMwgA=
+          turn_off:
+            service: remote.send_command
+            entity_id: remote.mi_remote_controller_01
+            data:
+              command:
+                - nMwmUwlk0mk0mEsms5mEsmM2AIaagKkAP4A/zYAs5gBxQCDgDnMQBDAI6YgEUBpIGBAEQC84DPA0eAh4XfgD+ETwHXgY+AxMwgA=
+
+        air_conditioner_01_night:
+          friendly_name: "Ночной режим кондиционера"
+          value_template: "{{ is_state('binary_sensor.air_conditioner_01_night_available', 'on') }}"
+          turn_on:
+            service: remote.send_command
+            entity_id: remote.mi_remote_controller_01
+            data:
+              command:
+                - nMwmUwlk0mkzmEsm0wmEsmM2mgBBAIlNQDCAH8CA5qAWQA/gcSAg4AZTGbTEBngW4Aa4BGAZvAhuaTkBDwEPBD8MvgO/CIwLRwGNAIKYQAA=
+          turn_off:
+            service: remote.send_command
+            entity_id: remote.mi_remote_controller_01
+            data:
+              command:
+                - nMwmUwlk0mkzmEsm0wmEsmM2mgBBAIlNQDCAH8CA5qAWQA/gcSAg4AZTGbTEBngW4Aa4BGAZvAhuaTkBDwEPBD8MvgO/CIwLRwGNAIKYQAA=
+  mqtt:
+    sensor:
+      - name: air_conditioner_01_temperature
+        state_topic: "custom/air_conditioner_01/temperature"
+        availability_template: "{{ is_state('binary_sensor.air_conditioner_01_available', 'on') }}"
+      - name: air_conditioner_01_fan_speed
+        state_topic: "custom/air_conditioner_01/fan_speed"
+        availability_template: "{{ is_state('binary_sensor.air_conditioner_01_available', 'on') }}"
+
+  automation:
+    - id: "Установка температуры кондиционера"
+      alias: air_conditioner_01_set_temperature
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id: input_number.air_conditioner_01_temperature_level
+      action:
+        - variables:
+            difference: "{{ states('input_number.air_conditioner_01_temperature_level')|int - states('sensor.air_conditioner_01_temperature')|int(states('input_number.air_conditioner_01_temperature_level')|int) }}"
+        - choose:
+            - conditions:
+                - condition: template
+                  value_template: "{{ difference > 0 }}"
+              sequence:
+                - repeat:
+                    count: "{{ difference|abs }}"
+                    sequence:
+                      - service: remote.send_command
+                        entity_id: remote.mi_remote_controller_01
+                        data:
+                          command:
+                            - nMwmUwlk0mk0mEsms5mEsmM2AIKbTAAwgFSAQMAfwB4mYB+gceAgoDOAEeAR4HrgIeC/4A9ABlMZtMQMvAhsBjwdvAy8BjphAA== # UP
+                      - delay: 00:00:02
+            - conditions:
+                - condition: template
+                  value_template: "{{ difference < 0 }}"
+              sequence:
+                - repeat:
+                    count: "{{ difference|abs }}"
+                    sequence:
+                      - service: remote.send_command
+                        entity_id: remote.mi_remote_controller_01
+                        data:
+                          command:
+                            - nMwmUwlk0mkzmEsm0wmEsmM2mgBCzUBUgB3ms5AH0B+AEzALIAc5jNpiBxoJMAEeAR4O3grSENwFHgheAz4DPgReAg4f5hskAx4BCTCAAA== # DOWN
+                      - delay: 00:00:02
+        - service: mqtt.publish
+          data_template:
+            topic: "custom/air_conditioner_01/temperature"
+            payload_template: "{{states('input_number.air_conditioner_01_temperature_level')|int}}"
+            retain: true
+
+    - id: "Установка скорости кондиционера"
+      alias: air_conditioner_01_set_fan_speed
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id: input_number.air_conditioner_01_fan_speed
+      action:
+        - variables:
+            difference: >-
+              {% set new_fan_speed = states('input_number.air_conditioner_01_fan_speed')|int %}
+              {% set current_fan_speed = states('sensor.air_conditioner_01_fan_speed')|int(new_fan_speed) %}
+              {% if current_fan_speed <= new_fan_speed %}
+                {{new_fan_speed - current_fan_speed}}
+              {% else %}
+                {{4 - current_fan_speed + new_fan_speed}}
+              {% endif %}
+        - repeat:
+            count: "{{ difference }}"
+            sequence:
+              - service: remote.send_command
+                entity_id: remote.mi_remote_controller_01
+                data:
+                  command:
+                    - nMwmUwlk0mkzmEsm0wmEsmM2mgBCzUBUgB/ms5AP8A+QOPAQkAjwCPA98F7wIPBm8ELwGdAMKYzaYgM+Bn4KuAZXMIAA # Fan
+              - delay: 00:00:02
+
+        - service: mqtt.publish
+          data_template:
+            topic: "custom/air_conditioner_01/fan_speed"
+            payload_template: "{{states('input_number.air_conditioner_01_fan_speed')|int}}"
+            retain: true

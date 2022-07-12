@@ -1,0 +1,81 @@
+aqara_cube_actions:
+  # homeassistant:
+  #   customize:
+  #     automation.notify_when_need_add_waterbox:
+  #       friendly_name: Отправить сообщение о том, что необходимо установить водяной бак
+  #       icon: mdi:refresh-auto
+  binary_sensor:
+    - platform: mqtt
+      name: nastya_is_busy
+      state_topic: "custom/nastya_is_busy/state"
+      payload_on: "True"
+      payload_off: "False"
+
+    - platform: mqtt
+      name: evgeniy_is_busy
+      state_topic: "custom/evgeniy_is_busy/state"
+      payload_on: "True"
+      payload_off: "False"
+
+  automation:
+    - id: Изменить состояние занятости Насти
+      alias: notify_when_nastya_cube_is_flip180
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id: sensor.0x00158d0007082349_action
+          to: "flip180"
+      action:
+        - service: mqtt.publish
+          data_template:
+            topic: "custom/nastya_is_busy/state"
+            payload_template: "{{ not is_state('binary_sensor.nastya_is_busy', 'on') }}"
+            retain: true
+
+    - id: Отправить сообщение состояние занятости Настя
+      alias: notify_change_sensor_nastya_is_busy
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id: binary_sensor.nastya_is_busy
+      action:
+        - service: telegram_bot.send_message
+          data_template:
+            target: !secret telegram_danilov_info_group_id
+            message: >
+              {% if is_state(trigger.entity_id, 'on') %}
+              Настя занята
+              {%- else %}
+              Настя освободилась
+              {% endif %}
+
+    - id: Изменить состояние занятости Жени
+      alias: notify_when_evgeniy_cube_is_flip180
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id: sensor.0x00158d0007098707_action
+          to: "flip180"
+      action:
+        - service: mqtt.publish
+          data_template:
+            topic: "custom/evgeniy_is_busy/state"
+            payload_template: "{{ not is_state('binary_sensor.evgeniy_is_busy', 'on') }}"
+            retain: true
+
+    - id: Отправить сообщение состояние занятости Женя
+      alias: notify_change_sensor_evgeniy_is_busy
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id: binary_sensor.evgeniy_is_busy
+      action:
+        - service: telegram_bot.send_message
+          data_template:
+            target: !secret telegram_danilov_info_group_id
+            message: >
+              {% if is_state(trigger.entity_id, 'on') %}
+              Женя занят
+              {%- else %}
+              Женя освободился
+              {% endif %}

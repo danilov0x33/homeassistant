@@ -1,0 +1,39 @@
+cat_eye_dp2c_j21918665_package:
+  input_button:
+    wake_up_cat_eye_button:
+      name: Wake up
+      icon: mdi:eye
+
+  automation:
+    - id: Разбудить камеру
+      alias: wake_up_cat_eye_authomation
+      trigger:
+        - platform: state
+          entity_id: input_button.wake_up_cat_eye_button
+      condition:
+      action:
+        - service: ezviz.wake_device
+          target:
+            entity_id: camera.dp2c_j21918665
+
+    - id: Оповещение в телеграм о том, что кто-то за дверью
+      alias: notify_when_motion_trigger_on_cat_eye_automation
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id: sensor.dp2c_j21918665_last_alarm_pic
+      condition:
+        - condition: state
+          entity_id: binary_sensor.dp2c_j21918665_motion_trigger
+          state: "on"
+      action:
+        - service: telegram_bot.send_photo
+          data_template:
+            target: !secret telegram_danilov_info_group_id
+            url: "{{states('sensor.dp2c_j21918665_last_alarm_pic')}}"
+        - service: downloader.download_file
+          data:
+            url: "{{states('sensor.dp2c_j21918665_last_alarm_pic')}}"
+            subdir: "camera"
+            overwrite: true
+            filename: "dp2c_j21918665_last.jpg"

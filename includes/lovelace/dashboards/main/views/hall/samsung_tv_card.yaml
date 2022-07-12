@@ -1,0 +1,9 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Телевизор
+
+  - type: media-control
+    entity: media_player.samsung_tv

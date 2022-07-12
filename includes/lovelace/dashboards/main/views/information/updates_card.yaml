@@ -1,0 +1,43 @@
+type: custom:stack-in-card
+mpde: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Обновления системы
+
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: >
+          <ha-icon icon="mdi:home-assistant"></ha-icon> Обновления Supervisor ({{states.update | selectattr('state', 'eq', 'on') | list | count}})
+      - type: custom:auto-entities
+        filter:
+          include:
+            - domain: update
+              state: "on"
+        card:
+          type: entities
+      # - type: markdown
+      #   content: |
+      #     <ul>
+      #       {%- for update_entity in states.update | selectattr('state', 'eq', 'on') | list -%}
+      #         <li>{{state_attr(update_entity.entity_id, 'title')}}: <b>{{state_attr(update_entity.entity_id, 'installed_version')}}</b> -> <b>{{state_attr(update_entity.entity_id, 'latest_version')}}</b> </li>
+      #       {%- endfor -%}
+      #     </ul>
+
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: >
+          <ha-icon icon="hacs:hacs"></ha-icon> Обновления HACS ({{states('sensor.hacs')}})
+      - type: markdown
+        content: |
+          <ul>
+            {%- if states('sensor.hacs') != "unknown" and states('sensor.hacs') | int > 0 -%}
+              {%- for item in state_attr('sensor.hacs', 'repositories') -%}
+                <li>{{item.display_name}}: <b>{{item.installed_version}}</b> -> <b>{{item.available_version}}</b></li>
+              {%- endfor -%}
+            {%- endif -%}
+          </ul>

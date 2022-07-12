@@ -1,0 +1,14 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include ../../../../components/title_style.yaml
+        content: Холодильник
+      - type: entities
+        entities:
+          - sensor.lg_thinq_fridge
+          - binary_sensor.lg_thinq_fridge_door_open
+          - sensor.lg_thinq_fridge_freezer_temp
+          - sensor.lg_thinq_fridge_fridge_temp

@@ -1,0 +1,6 @@
+title: Главная
+icon: mdi:home-assistant
+cards:
+  - !include alert_card.yaml
+  - !include weather_card.yaml
+  - !include updates_card.yaml

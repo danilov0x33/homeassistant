@@ -1,0 +1,6 @@
+type: picture-glance
+title: Камера в зале
+camera_image: camera.ty2_j23903450
+camera_view: live
+entities:
+  - switch.ty2_j23903450_sleep

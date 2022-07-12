@@ -1,0 +1,7 @@
+binary_sensor.0x00158d0002b18159_contact:
+  friendly_name: Окно
+  device_class: window
+
+binary_sensor.0x00158d0002b17c46_contact:
+  friendly_name: Окно
+  device_class: window

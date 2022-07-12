@@ -1,6 +1,0 @@
-learn_mi_remote_controller_01_command:
-  alias: Обучение Xiaomi IR Base
-  sequence:
-    - service: xiaomi_miio.remote_learn_command
-      data:
-        entity_id: remote.mi_remote_controller_01

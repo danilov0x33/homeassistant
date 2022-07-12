@@ -1,38 +1,6 @@
 title: Лоджия
 icon: mdi:chair-rolling
-type: custom:masonry-layout
-layout:
-  max_cols: 5
-  min_height: 2
 cards:
-  - type: custom:layout-card
-    layout_type: vertical
-    cards:
-      - type: markdown
-        style: !include ../../../../components/sub_title_style.yaml
-        content: >
-          **Теплый пол**
-      - type: custom:layout-card
-        cards:
-          - !include ../../cards/loggia/tuya_thermostat.yaml
-  - type: custom:layout-card
-    layout_type: vertical
-    cards:
-      - type: markdown
-        style: !include ../../../../components/sub_title_style.yaml
-        content: >
-          **Освещение**
-      - type: custom:layout-card
-        cards:
-          - type: light
-            entity: light.controller_rgbw_1ea01d
-  - type: custom:layout-card
-    layout_type: vertical
-    cards:
-      - type: markdown
-        style: !include ../../../../components/sub_title_style.yaml
-        content: >
-          **Яндекс мини**
-      - type: custom:layout-card
-        cards:
-          - !include ../../cards/loggia/yandex_station_mini_001.yaml
+  - !include sensors.yaml
+  - !include lights.yaml
+  - !include tuya_thermostat_card.yaml

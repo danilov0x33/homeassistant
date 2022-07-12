@@ -1,0 +1,11 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Теплый пол
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: switch.tuya_thermostat_switch
+        name: Вкл/Выкл

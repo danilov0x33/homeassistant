@@ -1,0 +1,10 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Освещение
+
+  - type: light
+    entity: light.controller_rgbw_1ea01d
+    name: Основное

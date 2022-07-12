@@ -1,0 +1,11 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Сенсоры
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.0x00158d0002b17c46_contact

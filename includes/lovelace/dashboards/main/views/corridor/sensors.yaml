@@ -1,0 +1,25 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Сенсоры
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        entities:
+          - entity: alarm_control_panel.xiaomi_gateway_001_alarm
+            name: Охрана
+      # - type: markdown
+      #   style: !include ../../../../components/sub_title_style.yaml
+      #   content: Входной замок
+      # - type: entities
+      #   entities:
+      #     - entity: binary_sensor.0x00158d0003a44095_reverse
+      #     - entity: binary_sensor.0x00158d0003a44095_state
+
+      - type: custom:mini-graph-card
+        hour24: true
+        entities:
+          - entity: sensor.xiaomi_gateway_001_illuminance

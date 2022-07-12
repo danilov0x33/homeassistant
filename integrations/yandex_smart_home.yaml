@@ -1,10 +1,18 @@
 filter:
   include_entities:
+    - vacuum.dreame_bot_l10_pro_vacuum
+
+    - media_player.yandex_station_intents
     - media_player.samsung_tv
 
-  #entity_config:
-  #  sensor.esp001_sensor_bme280_temperature:
-  #    name: "Температура в зале"
-  #    properties:
-  #      - type: temperature
-  #        entity: sensor.esp001_sensor_bme280_temperature
+    - sensor.esp001_sensor_bme280_temperature
+    - sensor.esp001_sensor_bme280_humidity
+    - sensor.esp001_sensor_bme280_pressure
+
+    - light.0x00158d0007504210 # Основной свет в спальне
+    - light.yeelight_arwen_550c # Основной свет в зале
+    - light.yeelight_arwen_550c_ambilight # Дополнительный свет в зале
+    - light.yeelight_arwen_450c # Основной свет на кухне
+    - light.yeelight_arwen_450c_ambilight # Дополнительный свет на кухне
+    - light.controller_rgbw_1ea01d # Основной свет на лоджии
+

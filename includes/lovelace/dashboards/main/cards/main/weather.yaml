@@ -1,3 +1,0 @@
-type: weather-forecast
-entity: weather.home_assistant
-show_forecast: false

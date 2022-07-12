@@ -12,7 +12,17 @@ resources:
     type: module
   - url: /hacsfiles/lovelace-layout-card/layout-card.js
     type: module
+  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+    type: module
+  - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
+    type: module
   - url: /local/laundry.js
     type: js
 
-dashboards: !include ../includes/lovelace/dashboards.yaml
+dashboards:
+  main-dashboard:
+    mode: yaml
+    title: Главная
+    icon: mdi:home
+    show_in_sidebar: false
+    filename: includes/lovelace/dashboards/main/dashboard.yaml

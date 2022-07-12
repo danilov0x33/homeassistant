@@ -6,3 +6,9 @@ switch.tuya_switch_001_2:
 
 switch.tuya_switch_001_3:
   friendly_name: USB Реле
+
+switch.0x60a423fffeb04c7e_left:
+  friendly_name: Левая клавиша
+
+switch.0x60a423fffeb04c7e_right:
+  friendly_name: Правая клавиша

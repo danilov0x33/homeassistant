@@ -1,35 +1,6 @@
 title: Коридор
-icon: mdi:door
-type: custom:masonry-layout
-layout:
-  max_cols: 5
-  min_height: 2
+icon: mdi:exit-run
 cards:
-  - type: picture-glance
-    title: Видеоглазок
-    camera_image: camera.dp2c_j21918665
-    camera_view: auto
-    entities:
-      - light.xiaomi_gateway_001_light
-  - type: custom:layout-card
-    layout_type: vertical
-    cards:
-      - type: markdown
-        style: !include ../../../../components/sub_title_style.yaml
-        content: >
-          **Сенсоры**
-      - type: custom:layout-card
-        cards:
-          - !include ../../cards/corridor/xiaomi_aqara_s2_pro.yaml
-          - !include ../../cards/corridor/xiaomi_gateway_001_illuminance.yaml
-  - type: custom:layout-card
-    layout_type: vertical
-    cards:
-      - type: markdown
-        style: !include ../../../../components/sub_title_style.yaml
-        content: >
-          **Xiaomi ночник**
-      - type: custom:layout-card
-        cards:
-          - type: light
-            entity: light.xiaomi_gateway_001_light
+  - !include ezviz_dp2c_j21918665_card.yaml
+  - !include sensors.yaml
+  - !include lights.yaml

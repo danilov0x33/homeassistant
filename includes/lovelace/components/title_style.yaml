@@ -1,8 +1,6 @@
 |
   ha-card {
-    background-color: #0087bd;
     text-align: center;
-    color: #000000;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 22px;
   }

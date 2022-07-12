@@ -1,0 +1,36 @@
+# yandex_station_package:
+#   automation:
+#     - trigger:
+#         platform: event
+#         event_type: yandex_intent
+#         event_data:
+#           text: Какая температура в зале
+#       action:
+#         - service: script.turn_on
+#           entity_id: script.yandex_tts_esp001_sensor_temperature
+
+#     - trigger:
+#         platform: event
+#         event_type: yandex_intent
+#         event_data:
+#           text: Какая влажность в зале
+#       action:
+#         - service: script.turn_on
+#           entity_id: script.yandex_tts_esp001_sensor_humidity
+
+#   script:
+#     yandex_tts_esp001_sensor_temperature:
+#       alias: Температура с esp001_sensor
+#       sequence:
+#         - service: tts.yandex_station_say
+#           entity_id: media_player.yandex_station_mini_001
+#           data_template:
+#             message: Температура в зале {{ states("sensor.esp001_sensor_bme280_temperature") }} градуса.
+
+#     yandex_tts_esp001_sensor_humidity:
+#       alias: Температура с esp001_sensor
+#       sequence:
+#         - service: tts.yandex_station_say
+#           entity_id: media_player.yandex_station_mini_001
+#           data_template:
+#             message: Влажность в зале {{ states("sensor.esp001_sensor_bme280_humidity") }} процента.

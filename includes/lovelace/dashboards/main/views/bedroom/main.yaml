@@ -1,17 +1,14 @@
 title: Спальня
 icon: mdi:bed
-type: custom:masonry-layout
-layout:
-  max_cols: 5
-  min_height: 2
 cards:
+  - !include lights.yaml
   - type: custom:layout-card
     layout_type: vertical
     cards:
       - type: markdown
-        style: !include ../../../../components/sub_title_style.yaml
-        content: >
-          **Телевизор**
+        style: !include ../../../../components/title_style.yaml
+        content: Телевизор
       - type: custom:layout-card
         cards:
-          - !include ../../cards/bedroom/yandex_tv_001.yaml
+          - type: media-control
+            entity: media_player.yandex_tv_001

@@ -1,0 +1,25 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Освещение
+
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: Основной
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: switch.0x60a423fffeb04c7e_left
+                name: Основное
+  - type: custom:stack-in-card
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: Xiaomi ночник
+      - type: light
+        entity: light.xiaomi_gateway_001_light

@@ -1,0 +1,18 @@
+alert_notification_package:
+  automation:
+    - id: Отправить сообщение о том, что датчик протечки воды сработал
+      alias: notify_when_water_leak_alarm
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id:
+            - binary_sensor.0x00158d0002922709_water_leak
+            - binary_sensor.0x00158d0002922b19_water_leak
+          from: "off"
+          to: "on"
+      action:
+        - service: telegram_bot.send_message
+          data_template:
+            target: !secret telegram_danilov_info_group_id
+            message: >
+              Протечка в: {{ area_name(trigger.entity_id) }}

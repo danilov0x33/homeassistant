@@ -1,14 +1,7 @@
 title: Кухня
 icon: mdi:fridge
-type: custom:masonry-layout
-layout:
-  max_cols: 5
-  min_height: 2
 cards:
-  - type: markdown
-    style: !include ../../../../components/sub_title_style.yaml
-    content: >
-      **Холодильник**
-  - type: custom:layout-card
-    cards:
-      - !include ../../cards/kitchen/lg_thinq_fridge.yaml
+  - !include sensors.yaml
+  - !include lights.yaml
+  - !include ezviz_ty2_j23903681_card.yaml
+  - !include lg_thinq_fridge_card.yaml

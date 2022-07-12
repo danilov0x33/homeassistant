@@ -1,9 +1,0 @@
-title: Уровни заряда устройств
-icon: mdi:battery
-cards:
-  - type: vertical-stack
-    cards:
-      - type: markdown
-        style: !include ../../../components/title_style.yaml 
-        content: >
-          **Монитор системы**

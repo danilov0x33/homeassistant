@@ -1,0 +1,6 @@
+type: picture-glance
+title: Камера на кухне
+camera_image: camera.ty2_j23903681
+camera_view: live
+entities:
+  - switch.ty2_j23903681_sleep

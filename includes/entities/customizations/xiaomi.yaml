@@ -23,3 +23,7 @@ binary_sensor.0x00158d0003a44095_reverse:
 
 humidifier.xiaomi_humidifier_001:
   friendly_name: Увлажнитель воздуха
+
+light.0x00158d0007504210:
+  friendly_name: Лампочка
+  device_class: light

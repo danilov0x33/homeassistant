@@ -1,0 +1,13 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Кондиционер
+
+  - type: entities
+    entities:
+      - entity: switch.air_conditioner_01_power
+      - entity: switch.air_conditioner_01_night
+      - entity: input_number.air_conditioner_01_temperature_level
+      - entity: input_number.air_conditioner_01_fan_speed

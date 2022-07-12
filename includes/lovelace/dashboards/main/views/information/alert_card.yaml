@@ -1,0 +1,25 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Оповещение
+
+  - type: custom:auto-entities
+    show_empty: false
+    card_param: cards
+    filter:
+      template: >
+        {% if (as_timestamp(now()) - as_timestamp(states('sensor.dp2c_j21918665_last_alarm_time'))) / 60 / 60 < 24 %}
+          sensor.dp2c_j21918665_last_alarm_time
+        {% endif %}
+    card:
+      type: vertical-stack
+      cards:
+        - type: markdown
+          style: !include ../../../../components/sub_title_style.yaml
+          content: >
+            Последнее оповещение {{ states('sensor.dp2c_j21918665_last_alarm_time') }}
+
+        - type: picture
+          image: http://192.168.3.68:8123/local/downloads/camera/dp2c_j21918665_last.jpg #/local/downloads/camera/dp2c_j21918665_last.jpg

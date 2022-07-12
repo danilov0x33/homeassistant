@@ -9,3 +9,4 @@ sensor.esp001_sensor_bme280_humidity:
 sensor.esp001_sensor_bme280_pressure:
   friendly_name: Давление в комнате
   unit_of_measurement: "hPa"
+  

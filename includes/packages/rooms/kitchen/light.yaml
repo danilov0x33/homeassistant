@@ -1,0 +1,14 @@
+light_kitchen_package:
+  automation:
+    - id: Вкл/Выкл основной свет на кухне
+      alias: change_main_light_in_kitchen
+      trigger:
+        - platform: state
+          entity_id: switch.0x60a423fffeb047dd_right
+          to: "on"
+        - platform: state
+          entity_id: switch.0x60a423fffeb047dd_right
+          to: "off"
+      action:
+        - service: light.toggle
+          entity_id: light.yeelight_arwen_450c

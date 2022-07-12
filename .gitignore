@@ -14,6 +14,7 @@ tts/
 themes/
 zigbee2mqtt/
 image/
+downloads/
 
 
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
