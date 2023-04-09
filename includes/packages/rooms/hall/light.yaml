@@ -1,14 +1,28 @@
-light_hall_package:
+ha_light_package:
+  homeassistant:
+    customize:
+      automation.ha_change_main_light_in_hall_main:
+        friendly_name: Зал | Вкл/Выкл основного света в зале
+      automation.ha_change_night_light_in_hall_main:
+        friendly_name: Зал | Вкл/Выкл ночного света в зале
+
   automation:
-    - id: Вкл/Выкл основной свет в зале
-      alias: change_main_light_in_hall
+    - id: ha_change_main_light_in_hall_main
+      alias: ha_change_main_light_in_hall_main
       trigger:
         - platform: state
-          entity_id: switch.0x60a423fffeb04c7a_left
-          to: "on"
-        - platform: state
-          entity_id: switch.0x60a423fffeb04c7a_left
-          to: "off"
+          entity_id: sensor.0x54ef4410004da26c_action
+          to: "single_left"
       action:
         - service: light.toggle
           entity_id: light.yeelight_arwen_550c
+
+    - id: ha_change_night_light_in_hall_main
+      alias: ha_change_night_light_in_hall_main
+      trigger:
+        - platform: state
+          entity_id: sensor.0x54ef4410004da26c_action
+          to: "single_right"
+      action:
+        - service: light.toggle
+          entity_id: light.yeelight_arwen_550c_ambilight

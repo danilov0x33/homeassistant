@@ -5,6 +5,16 @@ cards:
     style: !include ../../../../components/title_style.yaml
     content: Освещение
 
-  - type: light
-    entity: light.0x00158d0007504210
-    name: Лампочка
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: Yeelight 450C
+      - type: horizontal-stack
+        cards:
+          - type: light
+            entity: light.yeelight_450c_2
+            name: Основное
+          - type: light
+            entity: light.yeelight_450c_2_ambilight
+            name: Дополнительное

@@ -9,22 +9,15 @@ cards:
     show_header_toggle: false
     entities:
       - entity: binary_sensor.0x00158d000123129b_contact
-      
-  - type: vertical-stack
+
+  - type: horizontal-stack
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: custom:mini-graph-card
-            hour24: true
-            entities:
-              - entity: sensor.esp001_sensor_bme280_temperature
-          - type: custom:mini-graph-card
-            line_color: blue
-            hour24: true
-            entities:
-              - entity: sensor.esp001_sensor_bme280_humidity
-          - type: custom:mini-graph-card
-            line_color: red
-            hour24: true
-            entities:
-              - entity: sensor.esp001_sensor_bme280_pressure
+      - type: custom:mini-graph-card
+        hour24: true
+        entities:
+          - entity: sensor.0x00124b00252193c2_temperature
+      - type: custom:mini-graph-card
+        line_color: blue
+        hour24: true
+        entities:
+          - entity: sensor.0x00124b00252193c2_humidity

@@ -13,8 +13,8 @@ cards:
       - type: horizontal-stack
         cards:
           - type: light
-            entity: light.yeelight_arwen_450c
+            entity: light.yeelight_450c_0
             name: Основное
           - type: light
-            entity: light.yeelight_arwen_450c_ambilight
+            entity: light.yeelight_450c_0_ambilight
             name: Дополнительное

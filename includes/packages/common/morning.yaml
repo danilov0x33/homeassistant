@@ -1,0 +1,77 @@
+# common_morning_package:
+#   counter:
+#     cr_morning_light_power:
+#       name: Счетчик кол-во плавного увеличения яркости света в спальне утром
+#       initial: 0
+#       step: 1
+
+#   automation:
+#     - id: cr_morning_ligth
+#       alias: Спальня| Плавное включение света в спальне утром
+#       trigger:
+#         - platform: time
+#           at: "06:00:00"
+#         - platform: time
+#           at: "07:00:00"
+#         - platform: time
+#           at: "08:00:00"
+#         - platform: time
+#           at: "09:00:00"
+#       condition:
+#       action:
+#         - choose:
+#             - conditions:
+#                 - condition: template
+#                   value_template: "{{  states('counter.cr_morning_light_power') | int == 0 }}"
+#               sequence:
+#                 - service: light.turn_on
+#                   target:
+#                     entity_id: light.yeelight_450c_2_ambilight
+#                   data:
+#                     rgb_color: [255, 128, 0]
+#                     brightness_pct: 1
+#                 - service: counter.increment
+#                   target:
+#                     entity_id: counter.cr_morning_light_power
+#             - conditions:
+#                 - condition: template
+#                   value_template: "{{  states('counter.cr_morning_light_power') | int == 1 }}"
+#               sequence:
+#                 - service: light.turn_on
+#                   target:
+#                     entity_id: light.yeelight_450c_2_ambilight
+#                   data:
+#                     rgb_color: [255, 128, 0]
+#                     transition: 30
+#                     brightness_pct: 30
+#                 - service: counter.increment
+#                   target:
+#                     entity_id: counter.cr_morning_light_power
+#             - conditions:
+#                 - condition: template
+#                   value_template: "{{  states('counter.cr_morning_light_power') | int == 2 }}"
+#               sequence:
+#                 - service: light.turn_on
+#                   target:
+#                     entity_id: light.yeelight_450c_2_ambilight
+#                   data:
+#                     rgb_color: [255, 128, 0]
+#                     transition: 30
+#                     brightness_pct: 60
+#                 - service: counter.increment
+#                   target:
+#                     entity_id: counter.cr_morning_light_power
+#             - conditions:
+#                 - condition: template
+#                   value_template: "{{  states('counter.cr_morning_light_power') | int == 3 }}"
+#               sequence:
+#                 - service: light.turn_on
+#                   target:
+#                     entity_id: light.yeelight_450c_2_ambilight
+#                   data:
+#                     rgb_color: [255, 128, 0]
+#                     transition: 30
+#                     brightness_pct: 100
+#                 - service: counter.reset
+#                   target:
+#                     entity_id: counter.cr_morning_light_power

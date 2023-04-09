@@ -1,18 +1,22 @@
 filter:
   include_entities:
-    - vacuum.dreame_bot_l10_pro_vacuum
+    - vacuum.dreame_bot_l10_pro
 
     - media_player.yandex_station_intents
     - media_player.samsung_tv
 
-    - sensor.esp001_sensor_bme280_temperature
-    - sensor.esp001_sensor_bme280_humidity
-    - sensor.esp001_sensor_bme280_pressure
+    - sensor.esp001sensor_bme280_temperature
+    - sensor.esp001sensor_bme280_humidity
+    - sensor.esp001sensor_bme280_pressure
 
-    - light.0x00158d0007504210 # Основной свет в спальне
     - light.yeelight_arwen_550c # Основной свет в зале
     - light.yeelight_arwen_550c_ambilight # Дополнительный свет в зале
-    - light.yeelight_arwen_450c # Основной свет на кухне
-    - light.yeelight_arwen_450c_ambilight # Дополнительный свет на кухне
+    - light.yeelight_450c_0 # Основной свет на кухне
+    - light.yeelight_450c_0_ambilight # Дополнительный свет на кухне
     - light.controller_rgbw_1ea01d # Основной свет на лоджии
+    - light.yeelight_450c_1 # Основной свет в коридоре
+    - light.yeelight_450c_1_ambilight # Дополнительный свет в коридоре
+    - light.0x00158d0007504210 # Основной свет в коридоре перед ванной
+    - light.yeelight_450c_2 # Основной свет в спальне
+    - light.yeelight_450c_2_ambilight # Дополнительный свет в спальне
 

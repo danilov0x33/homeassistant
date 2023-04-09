@@ -1,0 +1,88 @@
+common_dreame_bot_l10_pro_vacuum_package:
+  # recorder:
+  #   include:
+  #     entities:
+
+  homeassistant:
+    customize:
+      automation.common_notify_when_need_add_waterbox_main:
+        friendly_name: Общеее | Отправить сообщение о том, что необходимо установить водяной бак
+      automation.common_scheduler_start_work_main:
+        friendly_name: Общеее | Запустить пылесос на ежедневную уборку
+      automation.common_reset_vacuum_started_with_old_water_counter_main:
+        friendly_name: Общеее | Сброс счетчика запуска пылесоса
+
+  counter:
+    vacuum_started_with_old_water:
+      name: Счетчик кол-во запусков пылесоса со старой водой в баке
+      initial: 0
+      step: 1
+
+  automation:
+    - id: common_scheduler_start_work_main
+      alias: common_scheduler_start_work_main
+      trigger:
+        - platform: time
+          at: "12:00:00"
+        - platform: time
+          at: "16:00:00"
+        - platform: time
+          at: "20:00:00"
+      condition:
+        - condition: or
+          conditions:
+            - condition: numeric_state
+              entity_id: counter.vacuum_started_with_old_water
+              below: 3
+            - condition: state
+              entity_id: sensor.dreame_bot_l10_pro_water_tank
+              state: "not_installed"
+      action:
+        - service: vacuum.start
+          target:
+            entity_id: vacuum.dreame_bot_l10_pro
+        - service: counter.increment
+          target:
+            entity_id: counter.vacuum_started_with_old_water
+
+    - id: common_notify_when_need_add_waterbox_main
+      alias: common_notify_when_need_add_waterbox_main
+      trigger:
+        - platform: time
+          at: "11:45:00"
+        - platform: time
+          at: "15:45:00"
+        - platform: time
+          at: "19:45:00"
+      action:
+        - choose:
+            - conditions:
+                - condition: state
+                  entity_id: sensor.dreame_bot_l10_pro_water_tank
+                  state: "not_installed"
+              sequence:
+                - service: telegram_bot.send_message
+                  data_template:
+                    target: !secret telegram_danilov_info_group_id
+                    message: "Отсутствует бак с водой в роботе-пылесосе"
+            - conditions:
+                - condition: numeric_state
+                  entity_id: counter.vacuum_started_with_old_water
+                  above: 2
+              sequence:
+                - service: telegram_bot.send_message
+                  data_template:
+                    target: !secret telegram_danilov_info_group_id
+                    message: "Нужно поменять тряпку в роботе-пылесосе"
+
+    - id: common_reset_vacuum_started_with_old_water_counter_main
+      alias: common_reset_vacuum_started_with_old_water_counter_main
+      trigger:
+        - platform: state
+          entity_id: sensor.dreame_bot_l10_pro_water_tank
+          from: "not_installed"
+          to: "installed"
+      action:
+        - service: counter.reset
+          target:
+            entity_id: counter.vacuum_started_with_old_water

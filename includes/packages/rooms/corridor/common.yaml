@@ -1,0 +1,83 @@
+co_common_package:
+  recorder:
+    include:
+      entities:
+        - switch.0x54ef4410005e60c8_left
+        - switch.0x54ef4410005e60c8_right
+        - sensor.0x54ef4410005e60c8_action
+
+        - switch.0x54ef4410005b0295_left
+        - switch.0x54ef4410005b0295_right
+        - sensor.0x54ef4410005b0295_action
+
+        - binary_sensor.0x00158d0003a44095_state
+        - binary_sensor.0x00158d0003a44095_reverse
+
+        - binary_sensor.0x00158d0003f1029f_occupancy
+        - sensor.0x00158d0003f1029f_battery
+
+        - sensor.0xcc86ecfffe168a05_action
+        - sensor.0xcc86ecfffe168a05_battery
+
+        - sensor.xiaomi_gateway_001_illuminance
+        - alarm_control_panel.xiaomi_gateway_001_alarm
+
+        - light.xiaomi_gateway_001_light
+        
+        - light.wiz_ceiling_corridor
+
+        - light.yeelight_450c_1
+        - light.yeelight_450c_1_ambilight
+        - light.yeelight_450c_1_nightlight
+
+  homeassistant:
+    customize:
+      # MQTT
+      switch.0x54ef4410005e60c8_left:
+        friendly_name: Переключатель основного освещения в туалете (Питание)
+      switch.0x54ef4410005e60c8_right:
+        friendly_name: Переключатель основного освещение в ванной (Питание)
+      sensor.0x54ef4410005e60c8_action:
+        friendly_name: Действие переключателя в коридоре у ванной
+
+      switch.0x54ef4410005b0295_left:
+        friendly_name: Переключатель основного освещения в коридоре (Питание)
+      switch.0x54ef4410005b0295_right:
+        friendly_name: Переключатель дополнительного освещения в коридоре
+      sensor.0x54ef4410005b0295_action:
+        friendly_name: Действие переключателя в коридоре
+
+      binary_sensor.0x00158d0003a44095_state:
+        friendly_name: Основной замок
+        device_class: door
+      binary_sensor.0x00158d0003a44095_reverse:
+        friendly_name: Дополнительный замок
+        device_class: door
+
+      binary_sensor.0x00158d0003f1029f_occupancy:
+        friendly_name: Датчик движения в коридоре
+      sensor.0x00158d0003f1029f_battery:
+        friendly_name: Заряд батареи датчика движения в коридоре
+
+      sensor.0xcc86ecfffe168a05_action:
+        friendly_name: Действие 4-х переключателей в коридоре
+      sensor.0xcc86ecfffe168a05_battery:
+        friendly_name: Заряд батареи 4-х переключателей в коридоре
+
+      # Xiaomi
+      sensor.xiaomi_gateway_001_illuminance:
+        friendly_name: Освещённость в коридоре
+        unit_of_measurement: lm
+      light.xiaomi_gateway_001_light:
+        friendly_name: Ночник в коридоре
+
+      light.yeelight_450c_1:
+        friendly_name: Оснойной свет в коридоре
+      light.yeelight_450c_1_ambilight:
+        friendly_name: Подсветка оснойного света в коридоре
+      light.yeelight_450c_1_nightlight:
+        friendly_name: Ночной режим оснойного света в коридоре
+
+      # WIZ
+      light.wiz_ceiling_corridor:
+        friendly_name: Свет над ванной и туалетом

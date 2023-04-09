@@ -1,0 +1,145 @@
+ha_telegram_ui_package:
+  homeassistant:
+    customize:
+      automation.ha_telegram_ui_main:
+        friendly_name: Телеграмм UI | Зал
+
+  automation:
+    - id: ha_telegram_ui_main
+      alias: ha_telegram_ui_main
+      initial_state: true
+      trigger:
+        - platform: event
+          event_type: telegram_callback
+          event_data: {}
+      action:
+        - choose:
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/hall_control' }}"
+              sequence:
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: &msg_hall |
+                      *Зал :*
+                      {{'\U0001F6AA'}} Окно - {% if is_state('binary_sensor.0x00158d000123129b_contact', 'on') %} Открыто {% else %} Закрыто {% endif %}
+                      {{'\U0001F321'}} - {{ states('sensor.0x00124b00252193c2_temperature') }} °C, {{'\U0001F4A7'}} - {{ states('sensor.0x00124b00252193c2_humidity') }} %
+                    inline_keyboard: &keyb_hall
+                      - '{{''\U0001F4A1''}} Основной свет - {% if is_state(''light.yeelight_arwen_550c'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/hall_toggle_main_ligth , {{''\U0001F4A1''}} Ночной свет - {% if is_state(''light.yeelight_arwen_550c_ambilight'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/hall_toggle_night_ligth'
+                      - '{{''\U0001F4FA''}} TV - {% if is_state(''media_player.samsung_tv'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/hall_toggle_tv , {{''\U0001F50C''}} 3Д принтер - {% if is_state(''switch.0xa4c13826691e389b'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/hall_toggle_3d_print'
+                      - '{{''\U000021A9''}} Вернуться:/menu_back , {{''\U000021AA''}} Обновить:/hall_control'
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/hall_toggle_main_ligth' }}"
+              sequence:
+                - service: light.toggle
+                  entity_id: light.yeelight_arwen_550c
+                - delay:
+                    milliseconds: 500
+                - service: telegram_bot.answer_callback_query
+                  data:
+                    callback_query_id: "{{ trigger.event.data.id }}"
+                    message: |
+                      {{"\U0001F4AC"}} Основной свет - {% if is_state('light.yeelight_arwen_550c', 'on') %} Включен {% else %} Выключен {% endif %}
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: *msg_hall
+                    inline_keyboard: *keyb_hall
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/hall_toggle_night_ligth' }}"
+              sequence:
+                - service: light.toggle
+                  entity_id: light.yeelight_arwen_550c_ambilight
+                - delay:
+                    milliseconds: 500
+                - service: telegram_bot.answer_callback_query
+                  data:
+                    callback_query_id: "{{ trigger.event.data.id }}"
+                    message: |
+                      {{"\U0001F4AC"}} Ночной свет - {% if is_state('light.yeelight_arwen_550c_ambilight', 'on') %} Включен {% else %} Выключен {% endif %}
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: *msg_hall
+                    inline_keyboard: *keyb_hall
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/hall_toggle_tv' }}"
+              sequence:
+                - service: media_player.toggle
+                  entity_id: media_player.samsung_tv
+                - delay:
+                    milliseconds: 500
+                - service: telegram_bot.answer_callback_query
+                  data:
+                    callback_query_id: "{{ trigger.event.data.id }}"
+                    message: |
+                      {{"\U0001F4AC"}} TV - {% if is_state('media_player.samsung_tv', 'on') %} Включен {% else %} Выключен {% endif %}
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: *msg_hall
+                    inline_keyboard: *keyb_hall
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/hall_toggle_3d_print' }}"
+              sequence:
+                - service: switch.toggle
+                  entity_id: switch.0xa4c13826691e389b
+                - delay:
+                    milliseconds: 500
+                - service: telegram_bot.answer_callback_query
+                  data:
+                    callback_query_id: "{{ trigger.event.data.id }}"
+                    message: |
+                      {{"\U0001F4AC"}} Розетка - {% if is_state('switch.0xa4c13826691e389b', 'on') %} Включен {% else %} Выключен {% endif %}
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: *msg_hall
+                    inline_keyboard: *keyb_hall
+            # - conditions:
+            #     - condition: template
+            #       value_template: "{{ trigger.event.data.command == '/hall_toggle_conditioner' }}"
+            #   sequence:
+            #     - service: switch.toggle
+            #       entity_id: switch.air_conditioner_01_power
+            #     - delay:
+            #         milliseconds: 500
+            #     - service: telegram_bot.answer_callback_query
+            #       data:
+            #         callback_query_id: "{{ trigger.event.data.id }}"
+            #         message: |
+            #           {{"\U0001F4A8"}} Кондиционер - {% if is_state('switch.air_conditioner_01_power', 'on') %} Включен {% else %} Выключен {% endif %}
+            #     - service: telegram_bot.delete_message
+            #       data_template:
+            #         message_id: "{{ trigger.event.data.message.message_id }}"
+            #         chat_id: "{{ trigger.event.data.chat_id }}"
+            #     - service: telegram_bot.send_message
+            #       data:
+            #         target: "{{ trigger.event.data.chat_id }}"
+            #         message: *msg_hall
+            #         inline_keyboard: *keyb_hall

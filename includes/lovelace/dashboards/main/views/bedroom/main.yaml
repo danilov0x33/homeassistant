@@ -1,6 +1,7 @@
 title: Спальня
 icon: mdi:bed
 cards:
+  - !include sensors.yaml
   - !include lights.yaml
   - type: custom:layout-card
     layout_type: vertical

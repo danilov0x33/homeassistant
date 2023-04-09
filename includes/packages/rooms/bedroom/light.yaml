@@ -1,0 +1,21 @@
+be_light_package:
+  homeassistant:
+    customize:
+      automation.be_change_main_light_in_bedroom_main:
+        friendly_name: Спальня | Вкл/Выкл основного света в спальне
+
+  automation:
+    - id: be_change_main_light_in_bedroom_main
+      alias: be_change_main_light_in_bedroom_main
+      trigger:
+        - platform: state
+          entity_id: switch.0x60a423fffeb047dd_left
+          from: "off"
+          to: "on"
+        - platform: state
+          entity_id: switch.0x60a423fffeb047dd_left
+          from: "on"
+          to: "off"
+      action:
+        - service: light.toggle
+          entity_id: light.yeelight_450c_2

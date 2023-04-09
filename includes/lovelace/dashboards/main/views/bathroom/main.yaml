@@ -2,12 +2,4 @@ title: Ванная
 icon: mdi:shower
 cards:
   - !include sensors.yaml
-  - type: custom:stack-in-card
-    mode: vertical
-    cards:
-      - type: markdown
-        style: !include ../../../../components/title_style.yaml
-        content: Стиральная машина
-      - type: entities
-        entities:
-          - entity: sensor.lg_thinq_washing_machine
+  - !include lights.yaml

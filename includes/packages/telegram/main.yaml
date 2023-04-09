@@ -1,0 +1,69 @@
+main_telegram_ui_package:
+  homeassistant:
+    customize:
+      automation.telegram_menu_start_main:
+        friendly_name: Телеграмм UI | Вызов меню управления телеграм
+      automation.telegram_menu_control_main:
+        friendly_name: Главное меню управления телеграм
+
+  automation:
+    ## Стартовая автоматизация для запуска меню
+    - id: telegram_menu_start_main
+      alias: telegram_menu_start_main
+      initial_state: true
+      trigger:
+        - platform: event
+          event_type: telegram_text
+      condition:
+        - condition: template
+          value_template: >-
+            {{ trigger.event.data.text in ["куку", "Куку", "Rere", "rere", "Привет", "привет", "Ghbdtn", "ghbdtn"] }}
+      action:
+        - service: telegram_bot.send_message
+          data:
+            target: "{{ trigger.event.data.user_id }}"
+            message: |
+              {{'\U0001F527'}} *Управление умным домом*
+            inline_keyboard:
+              - '{{''\U0001F6AA''}} Коридор:/corridor_control , {{''\U0001F4BA''}} Лоджия:/loggia_control'
+              - '{{''\U0001F4FA''}} Зал:/hall_control, {{''\U0001F31C''}} Спальня:/bedroom_control'
+              - '{{''\U0001F374''}} Кухня:/kitchen_control, {{''\U0001F6C1''}} Ванна и туалет:/bathroom_control'
+              - '{{''\U0001F6AB''}} Убрать меню:/menu_hide , {{''\U000021AA''}} Обновить:/menu_back'
+
+    # ## Автоматизация управления главным меню
+    - id: telegram_menu_control_main
+      alias: telegram_menu_control_main
+      initial_state: true
+      trigger:
+        - platform: event
+          event_type: telegram_callback
+          event_data: {}
+      action:
+        - choose:
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/menu_hide' }}"
+              sequence:
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+        - choose:
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/menu_back' }}"
+              sequence:
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: |
+                      {{'\U0001F527'}} *Управление умным домом*
+                    inline_keyboard:
+                      - '{{''\U0001F6AA''}} Коридор:/corridor_control , {{''\U0001F4BA''}} Лоджия:/loggia_control'
+                      - '{{''\U0001F4FA''}} Зал:/hall_control, {{''\U0001F31C''}} Спальня:/bedroom_control'
+                      - '{{''\U0001F374''}} Кухня:/kitchen_control, {{''\U0001F6C1''}} Ванна и туалет:/bathroom_control'
+                      - '{{''\U0001F6AB''}} Убрать меню:/menu_hide , {{''\U000021AA''}} Обновить:/menu_back'

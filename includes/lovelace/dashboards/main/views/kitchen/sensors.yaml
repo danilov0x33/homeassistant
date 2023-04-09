@@ -9,3 +9,15 @@ cards:
     entities:
       - entity: binary_sensor.0x00158d0002922b19_water_leak
         name: Датчик протечки воды
+
+  - type: horizontal-stack
+    cards:
+      - type: custom:mini-graph-card
+        hour24: true
+        entities:
+          - entity: sensor.0x00124b002520c3d4_temperature
+      - type: custom:mini-graph-card
+        line_color: blue
+        hour24: true
+        entities:
+          - entity: sensor.0x00124b002520c3d4_humidity

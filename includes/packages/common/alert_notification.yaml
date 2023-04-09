@@ -1,7 +1,12 @@
-alert_notification_package:
+common_alert_notification_package:
+  homeassistant:
+    customize:
+      automation.common_notify_when_water_leak_alarm_main:
+        friendly_name: "Отправить сообщение о том, что датчик протечки воды сработал"
+
   automation:
-    - id: Отправить сообщение о том, что датчик протечки воды сработал
-      alias: notify_when_water_leak_alarm
+    - id: common_notify_when_water_leak_alarm_main
+      alias: common_notify_when_water_leak_alarm_main
       initial_state: true
       trigger:
         - platform: state

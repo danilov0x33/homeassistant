@@ -1,0 +1,186 @@
+# t1 - 4.97
+# t2 - 2.20
+# t3 - 4.14
+common_power_metrics_package:
+  recorder:
+    include:
+      entities:
+        - sensor.sensor_kasa_switch_001_current_consumption_integral
+      entity_globs:
+        - sensor.*_t1_high_energy
+        - sensor.*_t2_night_energy
+        - sensor.*_t3_normal_energy
+
+  homeassistant:
+    customize:
+      automation.common_power_metrics_tariffs:
+        friendly_name: Общее | Расчет электроэнергии
+
+  sensor:
+    - platform: integration
+      source: sensor.kasa_switch_001_current_consumption
+      unique_id: kasa_switch_001_energy
+      name: kasa_switch_001_energy
+      unit_prefix: k
+      round: 2
+
+  utility_meter:
+    0xa4c13851c962bc6d_daily:
+      source: sensor.0xa4c13851c962bc6d_energy
+      name: Дневное потребление энергии компьютера Жени
+      cycle: daily
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+    0xa4c13851c962bc6d_monthly:
+      source: sensor.0xa4c13851c962bc6d_energy
+      name: Месячное потребление энергии компьютера Жени
+      cycle: monthly
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+
+    0xa4c13826691e389b_daily:
+      source: sensor.0xa4c13826691e389b_energy
+      name: Дневное потребление энергии компьютера Насти
+      cycle: daily
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+    0xa4c13826691e389b_monthly:
+      source: sensor.0xa4c13826691e389b_energy
+      name: Месячное потребление энергии компьютера Насти
+      cycle: monthly
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+
+    0x00158d0001bbf9cf_daily:
+      source: sensor.0x00158d0001bbf9cf_energy
+      name: Дневное потребление энергии вытяжки
+      cycle: daily
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+    0x00158d0001bbf9cf_monthly:
+      source: sensor.0x00158d0001bbf9cf_energy
+      name: Месячное потребление энергии вытяжки
+      cycle: monthly
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+
+    0xa4c138f4dfe7903d_daily:
+      source: sensor.0xa4c138f4dfe7903d_energy
+      name: Дневное потребление энергии стиральной машины
+      cycle: daily
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+    0xa4c138f4dfe7903d_monthly:
+      source: sensor.0xa4c138f4dfe7903d_energy
+      name: Месячное потребление энергии стиральной машины
+      cycle: monthly
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+
+    0xa4c13895299116e4_daily:
+      source: sensor.0xa4c13895299116e4_energy
+      name: Дневное потребление энергии зеркала в ванной
+      cycle: daily
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+    0xa4c13895299116e4_monthly:
+      source: sensor.0xa4c13895299116e4_energy
+      name: Месячное потребление энергии зеркала в ванной
+      cycle: monthly
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+
+    kasa_switch_001_daily:
+      source: sensor.kasa_switch_001_today_s_consumption
+      name: Дневное потребление энергии чайника
+      cycle: daily
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+    kasa_switch_001_monthly:
+      source: sensor.sensor_kasa_switch_001_current_consumption_integral
+      name: Месячное потребление энергии зеркала в ванной
+      # delta_values: true
+      cycle: monthly
+      tariffs:
+        - t1_high_energy
+        - t2_night_energy
+        - t3_normal_energy
+
+  automation:
+    - id: common_power_metrics_tariffs
+      alias: common_power_metrics_tariffs
+      trigger:
+        - platform: time
+          at: "07:00:00"
+          variables:
+            tariff: "t1_high_energy"
+        - platform: time
+          at: "07:05:00"
+          variables:
+            tariff: "t1_high_energy"
+        - platform: time
+          at: "10:00:00"
+          variables:
+            tariff: "t3_normal_energy"
+        - platform: time
+          at: "10:05:00"
+          variables:
+            tariff: "t3_normal_energy"
+        - platform: time
+          at: "17:00:00"
+          variables:
+            tariff: "t1_high_energy"
+        - platform: time
+          at: "17:05:00"
+          variables:
+            tariff: "t1_high_energy"
+        - platform: time
+          at: "21:00:00"
+          variables:
+            tariff: "t3_normal_energy"
+        - platform: time
+          at: "21:05:00"
+          variables:
+            tariff: "t3_normal_energy"
+        - platform: time
+          at: "23:00:00"
+          variables:
+            tariff: "t2_night_energy"
+        - platform: time
+          at: "23:05:00"
+          variables:
+            tariff: "t2_night_energy"
+      action:
+        - service: select.select_option
+          target:
+            entity_id: >
+              {{ (states.select | map(attribute='entity_id') | select('search', '_daily|_monthly' ) | list) }}
+          data:
+            option: "{{ tariff }}"
+        # - service: select.select_option
+        #   target:
+        #     entity_id: select.0xa4c13851c962bc6d_monthly
+        #   data:
+        #     option: "{{ tariff }}"

@@ -1,0 +1,23 @@
+blueprint:
+  name: Test 2
+  domain: automation
+  input:
+    ttt:
+      name: ttt
+      selector:
+        entity:
+          domain: script
+
+mode: single
+
+variables:
+  ttt: !input ttt
+
+trigger:
+  - platform: time_pattern
+    minutes: "/1"
+
+action:
+  - alias: "start"
+    service: script.turn_on
+    entity_id: !input ttt

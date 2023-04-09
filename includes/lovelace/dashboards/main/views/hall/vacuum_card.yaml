@@ -1,30 +1,110 @@
-type: custom:stack-in-card
-mode: vertical
-cards:
-  - type: markdown
-    style: !include ../../../../components/title_style.yaml
-    content: Робопылесос
+# type: custom:stack-in-card
+# mode: vertical
+# cards:
+#   - type: markdown
+#     style: !include ../../../../components/title_style.yaml
+#     content: Робопылесос
 
-  - type: custom:vacuum-card
-    entity: vacuum.dreame_bot_l10_pro_vacuum
-    stats:
-      default:
-        - attribute: filter_left
-          unit: hours
-          subtitle: Filter
-        - attribute: side_brush_left
-          unit: hours
-          subtitle: Side brush
-        - attribute: main_brush_left
-          unit: hours
-          subtitle: Main brush
-        - attribute: sensor_dirty_left
-          unit: hours
-          subtitle: Sensors
-      cleaning:
-        - attribute: cleaned_area
-          unit: m2
-          subtitle: Cleaning area
-        - attribute: cleaning_time
-          unit: minutes
-          subtitle: Cleaning time
+#   - type: custom:vacuum-card
+#     entity: vacuum.dreame_bot_l10_pro
+#     stats:
+#       default:
+#         - attribute: filter_left
+#           unit: hours
+#           subtitle: Filter
+#         - attribute: side_brush_left
+#           unit: hours
+#           subtitle: Side brush
+#         - attribute: main_brush_left
+#           unit: hours
+#           subtitle: Main brush
+#         - attribute: sensor_dirty_left
+#           unit: hours
+#           subtitle: Sensors
+#       cleaning:
+#         - attribute: cleaned_area
+#           unit: m2
+#           subtitle: Cleaning area
+#         - attribute: cleaning_time
+#           unit: minutes
+#           subtitle: Cleaning time
+
+type: custom:xiaomi-vacuum-map-card
+vacuum_platform: default
+entity: vacuum.dreame_bot_l10_pro
+map_source:
+  camera: camera.dreame_bot_l10_pro_map
+calibration_source:
+  camera: true
+map_modes:
+  - template: vacuum_clean_zone
+    max_selections: 10
+    repeats_type: EXTERNAL
+    max_repeats: 3
+    service_call_schema:
+      service: dreame_vacuum.vacuum_clean_zone
+      service_data:
+        entity_id: "[[entity_id]]"
+        zone: "[[selection]]"
+        repeats: "[[repeats]]"
+  - template: vacuum_clean_segment
+    repeats_type: EXTERNAL
+    max_repeats: 3
+    service_call_schema:
+      service: dreame_vacuum.vacuum_clean_segment
+      service_data:
+        entity_id: "[[entity_id]]"
+        segments: "[[selection]]"
+        repeats: "[[repeats]]"
+    predefined_selections:
+      - id: 1
+        outline:
+          - - -5500
+            - -2850
+          - - -5500
+            - 600
+          - - 700
+            - 600
+          - - 700
+            - -2850
+      - id: 2
+        outline:
+          - - -4400
+            - -5800
+          - - -4400
+            - -2750
+          - - -150
+            - -2750
+          - - -150
+            - -5800
+      - id: 3
+        outline:
+          - - -7250
+            - -5350
+          - - -7250
+            - 400
+          - - -4400
+            - 400
+          - - -4400
+            - -5350
+      - id: 4
+        outline:
+          - - -11250
+            - -6250
+          - - -11250
+            - -2950
+          - - -6800
+            - -2950
+          - - -6800
+            - -6250
+  - name: Clean Spot
+    icon: mdi:map-marker-plus
+    max_repeats: 3
+    selection_type: MANUAL_POINT
+    repeats_type: EXTERNAL
+    service_call_schema:
+      service: dreame_vacuum.vacuum_clean_spot
+      service_data:
+        entity_id: "[[entity_id]]"
+        points: "[[selection]]"
+        repeats: "[[repeats]]"

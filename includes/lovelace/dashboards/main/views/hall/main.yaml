@@ -8,5 +8,4 @@ cards:
   - !include yandex_station_mini_001_card.yaml
   - !include tyua_switch_01_card.yaml
   - !include vacuum_card.yaml
-  - !include xiaomi_humidifier_001_card.yaml
-  - !include air_conditioner_01_card.yaml
+  # - !include air_conditioner_01_card.yaml

@@ -1,0 +1,73 @@
+ba_common_package:
+  recorder:
+    include:
+      entities:
+        - sensor.0x00124b00251fa5d7_humidity
+        - sensor.0x00124b00251fa5d7_temperature
+        - sensor.0x00124b00251fa5d7_battery
+
+        - binary_sensor.0x00158d0002922709_water_leak
+        - sensor.0x00158d0002922709_battery
+
+        - binary_sensor.0x00158d0003cbd91c_contact
+        - sensor.0x00158d0003cbd91c_battery
+
+        - binary_sensor.0x00158d0003cf8ae6_occupancy
+        - sensor.0x00158d0003cf8ae6_battery
+
+        - switch.0xa4c13895299116e4
+        - sensor.0xa4c13895299116e4_energy
+        - sensor.0xa4c13895299116e4_power
+
+        - switch.0xa4c138f4dfe7903d
+        - sensor.0xa4c138f4dfe7903d_energy
+        - sensor.0xa4c138f4dfe7903d_power
+
+        - sensor.lg_thinq_washing_machine
+        - sensor.lg_thinq_washing_machine_run_state
+        - sensor.lg_thinq_washing_machine_error_message
+        - binary_sensor.lg_thinq_washing_machine_wash_completed
+
+  homeassistant:
+    customize:
+      # MQTT
+      sensor.0x00124b00251fa5d7_humidity:
+        friendly_name: Влажность в ванной
+      sensor.0x00124b00251fa5d7_temperature:
+        friendly_name: Температура в ванной
+      sensor.0x00124b00251fa5d7_battery:
+        friendly_name: Заряд батареи датчика температуры и влажности в ванной
+
+      binary_sensor.0x00158d0002922709_water_leak:
+        friendly_name: Сенсор протечки в ванной
+      sensor.0x00158d0002922709_battery:
+        friendly_name: Заряд батареи датчика протечки в ванной
+
+      binary_sensor.0x00158d0003cbd91c_contact:
+        friendly_name: Дверь в ванную
+        device_class: door
+      sensor.0x00158d0003cbd91c_battery:
+        friendly_name: Заряд батареи датчика открытия двери в ванную
+
+      binary_sensor.0x00158d0003cf8ae6_occupancy:
+        friendly_name: Датчик движения в ванной
+      sensor.0x00158d0003cf8ae6_battery:
+        friendly_name: Заряд батареи датчика движения в ванной
+
+      switch.0xa4c13895299116e4:
+        friendly_name: Питание зеркала в ванной
+      sensor.0xa4c13895299116e4_energy:
+        friendly_name: Общее потребление электроэнергии зеркала в ванной
+      sensor.0xa4c13895299116e4_power:
+        friendly_name: Текущая мощность зеркала в ванной
+
+      switch.0xa4c138f4dfe7903d:
+        friendly_name: Питание стиральной машины
+      sensor.0xa4c138f4dfe7903d_energy:
+        friendly_name: Общее потребление электроэнергии стиральной машины
+      sensor.0xa4c138f4dfe7903d_power:
+        friendly_name: Текущая мощность стиральной машины
+
+      # LG
+      sensor.lg_thinq_washing_machine:
+        friendly_name: Стиральная машина

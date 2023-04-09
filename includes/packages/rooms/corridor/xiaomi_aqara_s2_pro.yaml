@@ -1,6 +1,6 @@
 # xiaomi_aqara_s2_pro_package:
+#  mqtt:
 #   sensor:
-#     - platform: mqtt
 #       name: "0x00158d0003a44095_action"
 #       state_topic: "zigbee2mqtt/0x00158d0003a44095/action"
 #       value_template: "{{ value_json.action }}"

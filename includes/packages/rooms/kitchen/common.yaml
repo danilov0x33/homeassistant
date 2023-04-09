@@ -1,0 +1,84 @@
+ki_common_package:
+  recorder:
+    include:
+      entities:
+        - switch.0x00158d0001bbf9cf
+        - sensor.0x00158d0001bbf9cf_energy
+        - sensor.0x00158d0001bbf9cf_power
+
+        - sensor.0x00124b002520c3d4_humidity
+        - sensor.0x00124b002520c3d4_temperature
+        - sensor.0x00124b002520c3d4_battery
+
+        - binary_sensor.0x00158d0002922b19_water_leak
+        - sensor.0x00158d0002922b19_battery
+
+        - switch.0x54ef4410004db308_left
+        - switch.0x54ef4410004db308_right
+        - sensor.0x54ef4410004db308_action
+
+        - light.yeelight_450c_0
+        - light.yeelight_450c_0_ambilight
+        - light.yeelight_450c_0_nightlight
+
+        - sensor.lg_thinq_fridge
+        - binary_sensor.lg_thinq_fridge_door_open
+
+        - switch.kasa_switch_001
+        - sensor.kasa_switch_001_current
+        - sensor.kasa_switch_001_current_consumption
+        - sensor.kasa_switch_001_today_s_consumption
+        - sensor.kasa_switch_001_total_consumption
+        - sensor.kasa_switch_001_voltage
+
+  homeassistant:
+    customize:
+      # MQTT
+      switch.0x00158d0001bbf9cf:
+        friendly_name: Питание вытяжки
+      sensor.0x00158d0001bbf9cf_energy:
+        friendly_name: Общее потребление электроэнергии вытяжки
+      sensor.0x00158d0001bbf9cf_power:
+        friendly_name: Текущая мощность вытяжки
+
+      sensor.0x00124b002520c3d4_humidity:
+        friendly_name: Влажность на кухне
+      sensor.0x00124b002520c3d4_temperature:
+        friendly_name: Температура на кухне
+      sensor.0x00124b002520c3d4_battery:
+        friendly_name: Заряд батареи датчика температура и влажности на кухне
+
+      binary_sensor.0x00158d0002922b19_water_leak:
+        friendly_name: Сенсор протечки на кухне
+      sensor.0x00158d0002922b19_battery:
+        friendly_name: Заряд батареи датчика температуры и влажности на кухне
+
+      switch.0x54ef4410004db308_left:
+        friendly_name: Переключатель дополнительного освещения на кухне (Питание)
+      switch.0x54ef4410004db308_right:
+        friendly_name: Переключатель основное освещение на кухне
+      sensor.0x54ef4410004db308_action:
+        friendly_name: Действие выключателя на кухне
+
+      # Xiaomi
+      light.yeelight_450c_0:
+        friendly_name: Основной свет на кухне
+      light.yeelight_450c_0_ambilight:
+        friendly_name: Подсветка основного света на кухне
+      light.yeelight_450c_0_nightlight:
+        friendly_name: Ночной режим основного света на кухне
+
+      # LG
+      sensor.lg_thinq_fridge:
+        friendly_name: Холодильник на кухне
+      binary_sensor.lg_thinq_fridge_door_open:
+        friendly_name: Двери холодильника на кухне
+        device_class: door
+
+      # Kasa
+      switch.kasa_switch_001:
+        friendly_name: Питание чайника
+      sensor.kasa_switch_001_current_consumption:
+        friendly_name: Мощность чайника
+        unit_of_measurement: W
+        device_class: power

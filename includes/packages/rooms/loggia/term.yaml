@@ -1,0 +1,46 @@
+# lo_term_package:
+#   homeassistant:
+#     customize:
+#       automation.lg_term_warm_floor:
+#         friendly_name: Лоджия| Автоматическое вкл/выкл теплого пола по рассписанию
+
+#       binary_sensor.lg_warm_floor_save_energy:
+#         friendly_name: Интервал для сохранения энергии на теплом поле
+
+#   binary_sensor:
+#     # Интервал для сохранения энергии на теплом поле
+#     - platform: tod
+#       name: lg_warm_floor_save_energy
+#       after: "23:00"
+#       before: "07:00"
+
+#   automation:
+#     - id: Лоджия| Автоматическое вкл/выкл теплого пола по рассписанию
+#       alias: lo_term_warm_floor
+#       trigger:
+#         - platform: state
+#           entity_id: binary_sensor.lg_warm_floor_save_energy
+#       action:
+#         - choose:
+#             - conditions:
+#                 - condition: state
+#                   entity_id: binary_sensor.lg_warm_floor_save_energy
+#                   state: "on"
+#                 - condition: state
+#                   entity_id: switch.tuya_thermostat_switch
+#                   state: "off"
+#               sequence:
+#                 - service: switch.turn_on
+#                   target:
+#                     entity_id: switch.tuya_thermostat_switch
+#             - conditions:
+#                 - condition: state
+#                   entity_id: binary_sensor.lg_warm_floor_save_energy
+#                   state: "off"
+#                 - condition: state
+#                   entity_id: switch.tuya_thermostat_switch
+#                   state: "on"
+#               sequence:
+#                 - service: switch.turn_off
+#                   target:
+#                     entity_id: switch.tuya_thermostat_switch

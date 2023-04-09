@@ -9,13 +9,23 @@ cards:
     cards:
       - type: markdown
         style: !include ../../../../components/sub_title_style.yaml
-        content: Основной
+        content: Yeelight 450C
       - type: horizontal-stack
         cards:
-          - type: entities
-            entities:
-              - entity: switch.0x60a423fffeb04c7e_left
-                name: Основное
+          - type: light
+            entity: light.yeelight_450c_1
+            name: Основное
+          - type: light
+            entity: light.yeelight_450c_1_ambilight
+            name: Дополнительное
+  - type: custom:stack-in-card
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: Свет над ванной и туалетом
+      - type: light
+        entity: light.wiz_ceiling_corridor
+
   - type: custom:stack-in-card
     cards:
       - type: markdown

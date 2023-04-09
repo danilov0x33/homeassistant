@@ -1,0 +1,17 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Освещение
+
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: Основное освещение
+      - type: horizontal-stack
+        cards:
+          - type: light
+            entity: light.wiz_ceiling_toilet
+            name: Основное

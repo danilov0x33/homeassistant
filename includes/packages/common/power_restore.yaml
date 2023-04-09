@@ -1,0 +1,6 @@
+# common_power_restore_package:
+# recorder:
+#   include:
+#     entities:
+# homeassistant:
+#   customize:

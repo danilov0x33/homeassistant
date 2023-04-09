@@ -1,30 +1,49 @@
-aqara_cube_actions:
-  # homeassistant:
-  #   customize:
-  #     automation.notify_when_need_add_waterbox:
-  #       friendly_name: Отправить сообщение о том, что необходимо установить водяной бак
-  #       icon: mdi:refresh-auto
-  binary_sensor:
-    - platform: mqtt
-      name: nastya_is_busy
-      state_topic: "custom/nastya_is_busy/state"
-      payload_on: "True"
-      payload_off: "False"
+common_busy_actions_package:
+  recorder:
+    include:
+      entities:
+        - binary_sensor.nastya_is_busy
+        - binary_sensor.evgeniy_is_busy
 
-    - platform: mqtt
-      name: evgeniy_is_busy
-      state_topic: "custom/evgeniy_is_busy/state"
-      payload_on: "True"
-      payload_off: "False"
+  homeassistant:
+    customize:
+      automation.common_send_when_nastya_change_busy_status_main:
+        friendly_name: "Общеее | Изменить состояние занятости Насти"
+      automation.common_notify_when_change_sensor_nastya_is_busy_main:
+        friendly_name: "Общеее | Отправить сообщение состояние занятости Настя"
+      automation.common_send_when_evgeniy_change_busy_status_main:
+        friendly_name: "Общеее | Изменить состояние занятости Жени"
+      automation.common_notify_when_change_sensor_evgeniy_is_busy_main:
+        friendly_name: "Общеее | Отправить сообщение состояние занятости Женя"
+
+      binary_sensor.nastya_is_busy:
+        friendly_name: "Занята Настя"
+      binary_sensor.evgeniy_is_busy:
+        friendly_name: "Занят Женя"
+
+  mqtt:
+    binary_sensor:
+      - name: nastya_is_busy
+        state_topic: "custom/nastya_is_busy/state"
+        payload_on: "True"
+        payload_off: "False"
+
+      - name: evgeniy_is_busy
+        state_topic: "custom/evgeniy_is_busy/state"
+        payload_on: "True"
+        payload_off: "False"
 
   automation:
-    - id: Изменить состояние занятости Насти
-      alias: notify_when_nastya_cube_is_flip180
+    - id: common_send_when_nastya_change_busy_status_main
+      alias: common_send_when_nastya_change_busy_status_main
       initial_state: true
       trigger:
         - platform: state
           entity_id: sensor.0x00158d0007082349_action
           to: "flip180"
+        - platform: state
+          entity_id: sensor.0x00158d000276ea3b_action # Xiaomi Кнопка
+          to: "single"
       action:
         - service: mqtt.publish
           data_template:
@@ -32,12 +51,18 @@ aqara_cube_actions:
             payload_template: "{{ not is_state('binary_sensor.nastya_is_busy', 'on') }}"
             retain: true
 
-    - id: Отправить сообщение состояние занятости Настя
-      alias: notify_change_sensor_nastya_is_busy
+    - id: common_notify_when_change_sensor_nastya_is_busy_main
+      alias: common_notify_when_change_sensor_nastya_is_busy_main
       initial_state: true
       trigger:
         - platform: state
           entity_id: binary_sensor.nastya_is_busy
+          from: "off"
+          to: "on"
+        - platform: state
+          entity_id: binary_sensor.nastya_is_busy
+          from: "on"
+          to: "off"
       action:
         - service: telegram_bot.send_message
           data_template:
@@ -49,8 +74,8 @@ aqara_cube_actions:
               Настя освободилась
               {% endif %}
 
-    - id: Изменить состояние занятости Жени
-      alias: notify_when_evgeniy_cube_is_flip180
+    - id: common_send_when_evgeniy_change_busy_status_main
+      alias: common_send_when_evgeniy_change_busy_status_main
       initial_state: true
       trigger:
         - platform: state
@@ -63,12 +88,18 @@ aqara_cube_actions:
             payload_template: "{{ not is_state('binary_sensor.evgeniy_is_busy', 'on') }}"
             retain: true
 
-    - id: Отправить сообщение состояние занятости Женя
-      alias: notify_change_sensor_evgeniy_is_busy
+    - id: common_notify_when_change_sensor_evgeniy_is_busy_main
+      alias: common_notify_when_change_sensor_evgeniy_is_busy_main
       initial_state: true
       trigger:
         - platform: state
           entity_id: binary_sensor.evgeniy_is_busy
+          from: "off"
+          to: "on"
+        - platform: state
+          entity_id: binary_sensor.evgeniy_is_busy
+          from: "on"
+          to: "off"
       action:
         - service: telegram_bot.send_message
           data_template:

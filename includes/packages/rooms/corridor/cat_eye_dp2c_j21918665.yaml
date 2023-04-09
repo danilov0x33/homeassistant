@@ -1,23 +1,12 @@
-cat_eye_dp2c_j21918665_package:
-  input_button:
-    wake_up_cat_eye_button:
-      name: Wake up
-      icon: mdi:eye
+co_cat_eye_dp2c_j21918665_package:
+  homeassistant:
+    customize:
+      automation.co_notify_when_motion_trigger_on_cat_eye_main:
+        friendly_name: Коридор | Оповещение в телеграм о том, что кто-то за входной дверью
 
   automation:
-    - id: Разбудить камеру
-      alias: wake_up_cat_eye_authomation
-      trigger:
-        - platform: state
-          entity_id: input_button.wake_up_cat_eye_button
-      condition:
-      action:
-        - service: ezviz.wake_device
-          target:
-            entity_id: camera.dp2c_j21918665
-
-    - id: Оповещение в телеграм о том, что кто-то за дверью
-      alias: notify_when_motion_trigger_on_cat_eye_automation
+    - id: co_notify_when_motion_trigger_on_cat_eye_main
+      alias: co_notify_when_motion_trigger_on_cat_eye_main
       initial_state: true
       trigger:
         - platform: state

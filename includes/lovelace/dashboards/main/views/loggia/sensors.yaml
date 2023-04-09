@@ -9,3 +9,35 @@ cards:
     show_header_toggle: false
     entities:
       - entity: binary_sensor.0x00158d0002b17c46_contact
+
+  - type: horizontal-stack
+    cards:
+      - type: custom:mini-graph-card
+        hour24: true
+        entities:
+          - entity: sensor.0x00124b002520c648_temperature
+      - type: custom:mini-graph-card
+        line_color: blue
+        hour24: true
+        entities:
+          - entity: sensor.0x00124b002520c648_humidity
+
+  # - type: vertical-stack
+  #   cards:
+  #     - type: markdown
+  #       style: !include ../../../../components/sub_title_style.yaml
+  #       content: Растения
+  #     - type: horizontal-stack
+  #       cards:
+  #         - type: custom:mini-graph-card
+  #           hour24: true
+  #           line_color: red
+  #           name: Помидоры слева
+  #           entities:
+  #             - entity: sensor.0x00124b001997fbc4_soil_moisture
+  #         - type: custom:mini-graph-card
+  #           hour24: true
+  #           line_color: red
+  #           name: Помидоры справа
+  #           entities:
+  #             - entity: sensor.0x00124b0017fd3171_soil_moisture

@@ -1,0 +1,15 @@
+# test_package:
+  #   script:
+  #     test_sctipt:
+  #       sequence:
+  #         - service: light.turn_on
+  #           entity_id: light.wiz_ceiling_toilet
+
+  # automation:
+  #   - id: test_auth
+  #     alias: test_auth
+  #     friendly_name: FFFF
+  #     use_blueprint:
+  #       path: local/ligth_control_with_sensor.yaml
+  #       input:
+  #         motion_sensor: script.ba_main_light_script_on

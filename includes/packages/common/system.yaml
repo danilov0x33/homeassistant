@@ -1,0 +1,53 @@
+system_package:
+  recorder:
+    include:
+      entities:
+        - sensor.mariadb_size
+        - sensor.victoria_metrics_size
+
+  homeassistant:
+    customize:
+      # Custom
+      sensor.mariadb_size:
+        friendly_name: Размер MariaDB
+      sensor.victoria_metrics_size:
+        friendly_name: Размер Victoria Metrics
+
+  sql:
+    - name: mariadb_size
+      db_url: !secret db_main_url
+      query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+      column: "value"
+      unit_of_measurement: MB
+
+  sensor:
+    # MariaDB Database Sensor
+    # - platform: sql
+    #   db_url: !secret db_main_url
+    #   queries:
+    #     - name: mariadb_size
+    #       query: "SELECT table_schema AS 'db_name', ROUND(SUM( data_length + index_length ) / 1024 / 1024, 2) AS 'size_mb' FROM information_schema.TABLES WHERE table_schema='homeassistant'"
+    #       column: "size_mb"
+    #       unit_of_measurement: MB
+
+    # InfluxDB Database Sensor
+    # - platform: influxdb
+    #   host: 192.168.3.68
+    #   port: 8086
+    #   username: !secret influxdb_username
+    #   password: !secret influxdb_password
+    #   scan_interval: 3600
+    #   queries:
+    #     - name: influxdb_size
+    #       unit_of_measurement: MB
+    #       value_template: "{{ (value|float / 1024 /1024)|round(1) }}"
+    #       group_function: sum
+    #       measurement: '"monitor"."shard"'
+    #       database: _internal
+    #       where: "time > now() - 10s"
+    #       field: diskBytes
+
+    - platform: command_line
+      name: victoria_metrics_size
+      command: "du -sm /share/victoria-metrics-data | awk '{print $1}'"
+      unit_of_measurement: "MB"

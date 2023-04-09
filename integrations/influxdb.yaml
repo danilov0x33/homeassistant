@@ -1,16 +1,74 @@
-host: a0d7b954-influxdb
-port: 8086
-
-database: home_assistant
-username: !secret influxdb_username
-password: !secret influxdb_password
+api_version: 1
+host: 192.168.3.68
+port: 8428 #8086
 max_retries: 3
-default_measurement: state
+measurement_attr: entity_id
+tags_attributes:
+  - friendly_name
+  - unit_of_measurement
+ignore_attributes:
+  - icon
+  - source
+  - options
+  - editable
+  - min
+  - max
+  - step
+  - mode
+  - marker_type
+  - preset_modes
+  - supported_features
+  - supported_color_modes
+  - effect_list
+  - attribution
+  - assumed_state
+  - state_open
+  - state_closed
+  - writable
+  - stateExtra
+  - event
+  - device_class
+  - state_class
+  - ip_address
+  - device_file
 include:
-  entities:
-    - switch.switch1
-component_config_glob:
-  sensor.*humidity:
-    override_measurement: humidity
-  sensor.*temperature:
-    override_measurement: temperature
+  domains:
+    - sensor
+    - binary_sensor
+    - light
+    - switch
+    - input_boolean
+    - input_select
+    - number
+    - lock
+    - weather
+exclude:
+  entity_globs:
+    - sensor.clock*
+    - sensor.date*
+    - sensor.glances*
+    - sensor.time*
+    - sensor.uptime*
+    - sensor.dwd_weather_warnings_*
+    - weather.weatherstation
+    - binary_sensor.*_smartphone_*
+    - sensor.*_smartphone_*
+    - sensor.adguard_home_*
+    - binary_sensor.*_internet_access
+
+# database: home_assistant
+# username: !secret influxdb_username
+# password: !secret influxdb_password
+default_measurement: state
+# include:
+#   entity_globs:
+#     - sensor.*_humidity
+#     - sensor.*_temperature
+#     - sensor.*_pressure
+#     - sensor.*_energy
+#     - sensor.*_power
+# component_config_glob:
+#   sensor.*humidity:
+#     override_measurement: humidity
+#   sensor.*temperature:
+#     override_measurement: temperature

@@ -1,0 +1,124 @@
+# Автоматизации света в ванной
+ba_light_package:
+  recorder:
+    include:
+      entities:
+        - switch.ba_manually_switch_main_light
+
+  homeassistant:
+    customize:
+      script.ba_main_light_script_on:
+        friendly_name: Ванная | Включение основного света
+      script.ba_main_light_script_off:
+        friendly_name: Ванная | Выключение основного света
+
+      automation.ba_auto_switch_main_light_main:
+        friendly_name: Ванная | Контроль света
+      automation.ba_switch_main_light_main:
+        friendly_name: Ванная | Вкл/Выкл основного света в ванной через выключатель
+      automation.ba_synch_manually_input_boolean_main:
+        friendly_name: Ванная | Синхронизация ручного переключателя
+
+      switch.ba_manually_main_light_switch:
+        friendly_name: Ручное управление основным светом в ванной
+
+  mqtt:
+    switch:
+      - unique_id: ba_manually_main_light_switch_id
+        object_id: ba_manually_main_light_switch
+        command_topic: "custom/ba/manually_main_light_switch"
+        retain: true
+        icon: mdi:lightbulb
+
+  script:
+    ba_main_light_script_on:
+      sequence:
+        - service: switch.turn_on
+          target:
+            entity_id:
+              - switch.0x54ef4410005e60c8_right
+              - switch.0xa4c13895299116e4
+        # - service: light.turn_on
+        #   target:
+        #     entity_id: light.wiz_ceiling_toilet
+        # data:
+        #   transition: 2
+        #   kelvin: 4000
+        #   brightness_pct: 100
+    ba_main_light_script_off:
+      sequence:
+        - service: switch.turn_off
+          target:
+            entity_id:
+              - switch.0x54ef4410005e60c8_right
+              - switch.0xa4c13895299116e4
+          # data:
+          #   transition: 1
+
+    # ba_night_light_script_on:
+    #   alias: "Включение ночного света"
+    #   sequence:
+    #     - service: light.turn_on
+    #       target:
+    #         entity_id: light.wiz_ceiling_toilet
+    #       data:
+    #         transition: 2
+    #         kelvin: 4000
+    #         brightness_pct: 10
+    # ba_night_light_script_off:
+    #   alias: "Выключение основного света"
+    #   sequence:
+    #     - service: light.turn_off
+    #       target:
+    #         entity_id:
+    #           - light.wiz_ceiling_toilet
+    #       data:
+    #         transition: 1
+
+  automation:
+    - id: ba_auto_switch_main_light_main
+      alias: ba_auto_switch_main_light_main
+      use_blueprint:
+        path: local/ligth_control_with_sensor.yaml
+        input:
+          motion_sensor: binary_sensor.0x00158d0003cf8ae6_occupancy
+          manual_light_switch: switch.ba_manually_main_light_switch # input_boolean.ba_manually_switch_main_light
+          main_light: switch.0x54ef4410005e60c8_right
+          main_light_script_on: script.ba_main_light_script_on
+          main_light_script_off: script.ba_main_light_script_off
+          main_time_delay: 7
+          night_light_enabled: "off"
+          # night_light: light.wiz_ceiling_toilet
+          # night_light_script_on: script.ba_night_light_script_on
+          # night_light_script_off: script.ba_night_light_script_off
+          # night_time_delay: 3
+          # night_lights_after_time: "00:00:00"
+          # night_lights_before_time: "08:00:00"
+
+    - id: ba_switch_main_light_main
+      alias: ba_switch_main_light_main
+      trigger:
+        - platform: state
+          entity_id: sensor.0x54ef4410005e60c8_action
+          to: "single_right"
+      action:
+        - service: switch.toggle
+          entity_id: switch.ba_manually_main_light_switch # input_boolean.ba_manually_switch_main_light
+
+    - id: ba_synch_manually_input_boolean_main
+      alias: ba_synch_manually_input_boolean_main
+      trigger:
+        - platform: state
+          entity_id: switch.0x54ef4410005e60c8_right
+          to: "off"
+      condition:
+        - condition: state
+          entity_id: switch.ba_manually_main_light_switch
+          state: "off"
+        - condition: state
+          entity_id: switch.0x54ef4410005e60c8_right
+          state: "off"
+      action:
+        - service: switch.turn_off
+          target:
+            entity_id: switch.ba_manually_main_light_switch

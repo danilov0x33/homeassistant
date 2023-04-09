@@ -1,0 +1,28 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Сенсоры
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: binary_sensor.0x00158d000123129b_contact
+      
+  - type: horizontal-stack
+    cards:
+      - type: custom:mini-graph-card
+        hour24: true
+        entities:
+          - entity: sensor.esp001sensor_bme280_temperature
+      - type: custom:mini-graph-card
+        line_color: blue
+        hour24: true
+        entities:
+          - entity: sensor.esp001sensor_bme280_humidity
+      - type: custom:mini-graph-card
+        line_color: red
+        hour24: true
+        entities:
+          - entity: sensor.esp001sensor_bme280_pressure

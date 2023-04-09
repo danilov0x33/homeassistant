@@ -1,0 +1,104 @@
+ha_common_package:
+  recorder:
+    include:
+      entities:
+        - sensor.0x00124b00252193c2_humidity
+        - sensor.0x00124b00252193c2_temperature
+        - sensor.0x00124b00252193c2_battery
+
+        - switch.0x54ef4410004da26c_left
+        - switch.0x54ef4410004da26c_right
+        - sensor.0x54ef4410004da26c_action
+
+        - binary_sensor.0x00158d000123129b_contact
+        - sensor.0x00158d000123129b_battery
+
+        - sensor.0x00158d000276ea3b_action
+        - sensor.0x00158d000276ea3b_battery
+
+        - switch.0xa4c13851c962bc6d
+
+        - switch.tuya_switch_001_1
+        - switch.tuya_switch_001_2
+        - switch.tuya_switch_001_3
+
+        - switch.0xa4c13826691e389b
+        - sensor.0xa4c13826691e389b_energy
+        - sensor.0xa4c13826691e389b_power
+
+        - humidifier.xiaomi_humidifier_001
+
+        - light.yeelight_arwen_550c
+        - light.yeelight_arwen_550c_ambilight
+        - light.yeelight_arwen_550c_nightlight
+
+        - media_player.yandex_station_mini_001
+
+        - vacuum.dreame_bot_l10_pro
+        - sensor.dreame_bot_l10_pro_battery_level
+        - sensor.dreame_bot_l10_pro_charging_status
+        - sensor.dreame_bot_l10_pro_error
+        - sensor.dreame_bot_l10_pro_state
+        - sensor.dreame_bot_l10_pro_status
+        - sensor.dreame_bot_l10_pro_task_status
+        - sensor.dreame_bot_l10_pro_water_tank
+
+  homeassistant:
+    customize:
+      # MQTT
+      sensor.0x00124b00252193c2_humidity:
+        friendly_name: Влажность в зале
+      sensor.0x00124b00252193c2_temperature:
+        friendly_name: Температура в зале
+      sensor.0x00124b00252193c2_battery:
+        friendly_name: Заряд батареи датчика температуры и влажности в зале
+
+      switch.0x54ef4410004da26c_left:
+        friendly_name: Переключатель основного освещение в зале
+      switch.0x54ef4410004da26c_right:
+        friendly_name: Переключатель дополнительное освещения в зале (Питание)
+      sensor.0x54ef4410004da26c_action:
+        friendly_name: Действие выключателя в зале
+
+      binary_sensor.0x00158d000123129b_contact:
+        friendly_name: Окно в зале
+        device_class: window
+      sensor.0x00158d000123129b_battery:
+        friendly_name: Заряд батареи датчика окна в зале
+
+      sensor.0x00158d000276ea3b_action:
+        friendly_name: Кнопка на столе у Насти
+      sensor.0x00158d000276ea3b_battery:
+        friendly_name: Заряд батареи кнопки на столе у Насти
+
+      # Tuya
+      switch.tuya_switch_001_1:
+        friendly_name: Левое реле под телевизором
+      switch.tuya_switch_001_2:
+        friendly_name: Правое реле под телевизором
+      switch.tuya_switch_001_3:
+        friendly_name: USB Реле под телевизором
+
+      switch.0xa4c13826691e389b:
+        friendly_name: Питание компьютера Насти
+      sensor.0xa4c13826691e389b_energy:
+        friendly_name: Общее потребление электроэнергии компьютера Насти
+      sensor.0xa4c13826691e389b_power:
+        friendly_name: Текущая мощность компьютера Насти
+
+      # Xiaomi
+      humidifier.xiaomi_humidifier_001:
+        friendly_name: Увлажнитель воздуха
+
+      light.yeelight_arwen_550c:
+        friendly_name: Основной свет в зале
+      light.yeelight_arwen_550c_ambilight:
+        friendly_name: Подсветка основного света в зале
+      light.yeelight_arwen_550c_nightlight:
+        friendly_name: Ночной режим основного света в зале
+
+      media_player.yandex_station_mini_001:
+        friendly_name: Яндекс станция мини в зале
+
+      vacuum.dreame_bot_l10_pro:
+        friendly_name: Робот пылесос

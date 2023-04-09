@@ -1,0 +1,78 @@
+kitchen_telegram_ui_package:
+  homeassistant:
+    customize:
+      automation.ki_telegram_ui_main:
+        friendly_name: Телеграмм UI | Кухня
+
+  automation:
+    - id: ki_telegram_ui_main
+      alias: ki_telegram_ui_main
+      initial_state: true
+      trigger:
+        - platform: event
+          event_type: telegram_callback
+          event_data: {}
+      action:
+        - choose:
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/kitchen_control' }}"
+              sequence:
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: &msg_kitchen |
+                      *Кухня :*
+                      {{'\U0001F4A6'}} Датчик протечки воды - {% if is_state('binary_sensor.0x00158d0002922b19_water_leak', 'on') %} ПРОТЕЧКА! {% else %} Сухо {% endif %}
+                      {{'\U0001F321'}} - {{ states('sensor.0x00124b002520c3d4_temperature') }} °C, {{'\U0001F4A7'}} - {{ states('sensor.0x00124b002520c3d4_humidity') }} %
+                    inline_keyboard: &keyb_kitchen
+                      - '{{''\U0001F4A1''}} Основной свет - {% if is_state(''light.yeelight_450c_0'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/kitchen_toggle_main_ligth , {{''\U0001F4A1''}} Ночной свет - {% if is_state(''light.yeelight_450c_0_ambilight'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/kitchen_toggle_night_ligth'
+                      - '{{''\U000021A9''}} Вернуться:/menu_back , {{''\U000021AA''}} Обновить:/kitchen_control'
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/kitchen_toggle_main_ligth' }}"
+              sequence:
+                - service: light.toggle
+                  entity_id: light.yeelight_450c_0
+                - delay:
+                    milliseconds: 500
+                - service: telegram_bot.answer_callback_query
+                  data:
+                    callback_query_id: "{{ trigger.event.data.id }}"
+                    message: |
+                      {{"\U0001F4A1"}} Основной свет - {% if is_state('light.yeelight_450c_0', 'on') %} Включен {% else %} Выключен {% endif %}
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: *msg_kitchen
+                    inline_keyboard: *keyb_kitchen
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/kitchen_toggle_night_ligth' }}"
+              sequence:
+                - service: light.toggle
+                  entity_id: light.yeelight_450c_0_ambilight
+                - delay:
+                    milliseconds: 500
+                - service: telegram_bot.answer_callback_query
+                  data:
+                    callback_query_id: "{{ trigger.event.data.id }}"
+                    message: |
+                      {{"\U0001F4A1"}} Ночной свет - {% if is_state('light.yeelight_450c_0_ambilight', 'on') %} Включен {% else %} Выключен {% endif %}
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: *msg_kitchen
+                    inline_keyboard: *keyb_kitchen

@@ -1,0 +1,92 @@
+be_common_package:
+  recorder:
+    include:
+      entities:
+        - light.0x00158d0007504210
+
+        - binary_sensor.0x00158d0002b18159_contact
+        - sensor.0x00158d0002b18159_battery
+
+        - switch.0x60a423fffeb047dd_left
+        - switch.0x60a423fffeb047dd_right
+
+        - sensor.esp001sensor_bme280_temperature
+        - sensor.esp001sensor_bme280_humidity
+        - sensor.esp001sensor_bme280_pressure
+
+        - sensor.0x00158d0007098707_action
+        - sensor.0x00158d0007098707_battery
+
+        - switch.0xa4c13851c962bc6d
+        - sensor.0xa4c13851c962bc6d_energy
+        - sensor.0xa4c13851c962bc6d_power
+
+        - sensor.0x54ef4410004461a2_humidity
+        - sensor.0x54ef4410004461a2_temperature
+        - sensor.0x54ef4410004461a2_voc
+        - sensor.0x54ef4410004461a2_battery
+
+        - light.yeelight_450c_2
+        - light.yeelight_450c_2_nightlight
+        - light.yeelight_450c_2_ambilight
+
+  homeassistant:
+    customize:
+      # MQTT
+      # light.0x00158d0007504210:
+      #   friendly_name: Основное освещение в спальне
+      #   device_class: light
+
+      binary_sensor.0x00158d0002b18159_contact:
+        friendly_name: Окно в спальне
+        device_class: window
+      sensor.0x00158d0002b18159_battery:
+        friendly_name: Заряд батареи датчика открытия окна в спальне
+
+      switch.0x60a423fffeb047dd_left:
+        friendly_name: Переключатель основного освещение в спальне
+      switch.0x60a423fffeb047dd_right:
+        friendly_name: Питание освещения в спальне
+
+      sensor.0x00158d0007098707_action:
+        friendly_name: Куб в спальне
+      sensor.0x00158d0007098707_battery:
+        friendly_name: Заряд батареи куба в спальне
+
+      switch.0xa4c13851c962bc6d:
+        friendly_name: Питание компьютера Жени
+      sensor.0xa4c13851c962bc6d_energy:
+        friendly_name: Общее потребление электроэнергии компьютера Жени
+      sensor.0xa4c13851c962bc6d_power:
+        friendly_name: Текущая мощность компьютера Жени
+
+      sensor.0x54ef4410004461a2_humidity:
+        friendly_name: Датчик влажности в спальне (TOC)
+      sensor.0x54ef4410004461a2_temperature:
+        friendly_name: Датчик температуры в спальне (TOC)
+      sensor.0x54ef4410004461a2_voc:
+        friendly_name: Датчик качества воздуха в спальне
+      sensor.0x54ef4410004461a2_battery:
+        friendly_name: Заряд батареи датчика качества воздуха в спальне
+
+      # ESP
+      sensor.esp001sensor_bme280_temperature:
+        friendly_name: Температура в спальне
+        device_class: temperature
+        unit_of_measurement: "°C"
+      sensor.esp001sensor_bme280_humidity:
+        friendly_name: Влажность в спальне
+        device_class: humidity
+        unit_of_measurement: "%"
+      sensor.esp001sensor_bme280_pressure:
+        friendly_name: Давление в спальне
+        device_class: pressure
+        unit_of_measurement: "hPa"
+
+      # Xiaomi
+      light.yeelight_450c_2:
+        friendly_name: Основной свет в спальне
+      light.yeelight_450c_2_ambilight:
+        friendly_name: Подсветка основного света в спальне
+      light.yeelight_450c_2_nightlight:
+        friendly_name: Ночной режим основного света в спальне

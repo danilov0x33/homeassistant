@@ -1,0 +1,8 @@
+# kitchen_media_package:
+
+#   xiaomi_tv:
+
+#   media_player:
+#   - platform: xiaomi_tv
+#     host: YOUR_TV_IP
+#     name: YOUR_TV_NAME

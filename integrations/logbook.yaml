@@ -1,0 +1,12 @@
+exclude:
+  entity_globs:
+    - automation.*
+    - script.*
+    - update.*
+    - counter.*
+    - climate.*
+    - device_tracker.*
+    - number.*
+    - sensor.*
+    - sun.*
+    - weather.*

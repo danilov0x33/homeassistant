@@ -1,0 +1,72 @@
+# Автоматизации если дома никого нет
+common_guard_home_package:
+  # recorder:
+  #   include:
+  #     entities:
+
+  homeassistant:
+    customize:
+      automation.common_prepare_home_if_owners_outside_main:
+        friendly_name: "Подготовка дома к отсутствию хозяев"
+      automation.common_prepare_home_if_owners_inside_main:
+        friendly_name: "Подготовка дома к присутствию хозяев"
+
+  automation:
+    - id: common_prepare_home_if_owners_outside_main
+      alias: common_prepare_home_if_owners_outside_main
+      trigger:
+        - platform: state
+          entity_id: alarm_control_panel.xiaomi_gateway_001_alarm
+          from: "disarmed"
+          to: "armed_away"
+      condition:
+      action:
+        # Включение камер
+        - service: switch.turn_off
+          target:
+            entity_id:
+              - switch.ty2_j23903450_privacy
+              - switch.ty2_j23903681_privacy
+        - service: switch.turn_on
+          target:
+            entity_id:
+              - switch.ty2_j23903450_sound
+              - switch.ty2_j23903450_light
+              - switch.ty2_j23903681_sound
+              - switch.ty2_j23903681_light
+        # Выключение света
+        - service: light.turn_off
+          target:
+            entity_id:
+              - light.yeelight_arwen_550c
+              - light.yeelight_450c_0
+              - light.yeelight_450c_2
+        # - service: switch.turn_off
+        #   target:
+        #     entity_id: switch.0xa4c13851c962bc6d # Выключение ёлки
+        - service: media_player.turn_off
+          target:
+            entity_id: media_player.samsung_tv # Выключение телевизора в зале
+
+    - id: common_prepare_home_if_owners_inside_main
+      alias: common_prepare_home_if_owners_inside_main
+      trigger:
+        - platform: state
+          entity_id: alarm_control_panel.xiaomi_gateway_001_alarm
+          from: "armed_away"
+          to: "disarmed"
+      condition:
+      action:
+        # Выключение камер
+        - service: switch.turn_off
+          target:
+            entity_id:
+              - switch.ty2_j23903450_sound
+              - switch.ty2_j23903450_light
+              - switch.ty2_j23903681_sound
+              - switch.ty2_j23903681_light
+        - service: switch.turn_on
+          target:
+            entity_id:
+              - switch.ty2_j23903450_privacy
+              - switch.ty2_j23903681_privacy

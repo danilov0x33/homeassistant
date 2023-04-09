@@ -11,3 +11,24 @@ cards:
         entities:
           - entity: binary_sensor.0x00158d0002922709_water_leak
             name: Датчик протечки воды
+          - entity: binary_sensor.0x00158d0003cbd91c_contact
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            hour24: true
+            entities:
+              - entity: sensor.0x00124b00251fa5d7_temperature
+          - type: custom:mini-graph-card
+            line_color: blue
+            hour24: true
+            entities:
+              - entity: sensor.0x00124b00251fa5d7_humidity
+
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include ../../../../components/title_style.yaml
+        content: Стиральная машина
+      - type: entities
+        entities:
+          - entity: sensor.lg_thinq_washing_machine

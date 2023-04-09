@@ -4,3 +4,4 @@ cards:
   - !include sensors.yaml
   - !include lights.yaml
   - !include tuya_thermostat_card.yaml
+  - !include xiaomi_humidifier_001_card.yaml
