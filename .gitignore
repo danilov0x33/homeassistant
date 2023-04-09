@@ -34,3 +34,4 @@ core.*
 core
 .HA_VERSION
 rtsp2webrtc_v5_amd64
+go2rtc-*
