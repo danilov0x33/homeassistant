@@ -5,6 +5,10 @@ ha_light_package:
         friendly_name: Зал | Вкл/Выкл основного света в зале
       automation.ha_change_night_light_in_hall_main:
         friendly_name: Зал | Вкл/Выкл ночного света в зале
+      automation.ha_change_ambilight_in_hall_main:
+        friendly_name: Зал | Вкл/Выкл подсветки в зале
+      automation.ha_toggle_power_light_in_hall_main:
+        friendly_name: Зал | Вкл/Выкл питания основного освещения в зале
 
   automation:
     - id: ha_change_main_light_in_hall_main
@@ -25,4 +29,39 @@ ha_light_package:
           to: "single_right"
       action:
         - service: light.toggle
+          entity_id: light.yeelight_arwen_550c_nightlight
+
+    - id: ha_change_ambilight_light_in_hall_main
+      alias: ha_change_ambilight_light_in_hall_main
+      trigger:
+        - platform: state
+          entity_id: sensor.0x54ef4410004da26c_action
+          to: "double_right"
+      action:
+        - service: light.toggle
           entity_id: light.yeelight_arwen_550c_ambilight
+
+    - id: ha_change_ambilight_in_hall_main
+      alias: ha_change_ambilight_in_hall_main
+      trigger:
+        - platform: state
+          entity_id: sensor.0x54ef4410004da26c_action
+          to: "single_both"
+      action:
+        - service: light.turn_off
+          entity_id:
+            - light.yeelight_arwen_550c
+            - light.yeelight_arwen_550c_nightlight
+            - light.yeelight_arwen_550c_ambilight
+
+    - id: ha_toggle_power_light_in_hall_main
+      alias: ha_toggle_power_light_in_hall_main
+      trigger:
+        - platform: state
+          entity_id: sensor.0x54ef4410004da26c_action
+          to: "double_both"
+      action:
+        - service: switch.toggle
+          entity_id:
+            - switch.0x54ef4410004da26c_right
+            - switch.0x54ef4410004da26c_left

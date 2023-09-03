@@ -1,6 +1,25 @@
 title: Коридор
 icon: mdi:exit-run
 cards:
-  - !include ezviz_dp2c_j21918665_card.yaml
+  # - !include ezviz_dp2c_j21918665_card.yaml
   - !include sensors.yaml
   - !include lights.yaml
+
+  # - type: custom:auto-entities
+  #   show_empty: false
+  #   card:
+  #     type: entities
+  #     show_header_toggle: false
+  #     style: |
+  #       ha-card {
+  #         color: #FA8072;
+  #         --paper-item-icon-color: #E6E6FA;
+  #         --iron-icon-stroke-color: #E6E6FA;
+  #         font-weight: bold;
+  #         font-size: 14px;
+  #       }
+  #   filter:
+  #     include:
+  #       - state: "unavailable"
+  #         options:
+  #           secondary_info: last-changed

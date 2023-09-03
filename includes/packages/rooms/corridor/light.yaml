@@ -23,6 +23,10 @@ co_light_package:
         friendly_name: Коридор | Вкл/Выкл основного света в коридоре через правую клавишу выключателя
       automation.co_synch_manually_input_boolean_main:
         friendly_name: Коридор | Синхронизация ручного переключателя
+      automation.co_off_light_main:
+        friendly_name: Коридор | Выключение основного освещения
+      automation.co_power_toggle_light_main:
+        friendly_name: Коридор | Вкл/Выкл питания основного освещения
 
       switch.co_manually_main_light_switch:
         friendly_name: Ручное управление основным светом в коридоре
@@ -131,3 +135,29 @@ co_light_package:
         - service: light.turn_off
           target:
             entity_id: switch.co_manually_main_light_switch
+
+    - id: co_off_light_main
+      alias: co_off_light_main
+      trigger:
+        - platform: state
+          entity_id: sensor.0x54ef4410005b0295_action
+          to: "single_both"
+      action:
+        - service: light.turn_off
+          entity_id:
+            - light.yeelight_450c_1
+            - light.wiz_ceiling_corridor
+            - light.yeelight_450c_1_nightlight
+            - light.yeelight_450c_1_ambilight
+
+    - id: co_power_toggle_light_main
+      alias: co_power_toggle_light_main
+      trigger:
+        - platform: state
+          entity_id: sensor.0x54ef4410005b0295_action
+          to: "double_both"
+      action:
+        - service: switch.toggle
+          entity_id:
+            - switch.0x54ef4410005b0295_right
+            - switch.0x54ef4410005b0295_left

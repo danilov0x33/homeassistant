@@ -22,4 +22,4 @@ cards:
             Последнее оповещение {{ states('sensor.dp2c_j21918665_last_alarm_time') }}
 
         - type: picture
-          image: http://192.168.3.68:8123/local/downloads/camera/dp2c_j21918665_last.jpg #/local/downloads/camera/dp2c_j21918665_last.jpg
+          image: http://ha-main-server/:8123/local/downloads/camera/dp2c_j21918665_last.jpg #/local/downloads/camera/dp2c_j21918665_last.jpg

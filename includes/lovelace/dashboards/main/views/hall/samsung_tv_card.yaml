@@ -6,4 +6,4 @@ cards:
     content: Телевизор
 
   - type: media-control
-    entity: media_player.samsung_tv
+    entity: media_player.danilov_samsung_au7570_50_tv

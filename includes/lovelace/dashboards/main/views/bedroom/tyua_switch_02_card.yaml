@@ -1,0 +1,13 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Сетевой фильтр у окна
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: switch.tuya_switch_002_1
+      - entity: switch.tuya_switch_002_2
+      - entity: switch.tuya_switch_002_3
+      - entity: switch.tuya_switch_002_4

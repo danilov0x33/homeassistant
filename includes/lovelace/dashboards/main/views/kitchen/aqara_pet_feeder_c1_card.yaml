@@ -1,0 +1,14 @@
+type: custom:stack-in-card
+mode: vertical
+cards:
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include ../../../../components/title_style.yaml
+        content: Автокормушка
+      - type: entities
+        entities:
+          - binary_sensor.0x54ef4410007125a4_error
+          - select.0x54ef4410007125a4_feed
+          - number.0x54ef4410007125a4_portion_weight
+          - number.0x54ef4410007125a4_serving_size

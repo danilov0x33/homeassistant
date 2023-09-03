@@ -4,3 +4,4 @@ cards:
   - !include alert_card.yaml
   - !include weather_card.yaml
   - !include updates_card.yaml
+  - !include states_card.yaml

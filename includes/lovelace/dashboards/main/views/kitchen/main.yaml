@@ -5,3 +5,4 @@ cards:
   - !include lights.yaml
   - !include ezviz_ty2_j23903681_card.yaml
   - !include lg_thinq_fridge_card.yaml
+  - !include aqara_pet_feeder_c1_card.yaml

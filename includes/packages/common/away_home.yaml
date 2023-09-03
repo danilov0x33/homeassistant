@@ -23,30 +23,54 @@ common_guard_home_package:
       action:
         # Включение камер
         - service: switch.turn_off
+          continue_on_error: true
           target:
-            entity_id:
-              - switch.ty2_j23903450_privacy
-              - switch.ty2_j23903681_privacy
+            entity_id: switch.c2c_k08011542_sleep # Спальня
+        - service: switch.turn_off
+          continue_on_error: true
+          target:
+            entity_id: switch.ty2_j23903450_privacy # Зал
         - service: switch.turn_on
+          continue_on_error: true
           target:
             entity_id:
               - switch.ty2_j23903450_sound
               - switch.ty2_j23903450_light
+        - service: switch.turn_off
+          continue_on_error: true
+          target:
+            entity_id: switch.ty2_k15013479_privacy # Коридор
+        - service: switch.turn_on
+          continue_on_error: true
+          target:
+            entity_id:
+              - switch.ty2_k15013479_sound
+              - switch.ty2_k15013479_light
+        - service: switch.turn_off
+          continue_on_error: true
+          target:
+            entity_id: switch.ty2_j23903681_privacy # Кухня
+        - service: switch.turn_on
+          continue_on_error: true
+          target:
+            entity_id:
               - switch.ty2_j23903681_sound
               - switch.ty2_j23903681_light
+
         # Выключение света
         - service: light.turn_off
+          continue_on_error: true
           target:
             entity_id:
               - light.yeelight_arwen_550c
               - light.yeelight_450c_0
               - light.yeelight_450c_2
-        # - service: switch.turn_off
-        #   target:
-        #     entity_id: switch.0xa4c13851c962bc6d # Выключение ёлки
+
+        # Выключение телевизора в зале
         - service: media_player.turn_off
+          continue_on_error: true
           target:
-            entity_id: media_player.samsung_tv # Выключение телевизора в зале
+            entity_id: media_player.samsung_tv
 
     - id: common_prepare_home_if_owners_inside_main
       alias: common_prepare_home_if_owners_inside_main
@@ -58,15 +82,37 @@ common_guard_home_package:
       condition:
       action:
         # Выключение камер
+        - service: switch.turn_on
+          continue_on_error: true
+          target:
+            entity_id: switch.c2c_k08011542_sleep # Спальня
+        - service: switch.turn_on
+          continue_on_error: true
+          target:
+            entity_id: switch.ty2_j23903450_privacy # Зал
         - service: switch.turn_off
+          continue_on_error: true
           target:
             entity_id:
               - switch.ty2_j23903450_sound
               - switch.ty2_j23903450_light
-              - switch.ty2_j23903681_sound
-              - switch.ty2_j23903681_light
         - service: switch.turn_on
+          continue_on_error: true
+          target:
+            entity_id: switch.ty2_k15013479_privacy # Коридор
+        - service: switch.turn_off
+          continue_on_error: true
           target:
             entity_id:
-              - switch.ty2_j23903450_privacy
-              - switch.ty2_j23903681_privacy
+              - switch.ty2_k15013479_sound
+              - switch.ty2_k15013479_light
+        - service: switch.turn_on
+          continue_on_error: true
+          target:
+            entity_id: switch.ty2_j23903681_privacy # Кухня
+        - service: switch.turn_off
+          continue_on_error: true
+          target:
+            entity_id:
+              - switch.ty2_j23903681_sound
+              - switch.ty2_j23903681_light

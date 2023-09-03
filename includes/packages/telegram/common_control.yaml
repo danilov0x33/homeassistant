@@ -1,0 +1,133 @@
+ba_telegram_ui_package:
+  homeassistant:
+    customize:
+      automation.ba_telegram_ui_main:
+        friendly_name: Телеграмм UI | Общее
+
+  automation:
+    - id: common_telegram_ui_main
+      alias: common_telegram_ui_main
+      initial_state: true
+      trigger:
+        - platform: event
+          event_type: telegram_callback
+          event_data: {}
+      action:
+        - choose:
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/common_control' }}"
+              sequence:
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: &msg_common |
+                      *Общее :*
+                    inline_keyboard: &keyb_common
+                      - "{{'📷'}} Получить фото с камер:/common_take_photos"
+                      - "{{'↩'}} Вернуться:/menu_back , {{'↪'}} Обновить:/common_control"
+
+            # Фото с камер
+            - conditions:
+                - condition: template
+                  value_template: "{{ trigger.event.data.command == '/common_take_photos' }}"
+              sequence:
+                # Камера в коридоре
+                - if:
+                    - condition: state
+                      entity_id: camera.ty2_k15013479
+                      state: "idle"
+                  then:
+                    - service: camera.snapshot
+                      target:
+                        entity_id: camera.ty2_k15013479
+                      data:
+                        filename: "/config/www/downloads/camera/ty2_k15013479_last.jpg"
+                    - service: telegram_bot.send_photo
+                      data_template:
+                        target: !secret telegram_danilov_info_group_id
+                        file: "/config/www/downloads/camera/ty2_k15013479_last.jpg"
+
+                # Камера в зале
+                - if:
+                    - condition: state
+                      entity_id: camera.ty2_j23903450
+                      state: "idle"
+                  then:
+                    - service: camera.snapshot
+                      target:
+                        entity_id: camera.ty2_j23903450
+                      data:
+                        filename: "/config/www/downloads/camera/ty2_j23903450_last.jpg"
+                    - service: telegram_bot.send_photo
+                      data_template:
+                        target: !secret telegram_danilov_info_group_id
+                        file: "/config/www/downloads/camera/ty2_j23903450_last.jpg"
+
+                # Камера в спальне
+                - if:
+                    - condition: state
+                      entity_id: camera.c2c_k08011542
+                      state: "idle"
+                  then:
+                    - service: camera.snapshot
+                      target:
+                        entity_id: camera.c2c_k08011542
+                      data:
+                        filename: "/config/www/downloads/camera/c2c_k08011542_last.jpg"
+                    - service: telegram_bot.send_photo
+                      data_template:
+                        target: !secret telegram_danilov_info_group_id
+                        file: "/config/www/downloads/camera/c2c_k08011542_last.jpg"
+
+                # Камера на кухне
+                - if:
+                    - condition: state
+                      entity_id: camera.ty2_j23903681
+                      state: "idle"
+                  then:
+                    - service: camera.snapshot
+                      target:
+                        entity_id: camera.ty2_j23903681
+                      data:
+                        filename: "/config/www/downloads/camera/ty2_j23903681_last.jpg"
+                    - service: telegram_bot.send_photo
+                      data_template:
+                        target: !secret telegram_danilov_info_group_id
+                        file: "/config/www/downloads/camera/ty2_j23903681_last.jpg"
+
+                # Камера на лоджии
+                - if:
+                    - condition: state
+                      entity_id: camera.camera01_mainstream
+                      state: "idle"
+                  then:
+                    - service: camera.snapshot
+                      target:
+                        entity_id: camera.camera01_mainstream
+                      data:
+                        filename: "/config/www/downloads/camera/camera01_mainstream_last.jpg"
+                    - service: telegram_bot.send_photo
+                      data_template:
+                        target: !secret telegram_danilov_info_group_id
+                        file: "/config/www/downloads/camera/camera01_mainstream_last.jpg"
+
+                - delay:
+                    milliseconds: 500
+                - service: telegram_bot.answer_callback_query
+                  data:
+                    callback_query_id: "{{ trigger.event.data.id }}"
+                    message: "Готово"
+                - service: telegram_bot.delete_message
+                  data_template:
+                    message_id: "{{ trigger.event.data.message.message_id }}"
+                    chat_id: "{{ trigger.event.data.chat_id }}"
+                - service: telegram_bot.send_message
+                  data:
+                    target: "{{ trigger.event.data.chat_id }}"
+                    message: *msg_common
+                    inline_keyboard: *keyb_common

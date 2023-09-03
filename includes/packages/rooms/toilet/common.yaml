@@ -17,20 +17,20 @@ to_common_package:
     customize:
       # MQTT
       binary_sensor.0x00158d0003cb49f0_occupancy:
-        friendly_name: Датчик движения в туалете
+        friendly_name: Датчик движения в туалете | 1!
       sensor.0x00158d0003cb49f0_battery:
         friendly_name: Заряд батареи датчика движения в туалете
 
       binary_sensor.0x00158d0001994303_contact:
-        friendly_name: Счетчик горячей воды
+        friendly_name: Счетчик горячей воды | 1!
       sensor.0x00158d0001994303_battery:
         friendly_name: Заряд датчика счетчика горячей воды
 
       binary_sensor.0x00158d000198df07_contact:
-        friendly_name: Счетчик холодной воды
+        friendly_name: Наличие электропитания квартиры | 1!
       sensor.0x00158d000198df07_battery:
-        friendly_name: Заряд датчика счетчика холодной воды
+        friendly_name: Заряд датчика наличия электропитания квартиры
 
       # WIZ
       light.wiz_ceiling_toilet:
-        friendly_name: Основной свет в туалете
+        friendly_name: Основной свет в туалете | 1!

@@ -1,0 +1,35 @@
+type: custom:stack-in-card
+mpde: vertical
+cards:
+  - type: markdown
+    style: !include ../../../../components/title_style.yaml
+    content: Состояние системы
+
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: Недоступные устройства
+
+      - type: custom:auto-entities
+        show_empty: false
+        filter:
+          template: "{{ states | select('search', '1!')  | map(attribute='entity_id') | select('is_state', 'unavailable') | list }}"
+        card:
+          type: entities
+          style: !include ../../../../components/important_text_style.yaml
+
+      - type: markdown
+        style: !include ../../../../components/sub_title_style.yaml
+        content: Сенсоры < 30% заряда
+
+      - type: custom:auto-entities
+        show_empty: false
+        card:
+          type: entities
+          show_header_toggle: false
+          style: !include ../../../../components/important_text_style.yaml
+        filter:
+          template: "{{ states.sensor | map(attribute='entity_id') | select('search', '_battery$|_battery_level&') | list }}"
+          exclude:
+            - state: "> 30.0"

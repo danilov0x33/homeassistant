@@ -6,6 +6,7 @@ common_power_metrics_package:
     include:
       entities:
         - sensor.sensor_kasa_switch_001_current_consumption_integral
+        - sensor.total_money_electricity_month
       entity_globs:
         - sensor.*_t1_high_energy
         - sensor.*_t2_night_energy
@@ -16,13 +17,20 @@ common_power_metrics_package:
       automation.common_power_metrics_tariffs:
         friendly_name: Общее | Расчет электроэнергии
 
-  sensor:
-    - platform: integration
-      source: sensor.kasa_switch_001_current_consumption
-      unique_id: kasa_switch_001_energy
-      name: kasa_switch_001_energy
-      unit_prefix: k
-      round: 2
+      sensor.total_money_electricity_month:
+        friendly_name: Общий расход на электроэнергию
+
+  template:
+    - sensor:
+        - name: total_money_electricity_month
+          unit_of_measurement: "руб"
+          state: >
+            {{ 
+              (states.sensor | select('search', 'monthly_t1_high_energy' ) | map(attribute='state') | map("float") | list | sum * 4.97
+                + states.sensor | select('search', 'monthly_t2_night_energy' ) | map(attribute='state') | map("float") | list | sum * 2.20
+                + states.sensor | select('search', 'monthly_t3_normal_energy' ) | map(attribute='state') | map("float") | list | sum * 4.14
+              ) | round(2)
+            }}
 
   utility_meter:
     0xa4c13851c962bc6d_daily:
@@ -95,7 +103,7 @@ common_power_metrics_package:
 
     0xa4c13895299116e4_daily:
       source: sensor.0xa4c13895299116e4_energy
-      name: Дневное потребление энергии зеркала в ванной
+      name: Дневное потребление энергии чайника
       cycle: daily
       tariffs:
         - t1_high_energy
@@ -103,7 +111,7 @@ common_power_metrics_package:
         - t3_normal_energy
     0xa4c13895299116e4_monthly:
       source: sensor.0xa4c13895299116e4_energy
-      name: Месячное потребление энергии зеркала в ванной
+      name: Месячное потребление энергии чайника
       cycle: monthly
       tariffs:
         - t1_high_energy
@@ -112,17 +120,8 @@ common_power_metrics_package:
 
     kasa_switch_001_daily:
       source: sensor.kasa_switch_001_today_s_consumption
-      name: Дневное потребление энергии чайника
+      name: Дневное потребление энергии зеркала в ванной
       cycle: daily
-      tariffs:
-        - t1_high_energy
-        - t2_night_energy
-        - t3_normal_energy
-    kasa_switch_001_monthly:
-      source: sensor.sensor_kasa_switch_001_current_consumption_integral
-      name: Месячное потребление энергии зеркала в ванной
-      # delta_values: true
-      cycle: monthly
       tariffs:
         - t1_high_energy
         - t2_night_energy

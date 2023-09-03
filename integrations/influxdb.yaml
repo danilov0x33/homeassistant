@@ -1,5 +1,5 @@
 api_version: 1
-host: 192.168.3.68
+host: 192.168.3.20
 port: 8428 #8086
 max_retries: 3
 measurement_attr: entity_id

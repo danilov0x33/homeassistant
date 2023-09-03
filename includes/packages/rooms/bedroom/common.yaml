@@ -30,6 +30,17 @@ be_common_package:
         - light.yeelight_450c_2_nightlight
         - light.yeelight_450c_2_ambilight
 
+        - switch.tuya_switch_002_1
+        - switch.tuya_switch_002_2
+        - switch.tuya_switch_002_3
+        - switch.tuya_switch_002_4
+
+        - sensor.0xa4c138894b3790d2_co2
+        - sensor.0xa4c138894b3790d2_voc
+        - sensor.0xa4c138894b3790d2_temperature
+        - sensor.0xa4c138894b3790d2_humidity
+        - sensor.0xa4c138894b3790d2_formaldehyd
+
   homeassistant:
     customize:
       # MQTT
@@ -38,13 +49,13 @@ be_common_package:
       #   device_class: light
 
       binary_sensor.0x00158d0002b18159_contact:
-        friendly_name: Окно в спальне
+        friendly_name: Окно в спальне | 1!
         device_class: window
       sensor.0x00158d0002b18159_battery:
         friendly_name: Заряд батареи датчика открытия окна в спальне
 
       switch.0x60a423fffeb047dd_left:
-        friendly_name: Переключатель основного освещение в спальне
+        friendly_name: Переключатель основного освещение в спальне | 1!
       switch.0x60a423fffeb047dd_right:
         friendly_name: Питание освещения в спальне
 
@@ -54,7 +65,7 @@ be_common_package:
         friendly_name: Заряд батареи куба в спальне
 
       switch.0xa4c13851c962bc6d:
-        friendly_name: Питание компьютера Жени
+        friendly_name: Питание компьютера Жени | 1!
       sensor.0xa4c13851c962bc6d_energy:
         friendly_name: Общее потребление электроэнергии компьютера Жени
       sensor.0xa4c13851c962bc6d_power:
@@ -65,7 +76,7 @@ be_common_package:
       sensor.0x54ef4410004461a2_temperature:
         friendly_name: Датчик температуры в спальне (TOC)
       sensor.0x54ef4410004461a2_voc:
-        friendly_name: Датчик качества воздуха в спальне
+        friendly_name: Датчик качества воздуха в спальне | 1!
       sensor.0x54ef4410004461a2_battery:
         friendly_name: Заряд батареи датчика качества воздуха в спальне
 
@@ -79,14 +90,35 @@ be_common_package:
         device_class: humidity
         unit_of_measurement: "%"
       sensor.esp001sensor_bme280_pressure:
-        friendly_name: Давление в спальне
+        friendly_name: Давление в спальне | 1!
         device_class: pressure
         unit_of_measurement: "hPa"
 
       # Xiaomi
       light.yeelight_450c_2:
-        friendly_name: Основной свет в спальне
+        friendly_name: Основной свет в спальне | 1!
       light.yeelight_450c_2_ambilight:
         friendly_name: Подсветка основного света в спальне
       light.yeelight_450c_2_nightlight:
         friendly_name: Ночной режим основного света в спальне
+
+      # Tuya
+      switch.tuya_switch_002_1:
+        friendly_name: Реле 1 у окна
+      switch.tuya_switch_002_2:
+        friendly_name: Реле 2 у окна
+      switch.tuya_switch_002_3:
+        friendly_name: Реле 3 у окна
+      switch.tuya_switch_002_4:
+        friendly_name: USB Реле у окна | 1!
+
+      sensor.0xa4c138894b3790d2_co2:
+        friendly_name: CO2 в спальне | 1!
+      sensor.0xa4c138894b3790d2_voc:
+        friendly_name: VOC в спальне
+      sensor.0xa4c138894b3790d2_temperature:
+        friendly_name: Температура в спальне
+      sensor.0xa4c138894b3790d2_humidity:
+        friendly_name: Влажность в спальне
+      sensor.0xa4c138894b3790d2_formaldehyd:
+        friendly_name: Уровень формальдегида в спальне

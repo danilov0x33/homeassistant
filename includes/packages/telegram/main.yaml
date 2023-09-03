@@ -23,12 +23,13 @@ main_telegram_ui_package:
           data:
             target: "{{ trigger.event.data.user_id }}"
             message: |
-              {{'\U0001F527'}} *Управление умным домом*
+              {{'🏠'}} *Управление умным домом*
             inline_keyboard:
-              - '{{''\U0001F6AA''}} Коридор:/corridor_control , {{''\U0001F4BA''}} Лоджия:/loggia_control'
-              - '{{''\U0001F4FA''}} Зал:/hall_control, {{''\U0001F31C''}} Спальня:/bedroom_control'
-              - '{{''\U0001F374''}} Кухня:/kitchen_control, {{''\U0001F6C1''}} Ванна и туалет:/bathroom_control'
-              - '{{''\U0001F6AB''}} Убрать меню:/menu_hide , {{''\U000021AA''}} Обновить:/menu_back'
+              - "{{'🌏'}} Общее:/common_control"
+              - "{{'🚪'}} Коридор:/corridor_control , {{'💺'}} Лоджия:/loggia_control"
+              - "{{'📺'}} Зал:/hall_control, {{'🌜'}} Спальня:/bedroom_control"
+              - "{{'🍴'}} Кухня:/kitchen_control, {{'🛁'}}/{{'🚽'}} Ванна и туалет:/bathroom_control"
+              - "{{'↪'}} Обновить:/menu_back"
 
     # ## Автоматизация управления главным меню
     - id: telegram_menu_control_main
@@ -61,9 +62,10 @@ main_telegram_ui_package:
                   data:
                     target: "{{ trigger.event.data.chat_id }}"
                     message: |
-                      {{'\U0001F527'}} *Управление умным домом*
+                      {{'🏠'}} *Управление умным домом*
                     inline_keyboard:
-                      - '{{''\U0001F6AA''}} Коридор:/corridor_control , {{''\U0001F4BA''}} Лоджия:/loggia_control'
-                      - '{{''\U0001F4FA''}} Зал:/hall_control, {{''\U0001F31C''}} Спальня:/bedroom_control'
-                      - '{{''\U0001F374''}} Кухня:/kitchen_control, {{''\U0001F6C1''}} Ванна и туалет:/bathroom_control'
-                      - '{{''\U0001F6AB''}} Убрать меню:/menu_hide , {{''\U000021AA''}} Обновить:/menu_back'
+                      - "{{'🌏'}} Общее:/common_control"
+                      - "{{'🚪'}} Коридор:/corridor_control , {{'💺'}} Лоджия:/loggia_control"
+                      - "{{'📺'}} Зал:/hall_control, {{'🌜'}} Спальня:/bedroom_control"
+                      - "{{'🍴'}} Кухня:/kitchen_control, {{'🛁'}} Ванна и туалет:/bathroom_control"
+                      - "{{'↪'}} Обновить:/menu_back"

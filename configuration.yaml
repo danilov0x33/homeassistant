@@ -36,6 +36,7 @@ tag: ~
 zone: ~
 cloud: ~
 # energy: ~
+ffmpeg: ~
 
 # Integrations
 hacs: !include integrations/hacs.yaml

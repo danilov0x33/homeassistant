@@ -28,10 +28,10 @@ be_telegram_ui_package:
                     message: &msg_bedroom |
                       *Спальня :*
                       {{'\U0001F6AA'}} Окно - {% if is_state('binary_sensor.0x00158d000123129b_contact', 'on') %} Открыто {% else %} Закрыто {% endif %}
-                      {{'\U0001F321'}} - {{ states('sensor.esp001sensor_bme280_temperature') }} °C, {{'\U0001F4A7'}} - {{ states('sensor.esp001sensor_bme280_humidity') }} %, {{'\U0001F5FB'}} - {{ states('sensor.esp001sensor_bme280_pressure') }} hPa
+                      {{'\U0001F321'}} - {{ states('sensor.esp001sensor_bme280_temperature') }} °C, {{'\U0001F4A7'}} - {{ states('sensor.esp001sensor_bme280_humidity') }} %, {{'\U0001F5FB'}} - {{ states('sensor.esp001sensor_bme280_pressure') }} hPa, {{'💨'}} - {{ states('sensor.0xa4c138894b3790d2_co2') }} CO2
                     inline_keyboard: &keyb_bedroom
                       - '{{''\U0001F4A1''}} Основной свет - {% if is_state(''light.yeelight_450c_2'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/bedroom_toggle_main_ligth , {{''\U0001F4A1''}} Ночной свет - {% if is_state(''light.yeelight_450c_2_ambilight'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/bedroom_toggle_night_ligth'
-                      - '{{''\U0001F4A1''}} TV - {% if is_state(''media_player.yandex_tv_001'', ''off'') or is_state(''media_player.yandex_tv_001'', ''unavailable'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/bedroom_toggle_tv'
+                      - "{{'📷'}} Получить изображение с камеры:/bedroom_take_photo"
                       - '{{''\U000021A9''}} Вернуться:/menu_back , {{''\U000021AA''}} Обновить:/bedroom_control'
             - conditions:
                 - condition: template
@@ -78,19 +78,26 @@ be_telegram_ui_package:
                     message: *msg_bedroom
                     inline_keyboard: *keyb_bedroom
 
+            # Фото с камеры
             - conditions:
                 - condition: template
-                  value_template: "{{ trigger.event.data.command == '/bedroom_toggle_tv' }}"
+                  value_template: "{{ trigger.event.data.command == '/bedroom_take_photo' }}"
               sequence:
-                - service: media_player.toggle
-                  entity_id: media_player.yandex_tv_001
+                - service: camera.snapshot
+                  target:
+                    entity_id: camera.c2c_k08011542
+                  data:
+                    filename: "/config/www/downloads/camera/c2c_k08011542_last.jpg"
+                - service: telegram_bot.send_photo
+                  data_template:
+                    target: !secret telegram_danilov_info_group_id
+                    file: "/config/www/downloads/camera/c2c_k08011542_last.jpg"
                 - delay:
                     milliseconds: 500
                 - service: telegram_bot.answer_callback_query
                   data:
                     callback_query_id: "{{ trigger.event.data.id }}"
-                    message: |
-                      {{"\U0001F4AC"}} TV в спальне - {% if is_state('media_player.yandex_tv_001', 'on') %} Включен {% else %} Выключен {% endif %}
+                    message: "Готово"
                 - service: telegram_bot.delete_message
                   data_template:
                     message_id: "{{ trigger.event.data.message.message_id }}"

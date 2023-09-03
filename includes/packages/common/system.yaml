@@ -7,11 +7,18 @@ system_package:
 
   homeassistant:
     customize:
-      # Custom
       sensor.mariadb_size:
         friendly_name: Размер MariaDB
       sensor.victoria_metrics_size:
         friendly_name: Размер Victoria Metrics
+      sensor.unavailable_devices:
+        friendly_name: Недоступные устройства
+
+  command_line:
+    - sensor:
+        name: victoria_metrics_size
+        command: "du -sm /share/victoria-metrics-data | awk '{print $1}'"
+        unit_of_measurement: "MB"
 
   sql:
     - name: mariadb_size
@@ -21,33 +28,58 @@ system_package:
       unit_of_measurement: MB
 
   sensor:
-    # MariaDB Database Sensor
-    # - platform: sql
-    #   db_url: !secret db_main_url
-    #   queries:
-    #     - name: mariadb_size
-    #       query: "SELECT table_schema AS 'db_name', ROUND(SUM( data_length + index_length ) / 1024 / 1024, 2) AS 'size_mb' FROM information_schema.TABLES WHERE table_schema='homeassistant'"
-    #       column: "size_mb"
-    #       unit_of_measurement: MB
+    - platform: systemmonitor
+      resources:
+        - type: disk_use_percent
+          arg: /config
+        - type: disk_use
+        - type: disk_free
+        - type: memory_use_percent
+        - type: memory_use
+        - type: memory_free
+        - type: processor_use
+        - type: processor_temperature
+        - type: last_boot
 
-    # InfluxDB Database Sensor
-    # - platform: influxdb
-    #   host: 192.168.3.68
-    #   port: 8086
-    #   username: !secret influxdb_username
-    #   password: !secret influxdb_password
-    #   scan_interval: 3600
-    #   queries:
-    #     - name: influxdb_size
-    #       unit_of_measurement: MB
-    #       value_template: "{{ (value|float / 1024 /1024)|round(1) }}"
-    #       group_function: sum
-    #       measurement: '"monitor"."shard"'
-    #       database: _internal
-    #       where: "time > now() - 10s"
-    #       field: diskBytes
+  # template:
+  #   - sensor:
+  #       unique_id: unavailable_devices
+  #       name: unavailable_devices
+  #       state: "{{[
+  #       'remote.km6',
+  #       'sensor.0x54ef4410004461a2_temperature'
+  #       ] | select('is_state', 'unavailable') | join(',') }}"
+  # state: >
+  #   {% for e in expand(
+  #   'remote.km6',
+  #   'sensor.0x54ef4410004461a2_temperature'
+  #   ) if is_state(e.entity_id, "unavailable") %}
+  #     {{  state_attr(e.entity_id, 'friendly_name') ~ " | " ~ e.entity_id }}
+  #     {%- if not loop.last %}, {% endif -%}
+  #   {% endfor %}
 
-    - platform: command_line
-      name: victoria_metrics_size
-      command: "du -sm /share/victoria-metrics-data | awk '{print $1}'"
-      unit_of_measurement: "MB"
+  # MariaDB Database Sensor
+  # - platform: sql
+  #   db_url: !secret db_main_url
+  #   queries:
+  #     - name: mariadb_size
+  #       query: "SELECT table_schema AS 'db_name', ROUND(SUM( data_length + index_length ) / 1024 / 1024, 2) AS 'size_mb' FROM information_schema.TABLES WHERE table_schema='homeassistant'"
+  #       column: "size_mb"
+  #       unit_of_measurement: MB
+
+  # InfluxDB Database Sensor
+  # - platform: influxdb
+  #   host: 192.168.3.68
+  #   port: 8086
+  #   username: !secret influxdb_username
+  #   password: !secret influxdb_password
+  #   scan_interval: 3600
+  #   queries:
+  #     - name: influxdb_size
+  #       unit_of_measurement: MB
+  #       value_template: "{{ (value|float / 1024 /1024)|round(1) }}"
+  #       group_function: sum
+  #       measurement: '"monitor"."shard"'
+  #       database: _internal
+  #       where: "time > now() - 10s"
+  #       field: diskBytes

@@ -15,6 +15,7 @@ lo_common_package:
         - light.controller_rgbw_1ea01d
 
         - humidifier.xiaomi_humidifier_001
+
         - binary_sensor.xiaomi_humidifier_001_water_tank
         - binary_sensor.xiaomi_humidifier_001_water_tank_empty
 
@@ -24,7 +25,7 @@ lo_common_package:
     customize:
       # MQTT
       binary_sensor.0x00158d0002b17c46_contact:
-        friendly_name: Окно на лоджии
+        friendly_name: Окно на лоджии | 1!
         device_class: window
       sensor.0x00158d0002b17c46_battery:
         friendly_name: Заряд батареи датчика открытия окна на лоджии
@@ -32,7 +33,7 @@ lo_common_package:
       sensor.0x00124b002520c648_humidity:
         friendly_name: Влажность на лоджии
       sensor.0x00124b002520c648_temperature:
-        friendly_name: Температура на лоджии
+        friendly_name: Температура на лоджии | 1!
       sensor.0x00124b002520c648_battery:
         friendly_name: Заряд батареи датчика температуры и влажности на лоджии
 
@@ -43,15 +44,15 @@ lo_common_package:
 
       # MagicHome
       light.controller_rgbw_1ea01d:
-        friendly_name: Основное освещение на лоджии
+        friendly_name: Основное освещение на лоджии | 1!
 
       # Xiaomi
       humidifier.xiaomi_humidifier_001:
-        friendly_name: Увлажнитель воздуха на лоджии
+        friendly_name: Увлажнитель воздуха на лоджии | 1!
       binary_sensor.xiaomi_humidifier_001_water_tank:
         friendly_name: Установлен ли бак с водой для увлажнителя на лоджии
       binary_sensor.xiaomi_humidifier_001_water_tank_empty:
         friendly_name: Елси ли вода баке увлажнителя на лоджии
 
       switch.tuya_thermostat_switch:
-        friendly_name: Теплый пол на лоджии
+        friendly_name: Теплый пол на лоджии | 1!

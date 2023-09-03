@@ -34,14 +34,14 @@ co_common_package:
     customize:
       # MQTT
       switch.0x54ef4410005e60c8_left:
-        friendly_name: Переключатель основного освещения в туалете (Питание)
+        friendly_name: Переключатель основного освещения в туалете (Питание) | 1!
       switch.0x54ef4410005e60c8_right:
         friendly_name: Переключатель основного освещение в ванной (Питание)
       sensor.0x54ef4410005e60c8_action:
         friendly_name: Действие переключателя в коридоре у ванной
 
       switch.0x54ef4410005b0295_left:
-        friendly_name: Переключатель основного освещения в коридоре (Питание)
+        friendly_name: Переключатель основного освещения в коридоре (Питание) | 1!
       switch.0x54ef4410005b0295_right:
         friendly_name: Переключатель дополнительного освещения в коридоре
       sensor.0x54ef4410005b0295_action:
@@ -55,7 +55,7 @@ co_common_package:
         device_class: door
 
       binary_sensor.0x00158d0003f1029f_occupancy:
-        friendly_name: Датчик движения в коридоре
+        friendly_name: Датчик движения в коридоре | 1!
       sensor.0x00158d0003f1029f_battery:
         friendly_name: Заряд батареи датчика движения в коридоре
 
@@ -69,10 +69,10 @@ co_common_package:
         friendly_name: Освещённость в коридоре
         unit_of_measurement: lm
       light.xiaomi_gateway_001_light:
-        friendly_name: Ночник в коридоре
+        friendly_name: Ночник в коридоре | 1!
 
       light.yeelight_450c_1:
-        friendly_name: Оснойной свет в коридоре
+        friendly_name: Оснойной свет в коридоре | 1!
       light.yeelight_450c_1_ambilight:
         friendly_name: Подсветка оснойного света в коридоре
       light.yeelight_450c_1_nightlight:
@@ -80,4 +80,4 @@ co_common_package:
 
       # WIZ
       light.wiz_ceiling_corridor:
-        friendly_name: Свет над ванной и туалетом
+        friendly_name: Свет над ванной и туалетом | 1!

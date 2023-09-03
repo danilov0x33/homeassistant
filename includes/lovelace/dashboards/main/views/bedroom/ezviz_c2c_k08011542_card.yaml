@@ -1,0 +1,6 @@
+type: picture-glance
+title: Камера в спальне
+camera_image: camera.c2c_k08011542
+camera_view: live
+entities:
+  - switch.c2c_k08011542_sleep

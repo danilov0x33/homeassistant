@@ -52,7 +52,7 @@ common_fault_tolerance_package:
       alias: system_toggle_automation_control_mode
       variables:
         all_main_automations: >
-          {{ states.automation | map(attribute='entity_id') | select('search', '_main$' ) | list }}
+          {{ states.automation | map(attribute='entity_id') | select('search', '_main$') | list }}
       trigger:
         - platform: state
           entity_id: binary_sensor.main_control
