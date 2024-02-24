@@ -11,6 +11,8 @@ common_alert_notification_package:
       trigger:
         - platform: state
           entity_id:
+            - binary_sensor.0x00158d00026b429b_water_leak
+            - binary_sensor.0x00158d0009ee5f7a_water_leak
             - binary_sensor.0x00158d0002922709_water_leak
             - binary_sensor.0x00158d0002922b19_water_leak
           from: "off"
@@ -20,4 +22,4 @@ common_alert_notification_package:
           data_template:
             target: !secret telegram_danilov_info_group_id
             message: >
-              Протечка в: {{ area_name(trigger.entity_id) }}
+              Протечка в: {{ area_name(trigger.entity_id) }} -> {{ state_attr(trigger.entity_id, 'friendly_name') }}

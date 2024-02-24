@@ -1,0 +1,25 @@
+common_water_leak_safety_package:
+  homeassistant:
+    customize:
+      automation.common_switch_off_when_water_leak_main:
+        friendly_name: "Перекрыть воду, если датчик протечки воды сработал"
+
+  automation:
+    - id: common_switch_off_when_water_leak_main
+      alias: common_switch_off_when_water_leak_main
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id:
+            - binary_sensor.0x00158d00026b429b_water_leak
+            - binary_sensor.0x00158d0009ee5f7a_water_leak
+            - binary_sensor.0x00158d0002922709_water_leak
+            - binary_sensor.0x00158d0002922b19_water_leak
+          from: "off"
+          to: "on"
+      action:
+        - service: switch.turn_off
+          target:
+            entity_id:
+              - switch.0xa4c138f4bd352a9e
+              - switch.0xa4c13868bf742ed6

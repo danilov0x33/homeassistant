@@ -41,9 +41,9 @@ common_busy_actions_package:
         - platform: state
           entity_id: sensor.0x00158d0007082349_action
           to: "flip180"
-        - platform: state
-          entity_id: sensor.0x00158d000276ea3b_action # Xiaomi Кнопка
-          to: "single"
+        # - platform: state
+        #   entity_id: sensor.0x00158d000276ea3b_action # Xiaomi Кнопка
+        #   to: "single"
       action:
         - service: mqtt.publish
           data_template:

@@ -1,0 +1,27 @@
+common_barcode_package:
+  homeassistant:
+    customize:
+      rest_command.send_barcode:
+        friendly_name: "Общеее | Отправить штрихкод"
+
+  rest_command:
+    send_barcode:
+      url: "http://192.168.3.3:8450/api/action/scan?text={{ code }}"
+      method: GET
+      headers:
+        BBUDDY-API-KEY: !secret barcode_buddy_key
+
+  automation:
+    - id: common_send_barcode_main
+      alias: common_send_barcode_main
+      initial_state: true
+      trigger:
+        - platform: state
+          entity_id: sensor.esp002_barcode_sensor_barcode1
+      condition:
+        - condition: template
+          value_template: "{{ is_number(trigger.to_state.state) }}"
+      action:
+        - service: rest_command.send_barcode
+          data:
+            code: "{{ states('sensor.esp002_barcode_sensor_barcode1') }}"

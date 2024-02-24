@@ -4,3 +4,4 @@
     - !secret telegram_danilov_info_group_id
     - !secret telegram_danilov_0x33_user_id
     - !secret telegram_ann15294_user_id
+    - !secret telegram_nikita_user_id

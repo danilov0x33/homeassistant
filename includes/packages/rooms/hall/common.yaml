@@ -55,6 +55,14 @@ ha_common_package:
         - sensor.kasa_switch_001_total_consumption
         - sensor.kasa_switch_001_voltage
 
+        - sensor.0x54ef4410004461a2_humidity
+        - sensor.0x54ef4410004461a2_temperature
+        - sensor.0x54ef4410004461a2_voc
+        - sensor.0x54ef4410004461a2_battery
+
+        - cover.0x54ef441000070ae3
+        - sensor.0x54ef441000070ae3_battery
+
   homeassistant:
     customize:
       # MQTT
@@ -82,6 +90,20 @@ ha_common_package:
         friendly_name: Кнопка на столе у Насти | 1!
       sensor.0x00158d000276ea3b_battery:
         friendly_name: Заряд батареи кнопки на столе у Насти
+
+      sensor.0x54ef4410004461a2_humidity:
+        friendly_name: Датчик влажности в зале (TOC)
+      sensor.0x54ef4410004461a2_temperature:
+        friendly_name: Датчик температуры в зале (TOC)
+      sensor.0x54ef4410004461a2_voc:
+        friendly_name: Датчик качества воздуха в зале | 1!
+      sensor.0x54ef4410004461a2_battery:
+        friendly_name: Заряд батареи датчика качества воздуха в зале
+
+      cover.0x54ef441000070ae3:
+        friendly_name: Шторы в зале | 1!
+      sensor.0x54ef441000070ae3_battery:
+        friendly_name: Заряд батареи штор в зале
 
       # Tuya
       switch.tuya_switch_001_1:

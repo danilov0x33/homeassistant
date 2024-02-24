@@ -1,0 +1,4 @@
+type: tile
+entity: cover.0x54ef441000070ae3
+features:
+  - type: "cover-position"

@@ -16,9 +16,9 @@ common_guard_home_package:
       alias: common_prepare_home_if_owners_outside_main
       trigger:
         - platform: state
-          entity_id: alarm_control_panel.xiaomi_gateway_001_alarm
-          from: "disarmed"
-          to: "armed_away"
+          entity_id: light.xiaomi_gateway_001_light
+          from: "off"
+          to: "on"
       condition:
       action:
         # Включение камер
@@ -29,33 +29,33 @@ common_guard_home_package:
         - service: switch.turn_off
           continue_on_error: true
           target:
-            entity_id: switch.ty2_j23903450_privacy # Зал
-        - service: switch.turn_on
-          continue_on_error: true
-          target:
-            entity_id:
-              - switch.ty2_j23903450_sound
-              - switch.ty2_j23903450_light
+            entity_id: switch.ty2_j23903450_sleep # Зал
+        # - service: switch.turn_on
+        #   continue_on_error: true
+        #   target:
+        #     entity_id:
+        #       - switch.ty2_j23903450_sound
+        #       - switch.ty2_j23903450_light
         - service: switch.turn_off
           continue_on_error: true
           target:
-            entity_id: switch.ty2_k15013479_privacy # Коридор
-        - service: switch.turn_on
-          continue_on_error: true
-          target:
-            entity_id:
-              - switch.ty2_k15013479_sound
-              - switch.ty2_k15013479_light
+            entity_id: switch.ty2_k15013479_sleep # Коридор
+        # - service: switch.turn_on
+        #   continue_on_error: true
+        #   target:
+        #     entity_id:
+        #       - switch.ty2_k15013479_sound
+        #       - switch.ty2_k15013479_light
         - service: switch.turn_off
           continue_on_error: true
           target:
-            entity_id: switch.ty2_j23903681_privacy # Кухня
-        - service: switch.turn_on
-          continue_on_error: true
-          target:
-            entity_id:
-              - switch.ty2_j23903681_sound
-              - switch.ty2_j23903681_light
+            entity_id: switch.ty2_j23903681_sleep # Кухня
+        # - service: switch.turn_on
+        #   continue_on_error: true
+        #   target:
+        #     entity_id:
+        #       - switch.ty2_j23903681_sound
+        #       - switch.ty2_j23903681_light
 
         # Выключение света
         - service: light.turn_off
@@ -76,9 +76,9 @@ common_guard_home_package:
       alias: common_prepare_home_if_owners_inside_main
       trigger:
         - platform: state
-          entity_id: alarm_control_panel.xiaomi_gateway_001_alarm
-          from: "armed_away"
-          to: "disarmed"
+          entity_id: light.xiaomi_gateway_001_light
+          from: "on"
+          to: "off"
       condition:
       action:
         # Выключение камер
@@ -89,30 +89,30 @@ common_guard_home_package:
         - service: switch.turn_on
           continue_on_error: true
           target:
-            entity_id: switch.ty2_j23903450_privacy # Зал
-        - service: switch.turn_off
-          continue_on_error: true
-          target:
-            entity_id:
-              - switch.ty2_j23903450_sound
-              - switch.ty2_j23903450_light
+            entity_id: switch.ty2_j23903450_sleep # Зал
+        # - service: switch.turn_off
+        #   continue_on_error: true
+        #   target:
+        #     entity_id:
+        #       - switch.ty2_j23903450_sound
+        #       - switch.ty2_j23903450_light
         - service: switch.turn_on
           continue_on_error: true
           target:
-            entity_id: switch.ty2_k15013479_privacy # Коридор
-        - service: switch.turn_off
-          continue_on_error: true
-          target:
-            entity_id:
-              - switch.ty2_k15013479_sound
-              - switch.ty2_k15013479_light
+            entity_id: switch.ty2_k15013479_sleep # Коридор
+        # - service: switch.turn_off
+        #   continue_on_error: true
+        #   target:
+        #     entity_id:
+        #       - switch.ty2_k15013479_sound
+        #       - switch.ty2_k15013479_light
         - service: switch.turn_on
           continue_on_error: true
           target:
-            entity_id: switch.ty2_j23903681_privacy # Кухня
-        - service: switch.turn_off
-          continue_on_error: true
-          target:
-            entity_id:
-              - switch.ty2_j23903681_sound
-              - switch.ty2_j23903681_light
+            entity_id: switch.ty2_j23903681_sleep # Кухня
+        # - service: switch.turn_off
+        #   continue_on_error: true
+        #   target:
+        #     entity_id:
+        #       - switch.ty2_j23903681_sound
+        #       - switch.ty2_j23903681_light

@@ -38,7 +38,7 @@ common_fault_tolerance_package:
             service: mqtt.publish
             data_template:
               topic: "custom/main_control/state"
-              payload_template: "{{ (['192.168.3.20', '192.168.3.68'] | reject('match', states('sensor.local_ip')) | list)[0] }}"
+              payload_template: "{{ (['192.168.3.20', '192.168.3.21'] | reject('match', states('sensor.local_ip')) | list)[0] }}"
               retain: true
           icon_template: >-
             {% if is_state('switch.main_control_mode', 'on') %}

@@ -13,6 +13,16 @@ to_common_package:
         - binary_sensor.0x00158d0001994303_contact
         - sensor.0x00158d0001994303_battery
 
+        - binary_sensor.0x00158d00026b429b_water_leak
+        - sensor.0x00158d00026b429b_battery
+
+        - binary_sensor.0x00158d0009ee5f7a_water_leak
+        - sensor.0x00158d0009ee5f7a_battery
+
+        - switch.0xa4c138f4bd352a9e
+
+        - switch.0xa4c13868bf742ed6
+
   homeassistant:
     customize:
       # MQTT
@@ -30,6 +40,22 @@ to_common_package:
         friendly_name: Наличие электропитания квартиры | 1!
       sensor.0x00158d000198df07_battery:
         friendly_name: Заряд датчика наличия электропитания квартиры
+
+      binary_sensor.0x00158d00026b429b_water_leak:
+        friendly_name: Датчик протечки на стояке | 1!
+      sensor.0x00158d00026b429b_battery:
+        friendly_name: Заряд батареи датчика протечки на стояке в туалете
+
+      binary_sensor.0x00158d0009ee5f7a_water_leak:
+        friendly_name: Датчик протечки у туалета | 1!
+      sensor.0x00158d0009ee5f7a_battery:
+        friendly_name: Заряд батареи датчика протечки у туалета
+
+      switch.0xa4c138f4bd352a9e:
+        friendly_name: Кран холодной воды | 1!
+
+      switch.0xa4c13868bf742ed6:
+        friendly_name: Кран горячей воды | 1!
 
       # WIZ
       light.wiz_ceiling_toilet:

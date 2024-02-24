@@ -23,12 +23,16 @@ co_common_package:
         - alarm_control_panel.xiaomi_gateway_001_alarm
 
         - light.xiaomi_gateway_001_light
-        
+
         - light.wiz_ceiling_corridor
 
         - light.yeelight_450c_1
         - light.yeelight_450c_1_ambilight
         - light.yeelight_450c_1_nightlight
+
+        - sensor.esp001sensor_bme280_temperature
+        - sensor.esp001sensor_bme280_humidity
+        - sensor.esp001sensor_bme280_pressure
 
   homeassistant:
     customize:
@@ -81,3 +85,17 @@ co_common_package:
       # WIZ
       light.wiz_ceiling_corridor:
         friendly_name: Свет над ванной и туалетом | 1!
+
+      # ESP
+      sensor.esp001sensor_bme280_temperature:
+        friendly_name: Температура в коридоре
+        device_class: temperature
+        unit_of_measurement: "°C"
+      sensor.esp001sensor_bme280_humidity:
+        friendly_name: Влажность в коридоре
+        device_class: humidity
+        unit_of_measurement: "%"
+      sensor.esp001sensor_bme280_pressure:
+        friendly_name: Давление в коридоре | 1!
+        device_class: pressure
+        unit_of_measurement: "hPa"

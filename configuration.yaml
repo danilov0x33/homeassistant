@@ -39,7 +39,7 @@ cloud: ~
 ffmpeg: ~
 
 # Integrations
-hacs: !include integrations/hacs.yaml
+#hacs: !include integrations/hacs.yaml
 influxdb: !include integrations/influxdb.yaml
 telegram_bot: !include integrations/telegram_bot.yaml
 yandex_smart_home: !include integrations/yandex_smart_home.yaml
