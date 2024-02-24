@@ -7,7 +7,6 @@ lo_telegram_ui_package:
   automation:
     - id: lo_telegram_ui_main
       alias: lo_telegram_ui_main
-      initial_state: true
       trigger:
         - platform: event
           event_type: telegram_callback

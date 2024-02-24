@@ -36,7 +36,6 @@ common_busy_actions_package:
   automation:
     - id: common_send_when_nastya_change_busy_status_main
       alias: common_send_when_nastya_change_busy_status_main
-      initial_state: true
       trigger:
         - platform: state
           entity_id: sensor.0x00158d0007082349_action
@@ -53,7 +52,6 @@ common_busy_actions_package:
 
     - id: common_notify_when_change_sensor_nastya_is_busy_main
       alias: common_notify_when_change_sensor_nastya_is_busy_main
-      initial_state: true
       trigger:
         - platform: state
           entity_id: binary_sensor.nastya_is_busy
@@ -76,7 +74,6 @@ common_busy_actions_package:
 
     - id: common_send_when_evgeniy_change_busy_status_main
       alias: common_send_when_evgeniy_change_busy_status_main
-      initial_state: true
       trigger:
         - platform: state
           entity_id: sensor.0x00158d0007098707_action
@@ -90,7 +87,6 @@ common_busy_actions_package:
 
     - id: common_notify_when_change_sensor_evgeniy_is_busy_main
       alias: common_notify_when_change_sensor_evgeniy_is_busy_main
-      initial_state: true
       trigger:
         - platform: state
           entity_id: binary_sensor.evgeniy_is_busy

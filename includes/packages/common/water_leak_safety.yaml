@@ -7,7 +7,6 @@ common_water_leak_safety_package:
   automation:
     - id: common_switch_off_when_water_leak_main
       alias: common_switch_off_when_water_leak_main
-      initial_state: true
       trigger:
         - platform: state
           entity_id:

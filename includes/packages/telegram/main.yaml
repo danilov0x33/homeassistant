@@ -10,7 +10,6 @@ main_telegram_ui_package:
     ## Стартовая автоматизация для запуска меню
     - id: telegram_menu_start_main
       alias: telegram_menu_start_main
-      initial_state: true
       trigger:
         - platform: event
           event_type: telegram_text
@@ -34,7 +33,6 @@ main_telegram_ui_package:
     # ## Автоматизация управления главным меню
     - id: telegram_menu_control_main
       alias: telegram_menu_control_main
-      initial_state: true
       trigger:
         - platform: event
           event_type: telegram_callback

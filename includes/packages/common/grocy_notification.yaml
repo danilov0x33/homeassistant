@@ -11,7 +11,6 @@ common_grocy_notification_package:
   automation:
     - id: common_notify_when_grocy_overdue_products_main
       alias: common_notify_when_grocy_overdue_products_main
-      initial_state: true
       trigger:
         - platform: time
           at: "19:00:00"
@@ -32,7 +31,6 @@ common_grocy_notification_package:
 
     - id: common_notify_when_grocy_expiring_products_main
       alias: common_notify_when_grocy_expiring_products_main
-      initial_state: true
       trigger:
         - platform: time
           at: "19:00:00"
@@ -55,7 +53,6 @@ common_grocy_notification_package:
 
     - id: common_notify_when_grocy_need_shops_main
       alias: common_notify_when_grocy_need_shops_main
-      initial_state: true
       trigger:
         - platform: time
           at: "10:00:00"

@@ -7,7 +7,6 @@ kitchen_telegram_ui_package:
   automation:
     - id: ki_telegram_ui_main
       alias: ki_telegram_ui_main
-      initial_state: true
       trigger:
         - platform: event
           event_type: telegram_callback

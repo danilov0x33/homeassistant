@@ -7,7 +7,6 @@ common_alert_notification_package:
   automation:
     - id: common_notify_when_water_leak_alarm_main
       alias: common_notify_when_water_leak_alarm_main
-      initial_state: true
       trigger:
         - platform: state
           entity_id:

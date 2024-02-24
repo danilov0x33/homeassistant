@@ -7,7 +7,6 @@ co_cat_eye_dp2c_j21918665_package:
   automation:
     - id: co_notify_when_motion_trigger_on_cat_eye_main
       alias: co_notify_when_motion_trigger_on_cat_eye_main
-      initial_state: true
       trigger:
         - platform: state
           entity_id: sensor.dp2c_j21918665_last_alarm_pic
