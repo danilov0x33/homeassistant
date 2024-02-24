@@ -18,6 +18,11 @@ homeassistant:
   packages: !include_dir_merge_named includes/packages
 
 # Configurations
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+    - 192.168.3.3
 lovelace: !include integrations/lovelace.yaml
 frontend: !include integrations/frontend.yaml
 recorder: !include integrations/recorder.yaml
