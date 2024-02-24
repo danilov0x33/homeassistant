@@ -9,6 +9,8 @@ common_fault_tolerance_package:
     customize:
       automation.system_toggle_automation_control_mode:
         friendly_name: Изменить местер instance Home Assistant
+      automation.system_change_main_if_not_available_mode:
+        friendly_name: Изменить местер instance Home Assistant если он не доступен
 
       binary_sensor.main_control:
         friendly_name: Является ли текущий сервер мастером
@@ -22,6 +24,10 @@ common_fault_tolerance_package:
         value_template: "{{ is_state('sensor.local_ip', value) }}"
         payload_on: "True"
         payload_off: "False"
+
+    sensor:
+      - name: main_control
+        state_topic: "custom/main_control/state"
 
   switch:
     - platform: template
@@ -47,6 +53,12 @@ common_fault_tolerance_package:
               mdi:server-off
             {% endif %}
 
+  binary_sensor:
+    - platform: rest
+      name: main_instant_available
+      scan_interval: 3
+      resource_template: "http://{{ states('sensor.main_control') }}:8123/manifest.json"
+
   automation:
     - id: system_toggle_automation_control_mode
       alias: system_toggle_automation_control_mode
@@ -62,17 +74,58 @@ common_fault_tolerance_package:
           entity_id: binary_sensor.main_control
           from: "off"
           to: "on"
+        - platform: state
+          entity_id: binary_sensor.main_instant_available
       action:
         - choose:
             - conditions:
-                - condition: state
-                  entity_id: binary_sensor.main_control
-                  state: "on"
+                - condition: or
+                  conditions:
+                    - condition: and
+                      conditions:
+                        - "{{ trigger.entity_id == 'binary_sensor.main_control' }}"
+                        - condition: state
+                          entity_id: binary_sensor.main_control
+                          state: "on"
+
+                    - condition: and
+                      conditions:
+                        - "{{ trigger.entity_id == 'binary_sensor.main_instant_available' }}"
+                        - condition: state
+                          entity_id: binary_sensor.main_instant_available
+                          state: "unavailable"
+                        - condition: state
+                          entity_id: binary_sensor.main_control
+                          state: "off"
               sequence:
                 - service: homeassistant.turn_on
                   target:
                     entity_id: "{{ all_main_automations }}"
-          default:
-            - service: homeassistant.turn_off
-              target:
-                entity_id: "{{ all_main_automations }}"
+
+            - conditions:
+                - condition: and
+                  conditions:
+                    - "{{ trigger.entity_id == 'binary_sensor.main_control' }}"
+                    - condition: state
+                      entity_id: binary_sensor.main_control
+                      state: "off"
+              sequence:
+                - service: homeassistant.turn_off
+                  target:
+                    entity_id: "{{ all_main_automations }}"
+
+            - conditions:
+                - condition: and
+                  conditions:
+                    - "{{ trigger.entity_id == 'binary_sensor.main_instant_available' }}"
+                    - condition: state
+                      entity_id: binary_sensor.main_instant_available
+                      state: "off"
+                    - condition: state
+                      entity_id: binary_sensor.main_control
+                      state: "off"
+              sequence:
+                - delay: 15
+                - service: homeassistant.turn_off
+                  target:
+                    entity_id: "{{ all_main_automations }}"
