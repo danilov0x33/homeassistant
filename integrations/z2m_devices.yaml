@@ -1,0 +1,14 @@
+"0x00158d0001bbf9cf":
+  friendly_name: "Вытяжка"
+
+"0xa4c1389466b02c9b":
+  friendly_name: "Датчик CO2 в спальне"
+  debounce: 60
+  debounce_ignore:
+    - temperature
+
+"0xa4c138894b3790d2":
+  friendly_name: "Датчик CO2 в зале"
+  debounce: 60
+  debounce_ignore:
+    - temperature
