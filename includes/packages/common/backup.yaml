@@ -34,53 +34,19 @@ common_backup_package:
               - sensor.0xa4c1389466b02c9b_humidity
               - sensor.0xa4c1389466b02c9b_voc
               - sensor.0xa4c1389466b02c9b_temperature
+
         - service: notify.mysql_command
           data:
             message: >-
               update state_attributes as a 
               INNER JOIN states s ON a.attributes_id=s.attributes_id
               INNER JOIN states_meta m ON m.metadata_id=s.metadata_id
-              set a.shared_attrs = null
+              set a.shared_attrs = null, s.attributes_id = null
               WHERE m.entity_id in (
-              'sensor.0xa4c138894b3790d2_co2',
-              'sensor.0xa4c138894b3790d2_formaldehyd',
-              'sensor.0xa4c138894b3790d2_humidity',
-              'sensor.0xa4c138894b3790d2_temperature',
-              'sensor.0xa4c138894b3790d2_voc',
-              'sensor.0xa4c1389466b02c9b_co2',
-              'sensor.0xa4c1389466b02c9b_formaldehyd',
-              'sensor.0xa4c1389466b02c9b_humidity',
-              'sensor.0xa4c1389466b02c9b_voc',
-              'sensor.0xa4c1389466b02c9b_temperature',
-              'switch.0xa4c13826691e389b',
-              'sensor.0xa4c13826691e389b_energy',
-              'sensor.0xa4c13826691e389b_power',
-              'sensor.0xa4c138f4dfe7903d_energy',
-              'sensor.0xa4c138f4dfe7903d_power',
-              'switch.0xa4c138f4dfe7903d',
-              'sensor.kasa_switch_001_voltage',
-              'sensor.0xa4c13851c962bc6d_power',
-              'sensor.0xa4c13851c962bc6d_energy',
-              'switch.0xa4c13851c962bc6d',
-              'sensor.0x54ef4410004461a2_battery',
-              'sensor.0x54ef4410004461a2_humidity',
-              'sensor.0x54ef4410004461a2_temperature',
-              'sensor.0x54ef4410004461a2_voc',
-              'sensor.0xa4c13895299116e4_power',
-              'switch.0xa4c13895299116e4',
-              'sensor.0xa4c13895299116e4_energy',
-              'sensor.0x00158d0001bbf9cf_energy',
-              'sensor.0x00158d0001bbf9cf_power',
-              'switch.0x00158d0001bbf9cf',
-              'switch.0xa4c13811d3a5a0f3',
-              'switch.0x54ef4410005e60c8_left',
-              'switch.0x54ef4410005e60c8_right',
-              'sensor.0x54ef4410005e60c8_action',
-              'sensor.esp001sensor_bme280_humidity',
-              'sensor.xiaomi_gateway_001_illuminance',
-              'switch.0xa4c13868bf742ed6',
-              'switch.0xa4c138f4bd352a9e',
-              'sensor.0x00124b00251fa5d7_battery',
-              'sensor.0x00124b00251fa5d7_humidity',
-              'sensor.0x00124b00251fa5d7_temperature'
-              );
+                '{{ states | map(attribute='entity_id') | list | join('\',\'') }}'
+              )
+
+        - service: notify.mysql_command
+          data:
+            message: >-
+              DELETE a from state_attributes as a WHERE a.shared_attrs = null

@@ -1,7 +1,7 @@
-ba_telegram_ui_package:
+common_telegram_ui_package:
   homeassistant:
     customize:
-      automation.ba_telegram_ui_main:
+      automation.common_telegram_ui_main:
         friendly_name: Телеграмм UI | Общее
 
   automation:
