@@ -31,30 +31,24 @@ ignore_attributes:
   - state_class
   - ip_address
   - device_file
+  - database
+  - value
 include:
-  domains:
-    - sensor
-    - binary_sensor
-    - light
-    - switch
-    - input_boolean
-    - input_select
-    - number
-    - lock
-    - weather
-exclude:
-  entity_globs:
-    - sensor.clock*
-    - sensor.date*
-    - sensor.glances*
-    - sensor.time*
-    - sensor.uptime*
-    - sensor.dwd_weather_warnings_*
-    - weather.weatherstation
-    - binary_sensor.*_smartphone_*
-    - sensor.*_smartphone_*
-    - sensor.adguard_home_*
-    - binary_sensor.*_internet_access
+  entities:
+    - binary_sensor.main_control
+# exclude:
+#   entity_globs:
+#     - sensor.clock*
+#     - sensor.date*
+#     - sensor.glances*
+#     - sensor.time*
+#     - sensor.uptime*
+#     - sensor.dwd_weather_warnings_*
+#     - weather.weatherstation
+#     - binary_sensor.*_smartphone_*
+#     - sensor.*_smartphone_*
+#     - sensor.adguard_home_*
+#     - binary_sensor.*_internet_access
 
 # database: home_assistant
 # username: !secret influxdb_username

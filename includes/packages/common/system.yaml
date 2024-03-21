@@ -4,6 +4,11 @@ system_package:
       entities:
         - sensor.mariadb_size
         - sensor.victoria_metrics_size
+  influxdb:
+    include:
+      entities:
+        - sensor.mariadb_size
+        - sensor.victoria_metrics_size
 
   homeassistant:
     customize:
