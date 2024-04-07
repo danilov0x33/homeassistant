@@ -24,6 +24,16 @@ ba_light_package:
       switch.ba_manually_main_light_switch:
         friendly_name: Ручное управление основным светом в ванной
 
+  adaptive_lighting:
+    - name: "bathroom"
+      initial_transition: 1
+      min_color_temp: 4000
+      max_color_temp: 5000
+      min_sunrise_time: "06:00:00"
+      max_sunrise_time: "08:00:00"
+      min_sunset_time: "18:00:00"
+      max_sunset_time: "21:00:00"
+
   mqtt:
     switch:
       - unique_id: ba_manually_main_light_switch_id
@@ -33,49 +43,47 @@ ba_light_package:
         icon: mdi:lightbulb
 
   script:
-    ba_main_light_script_on:
+    ba_manual_light_script_on:
+      mode: restart
       sequence:
+        - service: light.turn_on
+          target:
+            entity_id: light.0x7cb94c77ef400000
+          data:
+            transition: 2
+            kelvin: 4000
+            brightness_pct: 100
         - service: switch.turn_on
           target:
             entity_id:
-              - switch.0x54ef4410005e60c8_right
               - switch.0xa4c13811d3a5a0f3
-        # - service: light.turn_on
-        #   target:
-        #     entity_id: light.wiz_ceiling_toilet
-        # data:
-        #   transition: 2
-        #   kelvin: 4000
-        #   brightness_pct: 100
-    ba_main_light_script_off:
+
+    ba_main_light_script_on:
+      mode: restart
       sequence:
+        - service: adaptive_lighting.apply
+          data:
+            entity_id: switch.adaptive_lighting_bathroom
+            turn_on_lights: true
+            lights:
+              - light.0x7cb94c77ef400000
+        - service: switch.turn_on
+          target:
+            entity_id:
+              - switch.0xa4c13811d3a5a0f3
+
+    ba_main_light_script_off:
+      mode: restart
+      sequence:
+        - service: light.turn_off
+          target:
+            entity_id: light.0x7cb94c77ef400000
+          data:
+            transition: 1
         - service: switch.turn_off
           target:
             entity_id:
-              - switch.0x54ef4410005e60c8_right
               - switch.0xa4c13811d3a5a0f3
-          # data:
-          #   transition: 1
-
-    # ba_night_light_script_on:
-    #   alias: "Включение ночного света"
-    #   sequence:
-    #     - service: light.turn_on
-    #       target:
-    #         entity_id: light.wiz_ceiling_toilet
-    #       data:
-    #         transition: 2
-    #         kelvin: 4000
-    #         brightness_pct: 10
-    # ba_night_light_script_off:
-    #   alias: "Выключение основного света"
-    #   sequence:
-    #     - service: light.turn_off
-    #       target:
-    #         entity_id:
-    #           - light.wiz_ceiling_toilet
-    #       data:
-    #         transition: 1
 
   automation:
     - id: ba_auto_switch_main_light_main
@@ -84,18 +92,22 @@ ba_light_package:
         path: local/ligth_control_with_sensor.yaml
         input:
           motion_sensor: binary_sensor.0x00158d0003cf8ae6_occupancy
-          manual_light_switch: switch.ba_manually_main_light_switch # input_boolean.ba_manually_switch_main_light
-          main_light: switch.0x54ef4410005e60c8_right
+          door_sensors: binary_sensor.0x00158d0003cbd91c_contact
+          manual_light_switch: switch.ba_manually_main_light_switch
+          manual_light_script_on: script.ba_manual_light_script_on
+          manual_light_script_off: script.ba_main_light_script_off
+          manual_time_delay: 30
+          main_light: light.0x7cb94c77ef400000
           main_light_script_on: script.ba_main_light_script_on
           main_light_script_off: script.ba_main_light_script_off
           main_time_delay: 7
-          night_light_enabled: "off"
-          # night_light: light.wiz_ceiling_toilet
-          # night_light_script_on: script.ba_night_light_script_on
-          # night_light_script_off: script.ba_night_light_script_off
-          # night_time_delay: 3
-          # night_lights_after_time: "00:00:00"
-          # night_lights_before_time: "08:00:00"
+          night_light_enabled: "on"
+          night_light: light.0x7cb94c77ef400000
+          night_light_script_on: script.ba_main_light_script_on
+          night_light_script_off: script.ba_main_light_script_off
+          night_time_delay: 3
+          night_lights_after_time: "00:00:00"
+          night_lights_before_time: "08:00:00"
 
     - id: ba_switch_main_light_main
       alias: ba_switch_main_light_main
@@ -105,25 +117,23 @@ ba_light_package:
           to: "single_right"
       action:
         - service: switch.toggle
-          entity_id: switch.ba_manually_main_light_switch # input_boolean.ba_manually_switch_main_light
-
-    - id: ba_synch_manually_input_boolean_main
-      alias: ba_synch_manually_input_boolean_main
-      trigger:
-        - platform: state
-          entity_id: switch.0x54ef4410005e60c8_right
-          to: "off"
-      condition:
-        - condition: state
           entity_id: switch.ba_manually_main_light_switch
-          state: "off"
-        - condition: state
-          entity_id: switch.0x54ef4410005e60c8_right
-          state: "off"
-      action:
-        - service: switch.turn_off
-          target:
-            entity_id: switch.ba_manually_main_light_switch
+
+    # - id: ba_synch_manually_input_boolean_main
+    #   alias: ba_synch_manually_input_boolean_main
+    #   mode: restart
+    #   trigger:
+    #     - platform: state
+    #       entity_id: light.0x7cb94c77ef400000
+    #       to: "off"
+    #   condition:
+    #     - condition: state
+    #       entity_id: switch.ba_manually_main_light_switch
+    #       state: "on"
+    #   action:
+    #     - service: switch.turn_off
+    #       target:
+    #         entity_id: switch.ba_manually_main_light_switch
 
     - id: ba_toggle_power_light_main
       alias: ba_toggle_power_light_main

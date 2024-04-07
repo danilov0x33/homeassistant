@@ -23,6 +23,30 @@ to_common_package:
 
         - switch.0xa4c13868bf742ed6
 
+  influxdb:
+    include:
+      entities:
+        - binary_sensor.0x00158d0003cb49f0_occupancy
+        - sensor.0x00158d0003cb49f0_battery
+
+        - light.wiz_ceiling_toilet
+
+        - binary_sensor.0x00158d000198df07_contact
+        - sensor.0x00158d000198df07_battery
+
+        - binary_sensor.0x00158d0001994303_contact
+        - sensor.0x00158d0001994303_battery
+
+        - binary_sensor.0x00158d00026b429b_water_leak
+        - sensor.0x00158d00026b429b_battery
+
+        - binary_sensor.0x00158d0009ee5f7a_water_leak
+        - sensor.0x00158d0009ee5f7a_battery
+
+        - switch.0xa4c138f4bd352a9e
+
+        - switch.0xa4c13868bf742ed6
+
   homeassistant:
     customize:
       # MQTT

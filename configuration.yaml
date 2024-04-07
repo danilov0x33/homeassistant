@@ -49,8 +49,9 @@ influxdb: !include integrations/influxdb.yaml
 telegram_bot: !include integrations/telegram_bot.yaml
 yandex_smart_home: !include integrations/yandex_smart_home.yaml
 yandex_station_intents: !include integrations/yandex_station_intents.yaml
-downloader:
-  download_dir: www/downloads
+adaptive_lighting: !include integrations/adaptive_lighting.yaml
+# downloader:
+#   download_dir: www/downloads
 # automation: !include automations.yaml
 # automation split: !include_dir_merge_list includes/automations
 # script: !include_dir_merge_named includes/scripts

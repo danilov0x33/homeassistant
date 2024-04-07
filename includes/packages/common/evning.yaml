@@ -1,0 +1,19 @@
+common_evning_package:
+  automation:
+    - id: common_evning_main
+      alias: common_evning_main
+      trigger:
+        - platform: numeric_state
+          entity_id: sensor.0xa4c138ccfeaeb6d9_illuminance
+          above: 1000
+          for:
+            minutes: 10
+      condition:
+        - condition: time
+          after: "19:00:00"
+      action:
+        - service: cover.close_cover
+          target:
+            entity_id:
+              - cover.0x54ef441000070ae3
+              - cover.0x54ef44100044454b

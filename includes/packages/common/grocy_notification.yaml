@@ -45,7 +45,7 @@ common_grocy_notification_package:
             message: >-
               {% set ns = namespace(result=['\U00002755 Истекает срок годности:']) %}
               {%- for attr in state_attr('binary_sensor.grocy_expiring_products', 'expiring_products') -%}
-                  {% if as_timestamp(attr.best_before_date) > as_timestamp(now().date()) %}
+                  {% if as_timestamp(attr.best_before_date) > as_timestamp(now().date()) and ((as_timestamp(attr.best_before_date) -  as_timestamp(now().date()))/1000/60) <= 3  %}
                     {% set ns.result = ns.result + [attr.name  + ' (Истекает через: ' + ((as_timestamp(attr.best_before_date) -  as_timestamp(now().date()))/1000/60)|int|string + ' дней; Общее кол-во: ' + attr.available_amount|int|string + ')'] %}
                   {% endif %}
               {%- endfor -%}

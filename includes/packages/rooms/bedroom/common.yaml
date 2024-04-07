@@ -38,6 +38,51 @@ be_common_package:
         - climate.0x54ef4410007076ce
         - sensor.0x54ef4410007076ce_battery
 
+        - sensor.0xa4c138cf24d9a98d_illuminance
+        - sensor.0xa4c138cf24d9a98d_battery
+
+  influxdb:
+    include:
+      entities:
+        - light.0x00158d0007504210
+
+        - binary_sensor.0x00158d0002b18159_contact
+        - sensor.0x00158d0002b18159_battery
+
+        - switch.0x60a423fffeb047dd_left
+        - switch.0x60a423fffeb047dd_right
+
+        - sensor.0x00158d0007098707_action
+        - sensor.0x00158d0007098707_battery
+
+        - switch.0xa4c13851c962bc6d
+        - sensor.0xa4c13851c962bc6d_energy
+        - sensor.0xa4c13851c962bc6d_power
+
+        - light.yeelight_450c_2
+        - light.yeelight_450c_2_nightlight
+        - light.yeelight_450c_2_ambilight
+
+        - switch.tuya_switch_002_1
+        - switch.tuya_switch_002_2
+        - switch.tuya_switch_002_3
+        - switch.tuya_switch_002_4
+
+        - sensor.0xa4c138894b3790d2_co2
+        - sensor.0xa4c138894b3790d2_voc
+        - sensor.0xa4c138894b3790d2_temperature
+        - sensor.0xa4c138894b3790d2_humidity
+        - sensor.0xa4c138894b3790d2_formaldehyd
+
+        - cover.0x54ef44100044454b
+        - sensor.0x54ef44100044454b_battery
+
+        - climate.0x54ef4410007076ce
+        - sensor.0x54ef4410007076ce_battery
+
+        - sensor.0xa4c138cf24d9a98d_illuminance
+        - sensor.0xa4c138cf24d9a98d_battery
+
   homeassistant:
     customize:
       # MQTT
@@ -106,3 +151,8 @@ be_common_package:
         friendly_name: Влажность в спальне
       sensor.0xa4c138894b3790d2_formaldehyd:
         friendly_name: Уровень формальдегида в спальне
+
+      sensor.0xa4c138cf24d9a98d_illuminance:
+        friendly_name: Освещенность улицы со стороны спальни | 1!
+      sensor.0xa4c138cf24d9a98d_battery:
+        friendly_name: Заряд батареи датчика освещенности улицы со стороны спальни

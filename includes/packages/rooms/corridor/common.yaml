@@ -34,6 +34,41 @@ co_common_package:
         - sensor.esp001sensor_bme280_humidity
         - sensor.esp001sensor_bme280_pressure
 
+  influxdb:
+    include:
+      entities:
+        - switch.0x54ef4410005e60c8_left
+        - switch.0x54ef4410005e60c8_right
+        - sensor.0x54ef4410005e60c8_action
+
+        - switch.0x54ef4410005b0295_left
+        - switch.0x54ef4410005b0295_right
+        - sensor.0x54ef4410005b0295_action
+
+        - binary_sensor.0x00158d0003a44095_state
+        - binary_sensor.0x00158d0003a44095_reverse
+
+        - binary_sensor.0x00158d0003f1029f_occupancy
+        - sensor.0x00158d0003f1029f_battery
+
+        - sensor.0xcc86ecfffe168a05_action
+        - sensor.0xcc86ecfffe168a05_battery
+
+        - sensor.xiaomi_gateway_001_illuminance
+        - alarm_control_panel.xiaomi_gateway_001_alarm
+
+        - light.xiaomi_gateway_001_light
+
+        - light.wiz_ceiling_corridor
+
+        - light.yeelight_450c_1
+        - light.yeelight_450c_1_ambilight
+        - light.yeelight_450c_1_nightlight
+
+        - sensor.esp001sensor_bme280_temperature
+        - sensor.esp001sensor_bme280_humidity
+        - sensor.esp001sensor_bme280_pressure
+
   homeassistant:
     customize:
       # MQTT

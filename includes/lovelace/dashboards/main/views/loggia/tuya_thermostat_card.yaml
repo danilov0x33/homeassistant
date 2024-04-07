@@ -7,5 +7,5 @@ cards:
   - type: entities
     show_header_toggle: false
     entities:
-      - entity: switch.tuya_thermostat_switch
+      - entity: climate.0xa4c1386da010b99d
         name: Вкл/Выкл

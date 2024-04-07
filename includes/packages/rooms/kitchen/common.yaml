@@ -28,6 +28,35 @@ ki_common_package:
         - sensor.lg_thinq_fridge
         - binary_sensor.lg_thinq_fridge_door_open
 
+  influxdb:
+    include:
+      entities:
+        - switch.0x00158d0001bbf9cf
+        - sensor.0x00158d0001bbf9cf_energy
+        - sensor.0x00158d0001bbf9cf_power
+
+        - sensor.0x00124b002520c3d4_humidity
+        - sensor.0x00124b002520c3d4_temperature
+        - sensor.0x00124b002520c3d4_battery
+
+        - switch.0xa4c13895299116e4
+        - sensor.0xa4c13895299116e4_energy
+        - sensor.0xa4c13895299116e4_power
+
+        - binary_sensor.0x00158d0002922b19_water_leak
+        - sensor.0x00158d0002922b19_battery
+
+        - switch.0x54ef4410004db308_left
+        - switch.0x54ef4410004db308_right
+        - sensor.0x54ef4410004db308_action
+
+        - light.yeelight_450c_0
+        - light.yeelight_450c_0_ambilight
+        - light.yeelight_450c_0_nightlight
+
+        - sensor.lg_thinq_fridge
+        - binary_sensor.lg_thinq_fridge_door_open
+
   homeassistant:
     customize:
       # MQTT

@@ -53,7 +53,9 @@ include:
 # database: home_assistant
 # username: !secret influxdb_username
 # password: !secret influxdb_password
-default_measurement: state
+
+#default_measurement: state
+
 # include:
 #   entity_globs:
 #     - sensor.*_humidity

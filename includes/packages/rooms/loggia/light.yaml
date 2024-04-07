@@ -1,0 +1,13 @@
+# Автоматизации света на лоджии
+lo_light_package:
+  automation:
+    - id: lo_switch_main_light_main
+      alias: lo_switch_main_light_main
+      trigger:
+        - platform: state
+          entity_id: sensor.0x00158d000276ea3b_action
+          to: "single"
+      action:
+        - service: light.toggle
+          target:
+            entity_id: light.0xa4c1383efb0fff4f

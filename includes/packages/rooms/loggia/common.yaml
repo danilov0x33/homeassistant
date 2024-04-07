@@ -19,7 +19,30 @@ lo_common_package:
         - binary_sensor.xiaomi_humidifier_001_water_tank
         - binary_sensor.xiaomi_humidifier_001_water_tank_empty
 
-        - switch.tuya_thermostat_switch
+        - climate.0xa4c1386da010b99d
+
+  influxdb:
+    include:
+      entities:
+        - binary_sensor.0x00158d0002b17c46_contact
+        - sensor.0x00158d0002b17c46_battery
+
+        - sensor.0x00124b002520c648_humidity
+        - sensor.0x00124b002520c648_temperature
+        - sensor.0x00124b002520c648_battery
+
+        - sensor.0x00124b0017fd3171_soil_moisture
+        - ensor.0x00124b001997fbc4_soil_moisture
+
+        - light.controller_rgbw_1ea01d
+
+        - humidifier.xiaomi_humidifier_001
+
+        - binary_sensor.xiaomi_humidifier_001_water_tank
+        - binary_sensor.xiaomi_humidifier_001_water_tank_empty
+
+        - climate.0xa4c1386da010b99d
+
 
   homeassistant:
     customize:
@@ -54,5 +77,5 @@ lo_common_package:
       binary_sensor.xiaomi_humidifier_001_water_tank_empty:
         friendly_name: Елси ли вода баке увлажнителя на лоджии
 
-      switch.tuya_thermostat_switch:
+      climate.0xa4c1386da010b99d:
         friendly_name: Теплый пол на лоджии | 1!

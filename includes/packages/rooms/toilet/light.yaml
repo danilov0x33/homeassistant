@@ -26,6 +26,16 @@ to_light_package:
       switch.to_manually_main_light_switch:
         friendly_name: Ручное управление основным светом в туалете
 
+  adaptive_lighting:
+    - name: "toilet"
+      initial_transition: 1
+      min_color_temp: 2700
+      max_color_temp: 5000
+      min_sunrise_time: "06:00:00"
+      max_sunrise_time: "08:00:00"
+      min_sunset_time: "18:00:00"
+      max_sunset_time: "21:00:00"
+
   mqtt:
     switch:
       - unique_id: to_manually_main_light_switch_id
@@ -35,7 +45,8 @@ to_light_package:
         icon: mdi:lightbulb
 
   script:
-    to_main_light_script_on:
+    to_manual_light_script_on:
+      mode: restart
       sequence:
         - service: light.turn_on
           target:
@@ -44,25 +55,19 @@ to_light_package:
             transition: 2
             kelvin: 4000
             brightness_pct: 100
-    to_main_light_script_off:
-      sequence:
-        - service: light.turn_off
-          target:
-            entity_id:
-              - light.wiz_ceiling_toilet
-          data:
-            transition: 1
 
-    to_night_light_script_on:
+    to_main_light_script_on:
+      mode: restart
       sequence:
-        - service: light.turn_on
-          target:
-            entity_id: light.wiz_ceiling_toilet
+        - service: adaptive_lighting.apply
           data:
-            transition: 2
-            kelvin: 4000
-            brightness_pct: 10
-    to_night_light_script_off:
+            entity_id: switch.adaptive_lighting_toilet
+            turn_on_lights: true
+            lights:
+              - light.wiz_ceiling_toilet
+
+    to_main_light_script_off:
+      mode: restart
       sequence:
         - service: light.turn_off
           target:
@@ -79,14 +84,17 @@ to_light_package:
         input:
           motion_sensor: binary_sensor.0x00158d0003cb49f0_occupancy
           manual_light_switch: switch.to_manually_main_light_switch
+          manual_light_script_on: script.to_manual_light_script_on
+          manual_light_script_off: script.to_main_light_script_off
+          manual_time_delay: 15
           main_light: light.wiz_ceiling_toilet
           main_light_script_on: script.to_main_light_script_on
           main_light_script_off: script.to_main_light_script_off
           main_time_delay: 5
           night_light_enabled: "on"
           night_light: light.wiz_ceiling_toilet
-          night_light_script_on: script.to_night_light_script_on
-          night_light_script_off: script.to_night_light_script_off
+          night_light_script_on: script.to_main_light_script_on
+          night_light_script_off: script.to_main_light_script_off
           night_time_delay: 3
           night_lights_after_time: "00:00:00"
           night_lights_before_time: "08:00:00"
@@ -110,11 +118,8 @@ to_light_package:
       condition:
         - condition: state
           entity_id: switch.to_manually_main_light_switch
-          state: "off"
-        - condition: state
-          entity_id: light.wiz_ceiling_toilet
-          state: "off"
+          state: "on"
       action:
-        - service: light.turn_off
+        - service: switch.turn_off
           target:
             entity_id: switch.to_manually_main_light_switch

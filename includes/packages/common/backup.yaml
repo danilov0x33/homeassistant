@@ -34,6 +34,7 @@ common_backup_package:
               - sensor.0xa4c1389466b02c9b_humidity
               - sensor.0xa4c1389466b02c9b_voc
               - sensor.0xa4c1389466b02c9b_temperature
+              - climate.0xa4c1386da010b99d
 
         - service: notify.mysql_command
           data:

@@ -31,6 +31,16 @@ co_light_package:
       switch.co_manually_main_light_switch:
         friendly_name: Ручное управление основным светом в коридоре
 
+  adaptive_lighting:
+    - name: "corridor"
+      initial_transition: 1
+      min_color_temp: 2700
+      max_color_temp: 5000
+      min_sunrise_time: "06:00:00"
+      max_sunrise_time: "08:00:00"
+      min_sunset_time: "18:00:00"
+      max_sunset_time: "21:00:00"
+
   mqtt:
     switch:
       - unique_id: co_manually_main_light_switch_id
@@ -40,7 +50,8 @@ co_light_package:
         icon: mdi:lightbulb
 
   script:
-    co_main_light_script_on:
+    co_manual_light_script_on:
+      mode: restart
       sequence:
         - service: light.turn_on
           target:
@@ -51,7 +62,20 @@ co_light_package:
             transition: 2
             kelvin: 4000
             brightness_pct: 100
+
+    co_main_light_script_on:
+      mode: restart
+      sequence:
+        - service: adaptive_lighting.apply
+          data:
+            entity_id: switch.adaptive_lighting_corridor
+            turn_on_lights: true
+            lights:
+              - light.yeelight_450c_1
+              - light.wiz_ceiling_corridor
+
     co_main_light_script_off:
+      mode: restart
       sequence:
         - service: light.turn_off
           target:
@@ -59,26 +83,30 @@ co_light_package:
               - light.yeelight_450c_1
               - light.wiz_ceiling_corridor
               - light.yeelight_450c_1_nightlight
+              - light.yeelight_450c_1_ambilight
           data:
             transition: 1
 
-    co_night_light_script_on:
-      sequence:
-        - service: light.turn_on
-          target:
-            entity_id: light.yeelight_450c_1_nightlight
-          data:
-            transition: 2
-    co_night_light_script_off:
-      sequence:
-        - service: light.turn_off
-          target:
-            entity_id:
-              - light.yeelight_450c_1
-              - light.wiz_ceiling_corridor
-              - light.yeelight_450c_1_nightlight
-          data:
-            transition: 1
+    # co_night_light_script_on:
+    #   sequence:
+    #     - service: light.turn_on
+    #       target:
+    #         entity_id: light.yeelight_450c_1
+    #       # data:
+    #       #   transition: 2
+    #       #   kelvin: 4000
+    #       #   brightness_pct: 10
+    # co_night_light_script_off:
+    #   sequence:
+    #     - service: light.turn_off
+    #       target:
+    #         entity_id:
+    #           - light.yeelight_450c_1
+    #           - light.wiz_ceiling_corridor
+    #           - light.yeelight_450c_1_nightlight
+    #           - light.yeelight_450c_1_ambilight
+    #       data:
+    #         transition: 1
 
   automation:
     - id: co_auto_switch_main_light_main
@@ -88,16 +116,17 @@ co_light_package:
         input:
           motion_sensor: binary_sensor.0x00158d0003f1029f_occupancy
           manual_light_switch: switch.co_manually_main_light_switch
-          main_light:
-            - light.yeelight_450c_1
-            - light.wiz_ceiling_corridor
+          manual_light_script_on: script.co_manual_light_script_on
+          manual_light_script_off: script.co_main_light_script_off
+          manual_time_delay: 30
+          main_light: light.yeelight_450c_1
           main_light_script_on: script.co_main_light_script_on
           main_light_script_off: script.co_main_light_script_off
           main_time_delay: 2
           night_light_enabled: "on"
-          night_light: light.yeelight_450c_1_nightlight
-          night_light_script_on: script.co_night_light_script_on
-          night_light_script_off: script.co_night_light_script_off
+          night_light: light.yeelight_450c_1
+          night_light_script_on: script.co_main_light_script_on
+          night_light_script_off: script.co_main_light_script_off
           night_time_delay: 1
           night_lights_after_time: "23:00:00"
           night_lights_before_time: "08:00:00"
@@ -118,19 +147,10 @@ co_light_package:
         - platform: state
           entity_id: light.yeelight_450c_1
           to: "off"
-        - platform: state
-          entity_id: light.wiz_ceiling_corridor
-          to: "off"
       condition:
         - condition: state
           entity_id: switch.co_manually_main_light_switch
-          state: "off"
-        - condition: state
-          entity_id: light.yeelight_450c_1
-          state: "off"
-        - condition: state
-          entity_id: light.wiz_ceiling_corridor
-          state: "off"
+          state: "on"
       action:
         - service: light.turn_off
           target:

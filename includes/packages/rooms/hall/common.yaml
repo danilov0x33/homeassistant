@@ -63,6 +63,76 @@ ha_common_package:
         - cover.0x54ef441000070ae3
         - sensor.0x54ef441000070ae3_battery
 
+        - sensor.0xa4c138ccfeaeb6d9_illuminance
+        - sensor.0xa4c138ccfeaeb6d9_battery
+
+  influxdb:
+    include:
+      entities:
+        - sensor.0x00124b00252193c2_humidity
+        - sensor.0x00124b00252193c2_temperature
+        - sensor.0x00124b00252193c2_battery
+
+        - switch.0x54ef4410004da26c_left
+        - switch.0x54ef4410004da26c_right
+        - sensor.0x54ef4410004da26c_action
+
+        - binary_sensor.0x00158d000123129b_contact
+        - sensor.0x00158d000123129b_battery
+
+        - sensor.0x00158d000276ea3b_action
+        - sensor.0x00158d000276ea3b_battery
+
+        - switch.0xa4c13851c962bc6d
+
+        - switch.tuya_switch_001_1
+        - switch.tuya_switch_001_2
+        - switch.tuya_switch_001_3
+
+        - switch.0xa4c13826691e389b
+        - sensor.0xa4c13826691e389b_energy
+        - sensor.0xa4c13826691e389b_power
+
+        - light.yeelight_arwen_550c
+        - light.yeelight_arwen_550c_ambilight
+        - light.yeelight_arwen_550c_nightlight
+
+        - media_player.yandex_station_mini_001
+        - media_player.danilov_samsung_au7570_50_tv
+
+        - vacuum.dreame_bot_l10_pro
+        - sensor.dreame_bot_l10_pro_battery_level
+        - sensor.dreame_bot_l10_pro_charging_status
+        - sensor.dreame_bot_l10_pro_error
+        - sensor.dreame_bot_l10_pro_state
+        - sensor.dreame_bot_l10_pro_status
+        - sensor.dreame_bot_l10_pro_task_status
+        - sensor.dreame_bot_l10_pro_water_tank
+
+        - sensor.0xa4c1389466b02c9b_co2
+        - sensor.0xa4c1389466b02c9b_voc
+        - sensor.0xa4c1389466b02c9b_temperature
+        - sensor.0xa4c1389466b02c9b_humidity
+        - sensor.0xa4c1389466b02c9b_formaldehyd
+
+        - switch.kasa_switch_001
+        - sensor.kasa_switch_001_current
+        - sensor.kasa_switch_001_current_consumption
+        - sensor.kasa_switch_001_today_s_consumption
+        - sensor.kasa_switch_001_total_consumption
+        - sensor.kasa_switch_001_voltage
+
+        - sensor.0x54ef4410004461a2_humidity
+        - sensor.0x54ef4410004461a2_temperature
+        - sensor.0x54ef4410004461a2_voc
+        - sensor.0x54ef4410004461a2_battery
+
+        - cover.0x54ef441000070ae3
+        - sensor.0x54ef441000070ae3_battery
+
+        - sensor.0xa4c138ccfeaeb6d9_illuminance
+        - sensor.0xa4c138ccfeaeb6d9_battery
+
   homeassistant:
     customize:
       # MQTT
@@ -154,3 +224,8 @@ ha_common_package:
         friendly_name: Мощность 3D принтера
         unit_of_measurement: W
         device_class: power
+
+      sensor.0xa4c138ccfeaeb6d9_illuminance:
+        friendly_name: Освещенность улицы со стороны зала | 1!
+      sensor.0xa4c138ccfeaeb6d9_battery:
+        friendly_name: Заряд батареи датчика освещенности улицы со стороны зала

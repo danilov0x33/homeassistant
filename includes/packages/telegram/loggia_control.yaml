@@ -30,7 +30,7 @@ lo_telegram_ui_package:
                       {{'\U0001F321'}} - {{ states('sensor.0x00124b002520c648_temperature') }} °C, {{'\U0001F4A7'}} - {{ states('sensor.0x00124b002520c648_humidity') }} %
                     inline_keyboard: &keyb_loggia
                       - '{{''\U0001F4A1''}} Основной свет - {% if is_state(''light.controller_rgbw_1ea01d'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/loggia_toggle_main_ligth'
-                      - '{{''\U0001F525''}} Теплый пол - {% if is_state(''switch.tuya_thermostat_switch'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/loggia_toggle_thermostat'
+                      - '{{''\U0001F525''}} Теплый пол - {% if is_state(''climate.0xa4c1386da010b99d'', ''off'')%}{{''🔴''}}{% else %}{{''🟢''}}{% endif %}:/loggia_toggle_thermostat'
                       - "{{'📷'}} Получить изображение с камеры:/loggia_take_photo"
                       - '{{''\U000021A9''}} Вернуться:/menu_back , {{''\U000021AA''}} Обновить:/loggia_control'
             - conditions:
@@ -59,15 +59,15 @@ lo_telegram_ui_package:
                 - condition: template
                   value_template: "{{ trigger.event.data.command == '/loggia_toggle_thermostat' }}"
               sequence:
-                - service: switch.toggle
-                  entity_id: switch.tuya_thermostat_switch
+                - service: climate.toggle
+                  entity_id: climate.0xa4c1386da010b99d
                 - delay:
                     milliseconds: 500
                 - service: telegram_bot.answer_callback_query
                   data:
                     callback_query_id: "{{ trigger.event.data.id }}"
                     message: |
-                      {{"\U0001F4AC"}} Теплый пол - {% if is_state('switch.tuya_thermostat_switch', 'on') %} Включен {% else %} Выключен {% endif %}
+                      {{"\U0001F4AC"}} Теплый пол - {% if is_state('climate.0xa4c1386da010b99d', 'on') %} Включен {% else %} Выключен {% endif %}
                 - service: telegram_bot.delete_message
                   data_template:
                     message_id: "{{ trigger.event.data.message.message_id }}"

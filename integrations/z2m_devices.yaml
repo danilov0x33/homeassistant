@@ -12,3 +12,18 @@
   debounce: 60
   debounce_ignore:
     - temperature
+
+"0xa4c138cf24d9a98d":
+  friendly_name: "Датчик освещенности в спальне"
+
+"0xa4c138ccfeaeb6d9":
+  friendly_name: "Датчик освещенности в зале"
+
+"0xa4c1386da010b99d":
+  friendly_name: "Теплый пол на лоджии"
+  debounce: 60
+  filtered_attributes:
+    - program
+  debounce_ignore:
+    - heat
+    - local_temperature
