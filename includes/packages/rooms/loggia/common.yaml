@@ -12,7 +12,7 @@ lo_common_package:
         - sensor.0x00124b0017fd3171_soil_moisture
         - ensor.0x00124b001997fbc4_soil_moisture
 
-        - light.controller_rgbw_1ea01d
+        - light.0xa4c1383efb0fff4f
 
         - humidifier.xiaomi_humidifier_001
 
@@ -34,7 +34,7 @@ lo_common_package:
         - sensor.0x00124b0017fd3171_soil_moisture
         - ensor.0x00124b001997fbc4_soil_moisture
 
-        - light.controller_rgbw_1ea01d
+        - llight.0xa4c1383efb0fff4f
 
         - humidifier.xiaomi_humidifier_001
 
@@ -65,8 +65,7 @@ lo_common_package:
       sensor.0x00124b001997fbc4_soil_moisture:
         friendly_name: Уровень влажности помидоров слева
 
-      # MagicHome
-      light.controller_rgbw_1ea01d:
+      light.0xa4c1383efb0fff4f:
         friendly_name: Основное освещение на лоджии | 1!
 
       # Xiaomi

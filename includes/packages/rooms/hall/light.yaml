@@ -13,11 +13,11 @@ ha_light_package:
   adaptive_lighting:
     - name: "hall"
       initial_transition: 1
-      min_color_temp: 2700
+      min_color_temp: 2900
       max_color_temp: 5000
-      min_sunrise_time: "06:00:00"
+      min_sunrise_time: "07:00:00"
       max_sunrise_time: "08:00:00"
-      min_sunset_time: "18:00:00"
+      min_sunset_time: "19:00:00"
       max_sunset_time: "21:00:00"
 
   automation:

@@ -6,5 +6,5 @@ cards:
     content: Освещение
 
   - type: light
-    entity: light.controller_rgbw_1ea01d
+    entity: light.0xa4c1383efb0fff4f
     name: Основное

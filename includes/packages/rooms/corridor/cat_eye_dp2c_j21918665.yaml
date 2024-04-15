@@ -18,7 +18,10 @@ co_cat_eye_dp2c_j21918665_package:
         - service: telegram_bot.send_photo
           data_template:
             target: !secret telegram_danilov_info_group_id
-            url: "{{states('sensor.dp2c_j21918665_last_alarm_pic')}}"
+            #file: /config/www/downloads/camera/dp2c_j21918665_last.jpg
+            url: "{{ 'http://' + states('sensor.local_ip') + ':8123' + state_attr('image.dp2c_j21918665_last_motion_image', 'entity_picture') }}"
+            caption: "Кто-то у входной двери"
+
         - service: downloader.download_file
           data:
             url: "{{states('sensor.dp2c_j21918665_last_alarm_pic')}}"

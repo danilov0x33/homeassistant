@@ -5,12 +5,15 @@ common_evning_package:
       trigger:
         - platform: numeric_state
           entity_id: sensor.0xa4c138ccfeaeb6d9_illuminance
-          above: 1000
+          above: 1500
           for:
             minutes: 10
       condition:
         - condition: time
           after: "19:00:00"
+        - condition: state
+          entity_id: cover.0x54ef441000070ae3
+          state: "opened"
       action:
         - service: cover.close_cover
           target:
