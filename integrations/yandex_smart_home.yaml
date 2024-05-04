@@ -1,30 +1,42 @@
+# https://docs.yaha-cloud.ru/
 filter:
   include_entities:
     - vacuum.dreame_bot_l10_pro
 
-    - media_player.yandex_station_intents
-
-    - sensor.0x00124b00251fa5d7_temperature # Датчик температуры в ванной
-    - sensor.0xa4c138894b3790d2_temperature # Датчик температуры в спальне
-    - sensor.0xa4c1389466b02c9b_temperature # Датчик температуры в зале
-    - sensor.0x00124b002520c3d4_temperature # Датчик температуры на кухне
-    - sensor.0x00124b002520c648_temperature # Датчик температуры на лоджии
+    # - sensor.0x00124b00251fa5d7_temperature # Датчик температуры в ванной
+    # - sensor.0xa4c138894b3790d2_temperature # Датчик температуры в спальне
+    # - sensor.0xa4c1389466b02c9b_temperature # Датчик температуры в зале
+    # - sensor.0x00124b002520c3d4_temperature # Датчик температуры на кухне
+    # - sensor.0x00124b002520c648_temperature # Датчик температуры на лоджии
 
     - light.yeelight_arwen_550c # Основной свет в зале
-    - light.yeelight_arwen_550c_ambilight # Дополнительный свет в зале
-    - light.yeelight_450c_0 # Основной свет на кухне
-    - light.yeelight_450c_0_ambilight # Дополнительный свет на кухне
-    - light.0xa4c1383efb0fff4f # Основной свет на лоджии
-    - light.yeelight_450c_1 # Основной свет в коридоре
-    - light.yeelight_450c_1_ambilight # Дополнительный свет в коридоре
-    - light.0x00158d0007504210 # Основной свет в коридоре перед ванной
-    - light.yeelight_450c_2 # Основной свет в спальне
-    - light.yeelight_450c_2_ambilight # Дополнительный свет в спальне
-    - light.0x7cb94c77ef400000 # Основной свет в ванной
+    # - light.yeelight_arwen_550c_ambilight # Дополнительный свет в зале
+    # - light.yeelight_450c_0 # Основной свет на кухне
+    # - light.yeelight_450c_0_ambilight # Дополнительный свет на кухне
+    # - light.0xa4c1383efb0fff4f # Основной свет на лоджии
+    # - light.yeelight_450c_1 # Основной свет в коридоре
+    # - light.yeelight_450c_1_ambilight # Дополнительный свет в коридоре
+    # - light.0x00158d0007504210 # Основной свет в коридоре перед ванной
+    # - light.yeelight_450c_2 # Основной свет в спальне
+    # - light.yeelight_450c_2_ambilight # Дополнительный свет в спальне
+    # - light.0x7cb94c77ef400000 # Основной свет в ванной
 
     - cover.0x54ef441000070ae3 # Шторы в зале
     - cover.0x54ef44100044454b # Шторы в спальне
 
-    - climate.0x54ef4410007076ce # Терморегулятор в спальне
+    # - climate.0x54ef4410007076ce # Терморегулятор в спальне
 
-    - switch.kasa_switch_001 # Свет над сторол Насти
+    # - switch.kasa_switch_001 # Свет над сторол Насти
+
+entity_config:
+  vacuum.dreame_bot_l10_pro:
+    name: Пылесос
+
+  light.yeelight_arwen_550c:
+    name: Основной свет
+
+  cover.0x54ef441000070ae3:
+    name: Шторы
+
+  cover.0x54ef44100044454b:
+    name: Шторы
