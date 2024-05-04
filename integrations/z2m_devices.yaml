@@ -1,29 +1,46 @@
 "0x00158d0001bbf9cf":
   friendly_name: "Вытяжка"
+  homeassistant:
+    name: "0x00158d0001bbf9cf"
 
 "0xa4c1389466b02c9b":
   friendly_name: "Датчик CO2 в спальне"
+  homeassistant:
+    name: "0xa4c1389466b02c9b"
   debounce: 60
   debounce_ignore:
     - temperature
 
 "0xa4c138894b3790d2":
   friendly_name: "Датчик CO2 в зале"
+  homeassistant:
+    name: "0xa4c138894b3790d2"
   debounce: 60
   debounce_ignore:
     - temperature
 
 "0xa4c138cf24d9a98d":
   friendly_name: "Датчик освещенности в спальне"
+  homeassistant:
+    name: "0xa4c138cf24d9a98d"
 
 "0xa4c138ccfeaeb6d9":
   friendly_name: "Датчик освещенности в зале"
+  homeassistant:
+    name: "0xa4c138ccfeaeb6d9"
 
 "0xa4c1386da010b99d":
   friendly_name: "Теплый пол на лоджии"
+  homeassistant:
+    name: "0xa4c1386da010b99d"
   debounce: 60
   filtered_attributes:
     - program
   debounce_ignore:
     - heat
     - local_temperature
+
+"0x54ef44100044454b":
+  friendly_name: "Правое окно в спальне"
+  homeassistant:
+    name: "0x54ef44100044454b"
