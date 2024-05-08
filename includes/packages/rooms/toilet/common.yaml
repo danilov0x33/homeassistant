@@ -51,36 +51,44 @@ to_common_package:
     customize:
       # MQTT
       binary_sensor.0x00158d0003cb49f0_occupancy:
-        friendly_name: Датчик движения в туалете | 1!
+        friendly_name: Датчик движения в туалете
+        important: true
       sensor.0x00158d0003cb49f0_battery:
         friendly_name: Заряд батареи датчика движения в туалете
 
       binary_sensor.0x00158d0001994303_contact:
-        friendly_name: Счетчик горячей воды | 1!
+        friendly_name: Счетчик горячей воды
+        important: true
       sensor.0x00158d0001994303_battery:
         friendly_name: Заряд датчика счетчика горячей воды
 
       binary_sensor.0x00158d000198df07_contact:
-        friendly_name: Наличие электропитания квартиры | 1!
+        friendly_name: Наличие электропитания квартиры
+        important: true
       sensor.0x00158d000198df07_battery:
         friendly_name: Заряд датчика наличия электропитания квартиры
 
       binary_sensor.0x00158d00026b429b_water_leak:
-        friendly_name: Датчик протечки на стояке | 1!
+        friendly_name: Датчик протечки на стояке
+        important: true
       sensor.0x00158d00026b429b_battery:
         friendly_name: Заряд батареи датчика протечки на стояке в туалете
 
       binary_sensor.0x00158d0009ee5f7a_water_leak:
-        friendly_name: Датчик протечки у туалета | 1!
+        friendly_name: Датчик протечки у туалета
+        important: true
       sensor.0x00158d0009ee5f7a_battery:
         friendly_name: Заряд батареи датчика протечки у туалета
 
       switch.0xa4c138f4bd352a9e:
-        friendly_name: Кран холодной воды | 1!
+        friendly_name: Кран холодной воды
+        important: true
 
       switch.0xa4c13868bf742ed6:
-        friendly_name: Кран горячей воды | 1!
+        friendly_name: Кран горячей воды
+        important: true
 
       # WIZ
       light.wiz_ceiling_toilet:
-        friendly_name: Основной свет в туалете | 1!
+        friendly_name: Основной свет в туалете
+        important: true

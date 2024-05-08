@@ -44,3 +44,15 @@
   friendly_name: "Правое окно в спальне"
   homeassistant:
     name: "0x54ef44100044454b"
+
+"0x00158d0007504210":
+  friendly_name: "Торшер у дивана"
+  homeassistant:
+    name: "0x00158d0007504210"
+
+"0x00158d0009ee5f7a":
+  friendly_name: "Датчик протечки в туалете"
+  homeassistant:
+    name: "0x00158d0009ee5f7a"
+  availability:
+    timeout: 4320

@@ -66,13 +66,30 @@ co_light_package:
     co_main_light_script_on:
       mode: restart
       sequence:
-        - service: adaptive_lighting.apply
+        - service: light.turn_on
           data:
-            entity_id: switch.adaptive_lighting_corridor
-            turn_on_lights: true
-            lights:
+            transition: 3
+            kelvin: 4000
+            brightness_pct: 1
+          target:
+            entity_id:
               - light.yeelight_450c_1
               - light.wiz_ceiling_corridor
+        - service: light.turn_on
+          data:
+            transition: 3
+            brightness_pct: 100
+          target:
+            entity_id:
+              - light.yeelight_450c_1
+              - light.wiz_ceiling_corridor
+        # - service: adaptive_lighting.apply
+        #   data:
+        #     entity_id: switch.adaptive_lighting_corridor
+        #     turn_on_lights: true
+        #     lights:
+        #       - light.yeelight_450c_1
+        #       - light.wiz_ceiling_corridor
 
     co_main_light_script_off:
       mode: restart
@@ -87,26 +104,22 @@ co_light_package:
           data:
             transition: 1
 
-    # co_night_light_script_on:
-    #   sequence:
-    #     - service: light.turn_on
-    #       target:
-    #         entity_id: light.yeelight_450c_1
-    #       # data:
-    #       #   transition: 2
-    #       #   kelvin: 4000
-    #       #   brightness_pct: 10
-    # co_night_light_script_off:
-    #   sequence:
-    #     - service: light.turn_off
-    #       target:
-    #         entity_id:
-    #           - light.yeelight_450c_1
-    #           - light.wiz_ceiling_corridor
-    #           - light.yeelight_450c_1_nightlight
-    #           - light.yeelight_450c_1_ambilight
-    #       data:
-    #         transition: 1
+    co_night_light_script_on:
+      sequence:
+        - service: light.turn_on
+          target:
+            entity_id: light.yeelight_450c_1_nightlight
+    co_night_light_script_off:
+      sequence:
+        - service: light.turn_off
+          target:
+            entity_id:
+              - light.yeelight_450c_1
+              - light.wiz_ceiling_corridor
+              - light.yeelight_450c_1_nightlight
+              - light.yeelight_450c_1_ambilight
+          data:
+            transition: 1
 
   automation:
     - id: co_auto_switch_main_light_main
@@ -124,9 +137,9 @@ co_light_package:
           main_light_script_off: script.co_main_light_script_off
           main_time_delay: 2
           night_light_enabled: "on"
-          night_light: light.yeelight_450c_1
-          night_light_script_on: script.co_main_light_script_on
-          night_light_script_off: script.co_main_light_script_off
+          night_light: light.yeelight_450c_1_nightlight
+          night_light_script_on: script.co_night_light_script_on
+          night_light_script_off: script.co_night_light_script_off
           night_time_delay: 1
           night_lights_after_time: "23:00:00"
           night_lights_before_time: "08:00:00"

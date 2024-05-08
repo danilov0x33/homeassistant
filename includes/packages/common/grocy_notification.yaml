@@ -1,69 +1,69 @@
-common_grocy_notification_package:
-  homeassistant:
-    customize:
-      automation.common_notify_when_grocy_overdue_products_main:
-        friendly_name: "Отправить сообщение о том, что продукты испортились"
-      automation.common_notify_when_grocy_expiring_products_main:
-        friendly_name: "Отправить сообщение о том, что продукты скоро испортятся"
-      automation.common_notify_when_grocy_need_shops_main:
-        friendly_name: "Отправить сообщение о том, что нужно купить продукты"
+# common_grocy_notification_package:
+#   homeassistant:
+#     customize:
+#       automation.common_notify_when_grocy_overdue_products_main:
+#         friendly_name: "Отправить сообщение о том, что продукты испортились"
+#       automation.common_notify_when_grocy_expiring_products_main:
+#         friendly_name: "Отправить сообщение о том, что продукты скоро испортятся"
+#       automation.common_notify_when_grocy_need_shops_main:
+#         friendly_name: "Отправить сообщение о том, что нужно купить продукты"
 
-  automation:
-    - id: common_notify_when_grocy_overdue_products_main
-      alias: common_notify_when_grocy_overdue_products_main
-      trigger:
-        - platform: time
-          at: "19:00:00"
-      condition:
-        - condition: state
-          entity_id: binary_sensor.grocy_overdue_products
-          state: "on"
-      action:
-        - service: telegram_bot.send_message
-          data_template:
-            target: !secret telegram_danilov_info_group_id
-            message: >-
-              {% set ns = namespace(result=['\U00002757 Просроченные продукты:']) %}
-              {%- for attr in state_attr('binary_sensor.grocy_overdue_products', 'overdue_products') -%}
-                  {% set ns.result = ns.result + [attr.name  + ' (Общее кол-во: ' + attr.available_amount|int|string + ')'] %}
-              {%- endfor -%}
-              {{ns.result | join('\n')}}
+#   automation:
+#     - id: common_notify_when_grocy_overdue_products_main
+#       alias: common_notify_when_grocy_overdue_products_main
+#       trigger:
+#         - platform: time
+#           at: "19:00:00"
+#       condition:
+#         - condition: state
+#           entity_id: binary_sensor.grocy_overdue_products
+#           state: "on"
+#       action:
+#         - service: telegram_bot.send_message
+#           data_template:
+#             target: !secret telegram_danilov_info_group_id
+#             message: >-
+#               {% set ns = namespace(result=['\U00002757 Просроченные продукты:']) %}
+#               {%- for attr in state_attr('binary_sensor.grocy_overdue_products', 'overdue_products') -%}
+#                   {% set ns.result = ns.result + [attr.name  + ' (Общее кол-во: ' + attr.available_amount|int|string + ')'] %}
+#               {%- endfor -%}
+#               {{ns.result | join('\n')}}
 
-    - id: common_notify_when_grocy_expiring_products_main
-      alias: common_notify_when_grocy_expiring_products_main
-      trigger:
-        - platform: time
-          at: "19:00:00"
-      condition:
-        - condition: state
-          entity_id: binary_sensor.grocy_expiring_products
-          state: "on"
-      action:
-        - service: telegram_bot.send_message
-          data_template:
-            target: !secret telegram_danilov_info_group_id
-            message: >-
-              {% set ns = namespace(result=['\U00002755 Истекает срок годности:']) %}
-              {%- for attr in state_attr('binary_sensor.grocy_expiring_products', 'expiring_products') -%}
-                  {% if as_timestamp(attr.best_before_date) > as_timestamp(now().date()) and ((as_timestamp(attr.best_before_date) -  as_timestamp(now().date()))/1000/60) <= 3  %}
-                    {% set ns.result = ns.result + [attr.name  + ' (Истекает через: ' + ((as_timestamp(attr.best_before_date) -  as_timestamp(now().date()))/1000/60)|int|string + ' дней; Общее кол-во: ' + attr.available_amount|int|string + ')'] %}
-                  {% endif %}
-              {%- endfor -%}
-              {{ns.result | join('\n')}}
+#     - id: common_notify_when_grocy_expiring_products_main
+#       alias: common_notify_when_grocy_expiring_products_main
+#       trigger:
+#         - platform: time
+#           at: "19:00:00"
+#       condition:
+#         - condition: state
+#           entity_id: binary_sensor.grocy_expiring_products
+#           state: "on"
+#       action:
+#         - service: telegram_bot.send_message
+#           data_template:
+#             target: !secret telegram_danilov_info_group_id
+#             message: >-
+#               {% set ns = namespace(result=['\U00002755 Истекает срок годности:']) %}
+#               {%- for attr in state_attr('binary_sensor.grocy_expiring_products', 'expiring_products') -%}
+#                   {% if as_timestamp(attr.best_before_date) > as_timestamp(now().date()) and ((as_timestamp(attr.best_before_date) -  as_timestamp(now().date()))/1000/60) <= 3  %}
+#                     {% set ns.result = ns.result + [attr.name  + ' (Истекает через: ' + ((as_timestamp(attr.best_before_date) -  as_timestamp(now().date()))/1000/60)|int|string + ' дней; Общее кол-во: ' + attr.available_amount|int|string + ')'] %}
+#                   {% endif %}
+#               {%- endfor -%}
+#               {{ns.result | join('\n')}}
 
-    - id: common_notify_when_grocy_need_shops_main
-      alias: common_notify_when_grocy_need_shops_main
-      trigger:
-        - platform: time
-          at: "10:00:00"
-      condition: "{{states('sensor.grocy_shopping_list')|int > 0}}"
-      action:
-        - service: telegram_bot.send_message
-          data_template:
-            target: !secret telegram_danilov_info_group_id
-            message: >-
-              {% set ns = namespace(result=['🍴 Нужно купить:']) %}
-              {%- for attr in state_attr('sensor.grocy_shopping_list', 'products') -%}
-                    {% set ns.result = ns.result + [attr.product.name] %}
-              {%- endfor -%}
-              {{ns.result | join('\n')}}
+#     - id: common_notify_when_grocy_need_shops_main
+#       alias: common_notify_when_grocy_need_shops_main
+#       trigger:
+#         - platform: time
+#           at: "10:00:00"
+#       condition: "{{states('sensor.grocy_shopping_list')|int > 0}}"
+#       action:
+#         - service: telegram_bot.send_message
+#           data_template:
+#             target: !secret telegram_danilov_info_group_id
+#             message: >-
+#               {% set ns = namespace(result=['🍴 Нужно купить:']) %}
+#               {%- for attr in state_attr('sensor.grocy_shopping_list', 'products') -%}
+#                     {% set ns.result = ns.result + [attr.product.name] %}
+#               {%- endfor -%}
+#               {{ns.result | join('\n')}}

@@ -42,12 +42,25 @@ ki_light_package:
                   entity_id: light.yeelight_450c_0
                   state: "off"
               sequence:
-                - service: adaptive_lighting.apply
+                - service: light.turn_on
                   data:
-                    entity_id: switch.adaptive_lighting_kitchen
-                    turn_on_lights: true
-                    lights:
-                      - light.yeelight_450c_0
+                    transition: 3
+                    kelvin: 4000
+                    brightness_pct: 1
+                  target:
+                    entity_id: light.yeelight_450c_0
+                - service: light.turn_on
+                  data:
+                    transition: 3
+                    brightness_pct: 100
+                  target:
+                    entity_id: light.yeelight_450c_0
+                # - service: adaptive_lighting.apply
+                #   data:
+                #     entity_id: switch.adaptive_lighting_kitchen
+                #     turn_on_lights: true
+                #     lights:
+                #       - light.yeelight_450c_0
 
     - id: ki_change_night_light_main
       alias: ki_change_night_light_main
@@ -79,8 +92,8 @@ ki_light_package:
         - service: light.turn_off
           entity_id:
             - light.yeelight_450c_0
-            - light.yeelight_450c_0_nightlight
-            - light.yeelight_450c_0_ambilight
+            # - light.yeelight_450c_0_nightlight
+            # - light.yeelight_450c_0_ambilight
 
     - id: ki_power_toggle_light_main
       alias: ki_power_toggle_light_main

@@ -19,6 +19,9 @@ lo_common_package:
         - binary_sensor.xiaomi_humidifier_001_water_tank
         - binary_sensor.xiaomi_humidifier_001_water_tank_empty
 
+        - sensor.0x00158d000276ea3b_action
+        - sensor.0x00158d000276ea3b_battery
+
         - climate.0xa4c1386da010b99d
 
   influxdb:
@@ -41,14 +44,17 @@ lo_common_package:
         - binary_sensor.xiaomi_humidifier_001_water_tank
         - binary_sensor.xiaomi_humidifier_001_water_tank_empty
 
-        - climate.0xa4c1386da010b99d
+        - sensor.0x00158d000276ea3b_action
+        - sensor.0x00158d000276ea3b_battery
 
+        - climate.0xa4c1386da010b99d
 
   homeassistant:
     customize:
       # MQTT
       binary_sensor.0x00158d0002b17c46_contact:
-        friendly_name: Окно на лоджии | 1!
+        friendly_name: Окно на лоджии
+        important: true
         device_class: window
       sensor.0x00158d0002b17c46_battery:
         friendly_name: Заряд батареи датчика открытия окна на лоджии
@@ -56,7 +62,8 @@ lo_common_package:
       sensor.0x00124b002520c648_humidity:
         friendly_name: Влажность на лоджии
       sensor.0x00124b002520c648_temperature:
-        friendly_name: Температура на лоджии | 1!
+        friendly_name: Температура на лоджии
+        important: true
       sensor.0x00124b002520c648_battery:
         friendly_name: Заряд батареи датчика температуры и влажности на лоджии
 
@@ -66,15 +73,24 @@ lo_common_package:
         friendly_name: Уровень влажности помидоров слева
 
       light.0xa4c1383efb0fff4f:
-        friendly_name: Основное освещение на лоджии | 1!
+        friendly_name: Основное освещение на лоджии
+        important: true
+
+      sensor.0x00158d000276ea3b_action:
+        friendly_name: Переключатель света на лоджии
+        important: true
+      sensor.0x00158d000276ea3b_battery:
+        friendly_name: Заряд батареи переключателя света на лоджии
 
       # Xiaomi
       humidifier.xiaomi_humidifier_001:
-        friendly_name: Увлажнитель воздуха на лоджии | 1!
+        friendly_name: Увлажнитель воздуха на лоджии
+        important: true
       binary_sensor.xiaomi_humidifier_001_water_tank:
         friendly_name: Установлен ли бак с водой для увлажнителя на лоджии
       binary_sensor.xiaomi_humidifier_001_water_tank_empty:
-        friendly_name: Елси ли вода баке увлажнителя на лоджии
+        friendly_name: Если ли вода баке увлажнителя на лоджии
 
       climate.0xa4c1386da010b99d:
-        friendly_name: Теплый пол на лоджии | 1!
+        friendly_name: Теплый пол на лоджии
+        important: true

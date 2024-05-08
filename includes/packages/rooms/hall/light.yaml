@@ -42,12 +42,25 @@ ha_light_package:
                   entity_id: light.yeelight_arwen_550c
                   state: "off"
               sequence:
-                - service: adaptive_lighting.apply
+                - service: light.turn_on
                   data:
-                    entity_id: switch.adaptive_lighting_hall
-                    turn_on_lights: true
-                    lights:
-                      - light.yeelight_arwen_550c
+                    transition: 3
+                    kelvin: 4000
+                    brightness_pct: 1
+                  target:
+                    entity_id: light.yeelight_arwen_550c
+                - service: light.turn_on
+                  data:
+                    transition: 3
+                    brightness_pct: 100
+                  target:
+                    entity_id: light.yeelight_arwen_550c
+                # - service: adaptive_lighting.apply
+                #   data:
+                #     entity_id: switch.adaptive_lighting_hall
+                #     turn_on_lights: true
+                #     lights:
+                #       - light.yeelight_arwen_550c
 
     - id: ha_change_night_light_in_hall_main
       alias: ha_change_night_light_in_hall_main

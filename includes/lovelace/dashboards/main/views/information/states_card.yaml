@@ -14,7 +14,7 @@ cards:
       - type: custom:auto-entities
         show_empty: false
         filter:
-          template: "{{ states | select('search', '1!')  | map(attribute='entity_id') | select('is_state', 'unavailable') | list }}"
+          template: "{{ states | selectattr('attributes.important', 'eq', true) | selectattr('state','in',['unavailable','unknown','none']) | map(attribute='entity_id') | list }}"
         card:
           type: entities
           style: !include ../../../../components/important_text_style.yaml

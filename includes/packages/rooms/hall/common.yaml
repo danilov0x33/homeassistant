@@ -2,6 +2,8 @@ ha_common_package:
   recorder:
     include:
       entities:
+        - light.0x00158d0007504210
+
         - sensor.0x00124b00252193c2_humidity
         - sensor.0x00124b00252193c2_temperature
         - sensor.0x00124b00252193c2_battery
@@ -12,9 +14,6 @@ ha_common_package:
 
         - binary_sensor.0x00158d000123129b_contact
         - sensor.0x00158d000123129b_battery
-
-        - sensor.0x00158d000276ea3b_action
-        - sensor.0x00158d000276ea3b_battery
 
         - switch.0xa4c13851c962bc6d
 
@@ -69,6 +68,8 @@ ha_common_package:
   influxdb:
     include:
       entities:
+        - light.0x00158d0007504210
+
         - sensor.0x00124b00252193c2_humidity
         - sensor.0x00124b00252193c2_temperature
         - sensor.0x00124b00252193c2_battery
@@ -79,9 +80,6 @@ ha_common_package:
 
         - binary_sensor.0x00158d000123129b_contact
         - sensor.0x00158d000123129b_battery
-
-        - sensor.0x00158d000276ea3b_action
-        - sensor.0x00158d000276ea3b_battery
 
         - switch.0xa4c13851c962bc6d
 
@@ -136,42 +134,45 @@ ha_common_package:
   homeassistant:
     customize:
       # MQTT
+      light.0x00158d0007504210:
+        friendly_name: Торшер у дивана
+
       sensor.0x00124b00252193c2_humidity:
         friendly_name: Влажность в зале
       sensor.0x00124b00252193c2_temperature:
-        friendly_name: Температура в зале | 1!
+        friendly_name: Температура в зале
+        important: true
       sensor.0x00124b00252193c2_battery:
         friendly_name: Заряд батареи датчика температуры и влажности в зале
 
       switch.0x54ef4410004da26c_left:
-        friendly_name: Переключатель основного освещение в зале | 1!
+        friendly_name: Переключатель основного освещение в зале
       switch.0x54ef4410004da26c_right:
-        friendly_name: Переключатель дополнительное освещения в зале (Питание)
+        friendly_name: Переключатель дополнительное освещения в зале
       sensor.0x54ef4410004da26c_action:
-        friendly_name: Действие выключателя в зале
+        friendly_name: Переключатель в зале
+        important: true
 
       binary_sensor.0x00158d000123129b_contact:
-        friendly_name: Окно в зале | 1!
+        friendly_name: Окно в зале
+        important: true
         device_class: window
       sensor.0x00158d000123129b_battery:
         friendly_name: Заряд батареи датчика окна в зале
-
-      sensor.0x00158d000276ea3b_action:
-        friendly_name: Кнопка на столе у Насти | 1!
-      sensor.0x00158d000276ea3b_battery:
-        friendly_name: Заряд батареи кнопки на столе у Насти
 
       sensor.0x54ef4410004461a2_humidity:
         friendly_name: Датчик влажности в зале (TOC)
       sensor.0x54ef4410004461a2_temperature:
         friendly_name: Датчик температуры в зале (TOC)
+        important: true
       sensor.0x54ef4410004461a2_voc:
-        friendly_name: Датчик качества воздуха в зале | 1!
+        friendly_name: Датчик качества воздуха в зале
       sensor.0x54ef4410004461a2_battery:
         friendly_name: Заряд батареи датчика качества воздуха в зале
 
       cover.0x54ef441000070ae3:
-        friendly_name: Шторы в зале | 1!
+        friendly_name: Шторы в зале
+        important: true
       sensor.0x54ef441000070ae3_battery:
         friendly_name: Заряд батареи штор в зале
 
@@ -181,17 +182,19 @@ ha_common_package:
       switch.tuya_switch_001_2:
         friendly_name: Правое реле под телевизором
       switch.tuya_switch_001_3:
-        friendly_name: USB Реле под телевизором | 1!
+        friendly_name: USB Реле под телевизором
+        important: true
 
       switch.0xa4c13826691e389b:
-        friendly_name: Питание компьютера Насти | 1!
+        friendly_name: Питание компьютера Насти
+        important: true
       sensor.0xa4c13826691e389b_energy:
         friendly_name: Общее потребление электроэнергии компьютера Насти
       sensor.0xa4c13826691e389b_power:
         friendly_name: Текущая мощность компьютера Насти
 
       sensor.0xa4c1389466b02c9b_co2:
-        friendly_name: CO2 в зале | 1!
+        friendly_name: CO2 в зале
       sensor.0xa4c1389466b02c9b_voc:
         friendly_name: VOC в зале
       sensor.0xa4c1389466b02c9b_temperature:
@@ -200,32 +203,39 @@ ha_common_package:
         friendly_name: Влажность в зале
       sensor.0xa4c1389466b02c9b_formaldehyd:
         friendly_name: Уровень формальдегида в зале
+        important: true
 
       light.yeelight_arwen_550c:
-        friendly_name: Основной свет в зале | 1!
+        friendly_name: Основной свет в зале
+        important: true
       light.yeelight_arwen_550c_ambilight:
         friendly_name: Подсветка основного света в зале
       light.yeelight_arwen_550c_nightlight:
         friendly_name: Ночной режим основного света в зале
 
       media_player.yandex_station_mini_001:
-        friendly_name: Яндекс станция мини в зале | 1!
+        friendly_name: Яндекс станция мини в зале
+        important: true
 
       vacuum.dreame_bot_l10_pro:
-        friendly_name: Робот пылесос | 1!
+        friendly_name: Робот пылесос
+        important: true
 
       media_player.danilov_samsung_au7570_50_tv:
-        friendly_name: Телевизор в зале | 1!
+        friendly_name: Телевизор в зале
+        important: true
 
       # Kasa
       switch.kasa_switch_001:
-        friendly_name: Питание 3D принтера | 1!
+        friendly_name: Питание света над столом Насти
+        important: true
       sensor.kasa_switch_001_current_consumption:
-        friendly_name: Мощность 3D принтера
+        friendly_name: Мощность света над столом Насти
         unit_of_measurement: W
         device_class: power
 
       sensor.0xa4c138ccfeaeb6d9_illuminance:
-        friendly_name: Освещенность улицы со стороны зала | 1!
+        friendly_name: Освещенность улицы со стороны зала
+        important: true
       sensor.0xa4c138ccfeaeb6d9_battery:
         friendly_name: Заряд батареи датчика освещенности улицы со стороны зала

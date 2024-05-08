@@ -32,6 +32,15 @@ system_package:
       column: "value"
       unit_of_measurement: MB
 
+  template:
+    binary_sensor:
+      - name: unavailable_entities
+        unique_id: unavailable_entities
+        state: "{{ (states | selectattr('attributes.important', 'eq', true) | selectattr('state','in',['unavailable','unknown','none']) | map(attribute='entity_id') | list | count) > 0 }}"
+        attributes:
+          entity_ids: >
+            "{{ states | selectattr('attributes.important', 'eq', true) | selectattr('state','in',['unavailable','unknown','none']) | map(attribute='entity_id') | list | join(',') }}"
+
   # sensor:
   #   - platform: systemmonitor
   #     resources:
