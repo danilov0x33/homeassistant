@@ -10,9 +10,6 @@ to_common_package:
         - binary_sensor.0x00158d000198df07_contact
         - sensor.0x00158d000198df07_battery
 
-        - binary_sensor.0x00158d0001994303_contact
-        - sensor.0x00158d0001994303_battery
-
         - binary_sensor.0x00158d00026b429b_water_leak
         - sensor.0x00158d00026b429b_battery
 
@@ -22,6 +19,9 @@ to_common_package:
         - switch.0xa4c138f4bd352a9e
 
         - switch.0xa4c13868bf742ed6
+
+        - binary_sensor.0x00158d0003937855_contact
+        - sensor.0x00158d0003937855_battery
 
   influxdb:
     include:
@@ -34,9 +34,6 @@ to_common_package:
         - binary_sensor.0x00158d000198df07_contact
         - sensor.0x00158d000198df07_battery
 
-        - binary_sensor.0x00158d0001994303_contact
-        - sensor.0x00158d0001994303_battery
-
         - binary_sensor.0x00158d00026b429b_water_leak
         - sensor.0x00158d00026b429b_battery
 
@@ -47,6 +44,9 @@ to_common_package:
 
         - switch.0xa4c13868bf742ed6
 
+        - binary_sensor.0x00158d0003937855_contact
+        - sensor.0x00158d0003937855_battery
+
   homeassistant:
     customize:
       # MQTT
@@ -55,12 +55,6 @@ to_common_package:
         important: true
       sensor.0x00158d0003cb49f0_battery:
         friendly_name: Заряд батареи датчика движения в туалете
-
-      binary_sensor.0x00158d0001994303_contact:
-        friendly_name: Счетчик горячей воды
-        important: true
-      sensor.0x00158d0001994303_battery:
-        friendly_name: Заряд датчика счетчика горячей воды
 
       binary_sensor.0x00158d000198df07_contact:
         friendly_name: Наличие электропитания квартиры
@@ -87,6 +81,13 @@ to_common_package:
       switch.0xa4c13868bf742ed6:
         friendly_name: Кран горячей воды
         important: true
+
+      binary_sensor.0x00158d0003937855_contact:
+        friendly_name: Дверь в туалете
+        device_class: door
+        important: true
+      sensor.0x00158d0003937855_battery:
+        friendly_name: Заряд батареи двери в туалете
 
       # WIZ
       light.wiz_ceiling_toilet:

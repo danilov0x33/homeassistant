@@ -7,11 +7,6 @@ common_fault_tolerance_package:
 
   homeassistant:
     customize:
-      automation.system_toggle_automation_control_mode:
-        friendly_name: Изменить местер instance Home Assistant
-      automation.system_change_main_if_not_available_mode:
-        friendly_name: Изменить местер instance Home Assistant если он не доступен
-
       binary_sensor.main_control:
         friendly_name: Является ли текущий сервер мастером
       switch.main_control_mode:

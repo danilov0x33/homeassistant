@@ -1,0 +1,23 @@
+common_notify_washing_machine_package:
+  # recorder:
+  #   include:
+  #     entities:
+
+  homeassistant:
+    customize:
+      number.washing_started_counter:
+        friendly_name: Счетчик кол-во запусков стиральной машины
+
+  # counter:
+  #   washing_started:
+  #     name: Счетчик кол-во запусков стиральной машины
+  #     initial: 0
+  #     step: 1
+
+  mqtt:
+    number:
+      object_id: washing_started_counter
+      command_topic: "custom/washing_started_counter/set"
+      state_topic: "custom/washing_started_counter/set"
+      min: 0
+      max: 100

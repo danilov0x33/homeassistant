@@ -1,7 +1,12 @@
 # https://docs.yaha-cloud.ru/
+# notifier:
+#   - oauth_token: !secret yandex_smart_home_oauth_token
+#     skill_id: !secret yandex_smart_home_skill_id
+#     user_id: !secret yandex_smart_home_user_id
 filter:
   include_entities:
     - vacuum.dreame_bot_l10_pro
+    - media_player.danilov_samsung_au7570_50_tv
 
     # - sensor.0x00124b00251fa5d7_temperature # Датчик температуры в ванной
     # - sensor.0xa4c138894b3790d2_temperature # Датчик температуры в спальне
@@ -11,20 +16,26 @@ filter:
 
     - light.yeelight_arwen_550c # Основной свет в зале
     # - light.yeelight_arwen_550c_ambilight # Дополнительный свет в зале
-    # - light.yeelight_450c_0 # Основной свет на кухне
+    - light.yeelight_450c_0 # Основной свет на кухне
     # - light.yeelight_450c_0_ambilight # Дополнительный свет на кухне
-    # - light.0xa4c1383efb0fff4f # Основной свет на лоджии
-    # - light.yeelight_450c_1 # Основной свет в коридоре
+    - light.0xa4c1383efb0fff4f # Основной свет на лоджии
+    - light.yeelight_450c_1 # Основной свет в коридоре
     # - light.yeelight_450c_1_ambilight # Дополнительный свет в коридоре
     - light.0x00158d0007504210 # Торшер у дивана
-    # - light.yeelight_450c_2 # Основной свет в спальне
+    - light.yeelight_450c_2 # Основной свет в спальне
     # - light.yeelight_450c_2_ambilight # Дополнительный свет в спальне
-    # - light.0x7cb94c77ef400000 # Основной свет в ванной
+    - light.0x7cb94c77ef400000 # Основной свет в ванной
 
     - cover.0x54ef441000070ae3 # Шторы в зале
     - cover.0x54ef44100044454b # Шторы в спальне
 
-    # - climate.0x54ef4410007076ce # Терморегулятор в спальне
+    - climate.0x54ef4410007012e6 # Термостат в зале
+    - climate.0x54ef4410007076ce # Термостат в спальне
+    - climate.zhimi_mc2a_8777_heater # Обогреватель в зале
+
+    - switch.tuya_switch_002_1 # Ночник у кровати
+
+    - fan.xiaomi_mp4_ce97_air_purifier # Очиститель воздуха
 
     # - switch.kasa_switch_001 # Свет над сторол Насти
 
@@ -35,8 +46,55 @@ entity_config:
   light.yeelight_arwen_550c:
     name: Основной свет
 
+  light.yeelight_450c_0:
+    name: Основной свет
+
+  light.yeelight_450c_1:
+    name: Основной свет
+
+  light.yeelight_450c_2:
+    name: Основной свет
+
+  light.0x7cb94c77ef400000:
+    name: Основной свет
+
+  light.0xa4c1383efb0fff4f:
+    name: Основной свет
+
   cover.0x54ef441000070ae3:
     name: Шторы
 
   cover.0x54ef44100044454b:
     name: Шторы
+
+  light.0x00158d0007504210:
+    name: Торшер
+
+  switch.tuya_switch_002_1:
+    type: devices.types.light
+    name: Ночник
+
+  climate.0x54ef4410007012e6:
+    name: Термостат
+    properties:
+      - type: battery_level
+        entity: sensor.0x54ef4410007012e6_battery
+
+  climate.0x54ef4410007076ce:
+    name: Термостат
+    properties:
+      - type: battery_level
+        entity: sensor.0x54ef4410007076ce_battery
+
+  climate.zhimi_mc2a_8777_heater:
+    name: Обогреватель
+
+  fan.xiaomi_mp4_ce97_air_purifier:
+    name: Очиститель воздуха
+    properties:
+      - type: temperature
+        entity: sensor.xiaomi_mp4_ce97_temperature
+      - type: humidity
+        entity: sensor.xiaomi_mp4_ce97_relative_humidity
+      - type: pm2.5_density
+        entity: sensor.xiaomi_mp4_ce97_pm25_density

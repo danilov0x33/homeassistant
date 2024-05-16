@@ -73,7 +73,7 @@ lo_common_package:
         friendly_name: Уровень влажности помидоров слева
 
       light.0xa4c1383efb0fff4f:
-        friendly_name: Основное освещение на лоджии
+        friendly_name: Основной свет на лоджии
         important: true
 
       sensor.0x00158d000276ea3b_action:

@@ -65,6 +65,19 @@ ha_common_package:
         - sensor.0xa4c138ccfeaeb6d9_illuminance
         - sensor.0xa4c138ccfeaeb6d9_battery
 
+        - climate.0x54ef4410007012e6
+        - climate.0x54ef4410007012e6_battery
+
+        - climate.zhimi_mc2a_8777_heater
+
+        - fan.xiaomi_mp4_ce97_air_purifier
+        - sensor.xiaomi_mp4_ce97_pm25_density
+        - sensor.xiaomi_mp4_ce97_relative_humidity
+        - sensor.xiaomi_mp4_ce97_temperature
+
+        - binary_sensor.0x00158d00045eea0d_contact
+        - sensor.0x00158d00045eea0d_battery
+
   influxdb:
     include:
       entities:
@@ -131,6 +144,19 @@ ha_common_package:
         - sensor.0xa4c138ccfeaeb6d9_illuminance
         - sensor.0xa4c138ccfeaeb6d9_battery
 
+        - climate.0x54ef4410007012e6
+        - climate.0x54ef4410007012e6_battery
+
+        - climate.zhimi_mc2a_8777_heater
+
+        - fan.xiaomi_mp4_ce97_air_purifier
+        - sensor.xiaomi_mp4_ce97_pm25_density
+        - sensor.xiaomi_mp4_ce97_relative_humidity
+        - sensor.xiaomi_mp4_ce97_temperature
+
+        - binary_sensor.0x00158d00045eea0d_contact
+        - sensor.0x00158d00045eea0d_battery
+
   homeassistant:
     customize:
       # MQTT
@@ -169,6 +195,11 @@ ha_common_package:
         friendly_name: Датчик качества воздуха в зале
       sensor.0x54ef4410004461a2_battery:
         friendly_name: Заряд батареи датчика качества воздуха в зале
+
+      binary_sensor.0x00158d00045eea0d_contact:
+        friendly_name: Датчик открытия крышки пылесоса
+      sensor.0x00158d00045eea0d_battery:
+        friendly_name: Заряд батареи датчика открытия крышки пылесоса
 
       cover.0x54ef441000070ae3:
         friendly_name: Шторы в зале
@@ -239,3 +270,25 @@ ha_common_package:
         important: true
       sensor.0xa4c138ccfeaeb6d9_battery:
         friendly_name: Заряд батареи датчика освещенности улицы со стороны зала
+
+      climate.0x54ef4410007012e6:
+        friendly_name: Термостат в зале
+        important: true
+      climate.0x54ef4410007012e6_battery:
+        friendly_name: Заряд батареи термостата в зале
+        important: true
+
+      # Xiaomi
+      climate.zhimi_mc2a_8777_heater:
+        friendly_name: Обогреватель в зале
+        important: true
+
+      fan.xiaomi_mp4_ce97_air_purifier:
+        friendly_name: Очиститель воздуха в зале
+        important: true
+      sensor.xiaomi_mp4_ce97_pm25_density:
+        friendly_name: PM2.5 очиститель воздуха в зале
+      sensor.xiaomi_mp4_ce97_relative_humidity:
+        friendly_name: Влажность очистителя воздуха в зале
+      sensor.xiaomi_mp4_ce97_temperature:
+        friendly_name: Температура очистителя воздуха в зале

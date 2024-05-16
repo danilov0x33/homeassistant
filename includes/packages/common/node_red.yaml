@@ -1,0 +1,40 @@
+common_node_red_package:
+  homeassistant:
+    customize:
+      switch.morning_node_red_flow:
+        friendly_name: Утро автоматизация node red
+      switch.evening_node_red_flow:
+        friendly_name: Вечер автоматизация node red
+      switch.leave_home_node_red_flow:
+        friendly_name: Уход из дома автоматизация node red
+      switch.return_to_home_node_red_flow:
+        friendly_name: Возвращение домой автоматизация node red
+      switch.vacuum_node_red_flow:
+        friendly_name: Пылесос автоматизация node red
+
+  mqtt:
+    switch:
+      - object_id: morning_node_red_flow
+        command_topic: "custom/morning_node_red_flow/set"
+        state_topic: "custom/morning_node_red_flow/set"
+        enabled_by_default: true
+
+      - object_id: evening_node_red_flow
+        command_topic: "custom/evening_node_red_flow/set"
+        state_topic: "custom/evening_node_red_flow/set"
+        enabled_by_default: true
+
+      - object_id: leave_home_node_red_flow
+        command_topic: "custom/leave_home_node_red_flow/set"
+        state_topic: "custom/leave_home_node_red_flow/set"
+        enabled_by_default: true
+
+      - object_id: return_to_home_node_red_flow
+        command_topic: "custom/return_to_home_node_red_flow/set"
+        state_topic: "custom/return_to_home_node_red_flow/set"
+        enabled_by_default: true
+
+      - object_id: vacuum_node_red_flow
+        command_topic: "custom/vacuum_node_red_flow/set"
+        state_topic: "custom/vacuum_node_red_flow/set"
+        enabled_by_default: true

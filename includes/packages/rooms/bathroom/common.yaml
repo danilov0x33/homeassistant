@@ -96,7 +96,7 @@ ba_common_package:
         friendly_name: Текущая мощность стиральной машины
 
       light.0x7cb94c77ef400000:
-        friendly_name: Свет в ванной
+        friendly_name: Основной свет в ванной
         important: true
 
       # LG

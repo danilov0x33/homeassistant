@@ -83,6 +83,7 @@ to_light_package:
         path: local/ligth_control_with_sensor.yaml
         input:
           motion_sensor: binary_sensor.0x00158d0003cb49f0_occupancy
+          door_sensors: binary_sensor.0x00158d0003937855_contact
           manual_light_switch: switch.to_manually_main_light_switch
           manual_light_script_on: script.to_manual_light_script_on
           manual_light_script_off: script.to_main_light_script_off

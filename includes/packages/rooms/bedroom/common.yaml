@@ -106,7 +106,7 @@ be_common_package:
         friendly_name: Заряд батареи правой шторы в спальне
 
       climate.0x54ef4410007076ce:
-        friendly_name: Терморегулятор в спальне
+        friendly_name: Термостат в спальне
         important: true
       sensor.0x54ef4410007076ce_battery:
         friendly_name: Заряд батареи терморегулятора в спальне

@@ -28,7 +28,6 @@ frontend: !include integrations/frontend.yaml
 recorder: !include integrations/recorder.yaml
 history: ~ #!include integrations/history.yaml
 logbook: ~ #!include integrations/logbook.yaml
-#map: ~
 media_source: ~
 mobile_app: ~
 person: ~

@@ -34,6 +34,9 @@ co_common_package:
         - sensor.esp001sensor_bme280_humidity
         - sensor.esp001sensor_bme280_pressure
 
+        - binary_sensor.0x00158d0001994303_contact
+        - sensor.0x00158d0001994303_battery
+
   influxdb:
     include:
       entities:
@@ -69,6 +72,9 @@ co_common_package:
         - sensor.esp001sensor_bme280_humidity
         - sensor.esp001sensor_bme280_pressure
 
+        - binary_sensor.0x00158d0001994303_contact
+        - sensor.0x00158d0001994303_battery
+
   homeassistant:
     customize:
       # MQTT
@@ -101,6 +107,12 @@ co_common_package:
         important: true
       sensor.0x00158d0003f1029f_battery:
         friendly_name: Заряд батареи датчика движения в коридоре
+
+      binary_sensor.0x00158d0001994303_contact:
+        friendly_name: Датчик наличия электропитания в квартире
+        important: true
+      sensor.0x00158d0001994303_battery:
+        friendly_name: Заряд батареи датчика наличия электропитания в квартире
 
       sensor.0xcc86ecfffe168a05_action:
         friendly_name: Действие 4-х переключателей в коридоре
