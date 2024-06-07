@@ -23,6 +23,9 @@ to_common_package:
         - binary_sensor.0x00158d0003937855_contact
         - sensor.0x00158d0003937855_battery
 
+        - binary_sensor.0x50325ffffe9c51be_occupancy
+        - sensor.0x50325ffffe9c51be_battery
+
   influxdb:
     include:
       entities:
@@ -46,6 +49,9 @@ to_common_package:
 
         - binary_sensor.0x00158d0003937855_contact
         - sensor.0x00158d0003937855_battery
+
+        - binary_sensor.0x50325ffffe9c51be_occupancy
+        - sensor.0x50325ffffe9c51be_battery
 
   homeassistant:
     customize:
@@ -88,6 +94,12 @@ to_common_package:
         important: true
       sensor.0x00158d0003937855_battery:
         friendly_name: Заряд батареи двери в туалете
+
+      binary_sensor.0x50325ffffe9c51be_occupancy:
+        friendly_name: Датчик движения в кошачем лотке
+        important: true
+      sensor.0x50325ffffe9c51be_battery:
+        friendly_name: Заряд батареи датчика движения в кошачем лотке
 
       # WIZ
       light.wiz_ceiling_toilet:

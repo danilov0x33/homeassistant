@@ -7,6 +7,7 @@ filter:
   include_entities:
     - vacuum.dreame_bot_l10_pro
     - media_player.danilov_samsung_au7570_50_tv
+    - media_player.km6
 
     # - sensor.0x00124b00251fa5d7_temperature # Датчик температуры в ванной
     # - sensor.0xa4c138894b3790d2_temperature # Датчик температуры в спальне

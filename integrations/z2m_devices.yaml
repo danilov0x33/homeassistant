@@ -71,3 +71,13 @@
   friendly_name: "Датчик открытия крышки пылесоса"
   homeassistant:
     name: "0x00158d00045eea0d"
+
+"0x00124b00251fa5d7":
+  friendly_name: "Датчик температуры и влажности в ванной"
+  homeassistant:
+    name: "0x00124b00251fa5d7"
+
+"0xa4c13826691e389b":
+  friendly_name: "Посудомойка"
+  homeassistant:
+    name: "0xa4c13826691e389b"

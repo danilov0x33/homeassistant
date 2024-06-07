@@ -24,16 +24,6 @@ common_backup_package:
             keep_days: 2
           target:
             entity_id:
-              - sensor.0xa4c138894b3790d2_co2
-              - sensor.0xa4c138894b3790d2_formaldehyd
-              - sensor.0xa4c138894b3790d2_humidity
-              - sensor.0xa4c138894b3790d2_temperature
-              - sensor.0xa4c138894b3790d2_voc
-              - sensor.0xa4c1389466b02c9b_co2
-              - sensor.0xa4c1389466b02c9b_formaldehyd
-              - sensor.0xa4c1389466b02c9b_humidity
-              - sensor.0xa4c1389466b02c9b_voc
-              - sensor.0xa4c1389466b02c9b_temperature
               - climate.0xa4c1386da010b99d
 
         - service: notify.mysql_command

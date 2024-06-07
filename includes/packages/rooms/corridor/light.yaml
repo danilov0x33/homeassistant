@@ -8,6 +8,8 @@ co_light_package:
 
   homeassistant:
     customize:
+      light.corridor_light:
+        friendly_name: Группа света в коридоре
       script.co_main_light_script_on:
         friendly_name: Коридор | Включение основного света
       script.co_main_light_script_off:
@@ -30,6 +32,13 @@ co_light_package:
 
       switch.co_manually_main_light_switch:
         friendly_name: Ручное управление основным светом в коридоре
+
+  light:
+    - platform: group
+      name: corridor_light_group
+      entities:
+        - light.yeelight_450c_1
+        - light.wiz_ceiling_corridor
 
   adaptive_lighting:
     - name: "corridor"
@@ -70,14 +79,6 @@ co_light_package:
           data:
             transition: 3
             kelvin: 4000
-            brightness_pct: 1
-          target:
-            entity_id:
-              - light.yeelight_450c_1
-              - light.wiz_ceiling_corridor
-        - service: light.turn_on
-          data:
-            transition: 3
             brightness_pct: 100
           target:
             entity_id:

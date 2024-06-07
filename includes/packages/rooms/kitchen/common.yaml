@@ -28,6 +28,8 @@ ki_common_package:
         - sensor.lg_thinq_fridge
         - binary_sensor.lg_thinq_fridge_door_open
 
+        - media_player.km6
+
   influxdb:
     include:
       entities:
@@ -56,6 +58,8 @@ ki_common_package:
 
         - sensor.lg_thinq_fridge
         - binary_sensor.lg_thinq_fridge_door_open
+
+        - media_player.km6
 
   homeassistant:
     customize:
@@ -115,6 +119,6 @@ ki_common_package:
         friendly_name: Двери холодильника на кухне
         device_class: door
 
-      remote.km6:
+      media_player.km6:
         friendly_name: ТВ приставка на кухне
         important: false
