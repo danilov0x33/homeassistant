@@ -196,10 +196,10 @@ ha_common_package:
       sensor.0x54ef4410004461a2_battery:
         friendly_name: Заряд батареи датчика качества воздуха в зале
 
-      binary_sensor.0x00158d00045eea0d_contact:
-        friendly_name: Датчик открытия крышки пылесоса
-      sensor.0x00158d00045eea0d_battery:
-        friendly_name: Заряд батареи датчика открытия крышки пылесоса
+      # binary_sensor.0x00158d00045eea0d_contact:
+      #   friendly_name: Датчик открытия крышки пылесоса
+      # sensor.0x00158d00045eea0d_battery:
+      #   friendly_name: Заряд батареи датчика открытия крышки пылесоса
 
       cover.0x54ef441000070ae3:
         friendly_name: Шторы в зале

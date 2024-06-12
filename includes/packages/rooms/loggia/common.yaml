@@ -24,6 +24,8 @@ lo_common_package:
 
         - climate.0xa4c1386da010b99d
 
+        - media_player.tv_pristavka_mi_tv_stick
+
   influxdb:
     include:
       entities:
@@ -48,6 +50,8 @@ lo_common_package:
         - sensor.0x00158d000276ea3b_battery
 
         - climate.0xa4c1386da010b99d
+
+        - media_player.tv_pristavka_mi_tv_stick
 
   homeassistant:
     customize:
@@ -94,3 +98,6 @@ lo_common_package:
       climate.0xa4c1386da010b99d:
         friendly_name: Теплый пол на лоджии
         important: true
+
+      media_player.tv_pristavka_mi_tv_stick:
+        friendly_name: Телевизор на лоджии

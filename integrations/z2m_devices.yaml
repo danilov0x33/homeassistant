@@ -1,10 +1,10 @@
 "0x00158d0001bbf9cf":
-  friendly_name: "Вытяжка"
+  description: "Вытяжка"
   homeassistant:
     name: "0x00158d0001bbf9cf"
 
 "0xa4c1389466b02c9b":
-  friendly_name: "Датчик CO2 в зале"
+  description: "Датчик CO2 в зале"
   homeassistant:
     name: "0xa4c1389466b02c9b"
   debounce: 60
@@ -12,7 +12,7 @@
     - temperature
 
 "0xa4c138894b3790d2":
-  friendly_name: "Датчик CO2 в спальне"
+  description: "Датчик CO2 в спальне"
   homeassistant:
     name: "0xa4c138894b3790d2"
   debounce: 60
@@ -20,17 +20,17 @@
     - temperature
 
 "0xa4c138cf24d9a98d":
-  friendly_name: "Датчик освещенности в спальне"
+  description: "Датчик освещенности в спальне"
   homeassistant:
     name: "0xa4c138cf24d9a98d"
 
 "0xa4c138ccfeaeb6d9":
-  friendly_name: "Датчик освещенности в зале"
+  description: "Датчик освещенности в зале"
   homeassistant:
     name: "0xa4c138ccfeaeb6d9"
 
 "0xa4c1386da010b99d":
-  friendly_name: "Теплый пол на лоджии"
+  description: "Теплый пол на лоджии"
   homeassistant:
     name: "0xa4c1386da010b99d"
   debounce: 60
@@ -41,43 +41,208 @@
     - local_temperature
 
 "0x54ef44100044454b":
-  friendly_name: "Правое окно в спальне"
+  description: "Правое окно в спальне"
   homeassistant:
     name: "0x54ef44100044454b"
 
 "0x00158d0007504210":
-  friendly_name: "Торшер у дивана"
+  description: "Торшер у дивана"
   homeassistant:
     name: "0x00158d0007504210"
 
 "0x00158d0009ee5f7a":
-  friendly_name: "Датчик протечки в туалете"
+  description: "Датчик протечки в туалете"
   homeassistant:
     name: "0x00158d0009ee5f7a"
   availability:
     timeout: 4320
 
+"0x00158d00026b429b":
+  description: "Датчик протечки на стояке"
+  homeassistant:
+    name: "0x00158d00026b429b"
+
+"0x00158d0002922709":
+  description: "Датчик протечки в ванной"
+  homeassistant:
+    name: "0x00158d0002922709"
+
+"0x00158d0002922b19":
+  description: "Датчик протечки на кухне"
+  homeassistant:
+    name: "0x00158d0002922b19"
+
 "0x00158d0003937855":
-  friendly_name: "Датчик открытия двери в туалете"
+  description: "Датчик открытия двери в туалете"
   homeassistant:
     name: "0x00158d0003937855"
 
-"0x00158d0001994303":
-  friendly_name: "Датчик электропитания в квартире"
-  homeassistant:
-    name: "0x00158d0001994303"
-
 "0x00158d00045eea0d":
-  friendly_name: "Датчик открытия крышки пылесоса"
+  description: "Датчик открытия крышки пылесоса"
   homeassistant:
     name: "0x00158d00045eea0d"
 
+"0x00158d0001994303":
+  description: "Датчик электропитания в квартире"
+  homeassistant:
+    name: "0x00158d0001994303"
+
 "0x00124b00251fa5d7":
-  friendly_name: "Датчик температуры и влажности в ванной"
+  description: "Датчик температуры и влажности в ванной"
   homeassistant:
     name: "0x00124b00251fa5d7"
 
 "0xa4c13826691e389b":
-  friendly_name: "Посудомойка"
+  description: "Посудомойка"
   homeassistant:
     name: "0xa4c13826691e389b"
+
+"0x00158d0003cf8ae6":
+  description: "Датчик движения в ванной"
+  homeassistant:
+    name: "0x00158d0003cf8ae6"
+
+"0x00158d0002b18159":
+  description: "Окно в спальне"
+  homeassistant:
+    name: "0x00158d0002b18159"
+
+"0x60a423fffeb047dd":
+  description: "Переключатель основного освещение в спальне"
+  homeassistant:
+    name: "0x60a423fffeb047dd"
+
+"0x00124b002520c648":
+  description: "Датчик температуры и влажности на лоджии"
+  homeassistant:
+    name: "0x00124b002520c648"
+
+"0x00158d0002b17c46":
+  description: "Окно на лоджии"
+  homeassistant:
+    name: "0x00158d0002b17c46"
+
+"0x00158d000123129b":
+  description: "Окно в зале"
+  homeassistant:
+    name: "0x00158d000123129b"
+
+"0x00158d0003f1029f":
+  description: "Датчик движения в коридоре"
+  homeassistant:
+    name: "0x00158d0003f1029f"
+
+"0x00158d000276ea3b":
+  description: "Переключатель основного освещение на лоджии"
+  homeassistant:
+    name: "0x00158d000276ea3b"
+
+"0x54ef4410004db308":
+  description: "Переключатель основного освещение на кухне"
+  homeassistant:
+    name: "0x54ef4410004db308"
+
+"0x54ef4410005e60c8":
+  description: "Переключатель основного освещение в туалете и ванной"
+  homeassistant:
+    name: "0x54ef4410005e60c8"
+
+"0x54ef4410004da26c":
+  description: "Переключатель основного освещение в зале"
+  homeassistant:
+    name: "0x54ef4410004da26c"
+
+"0x54ef4410005b0295":
+  description: "Переключатель основного освещение в коридоре"
+  homeassistant:
+    name: "0x54ef4410005b0295"
+
+"0x00124b00252193c2":
+  description: "Датчик температуры и влажности в зале"
+  homeassistant:
+    name: "0x00124b00252193c2"
+
+"0x00124b002520c3d4":
+  description: "Датчик температуры и влажности на кухне"
+  homeassistant:
+    name: "0x00124b002520c3d4"
+
+"0x00158d0003cb49f0":
+  description: "Датчик движения в туалете"
+  homeassistant:
+    name: "0x00158d0003cb49f0"
+
+"0x00158d0003cbd91c":
+  description: "Датчик открытия двери в ванную"
+  homeassistant:
+    name: "0x00158d0003cbd91c"
+
+"0x54ef4410004461a2":
+  description: "Датчик TVOC на лоджии"
+  homeassistant:
+    name: "0x54ef4410004461a2"
+
+"0xa4c138f4dfe7903d":
+  description: "Питание стиральной машины"
+  homeassistant:
+    name: "0xa4c138f4dfe7903d"
+
+"0xa4c13851c962bc6d":
+  description: "Питание компьютера Жени"
+  homeassistant:
+    name: "0xa4c13851c962bc6d"
+
+"0xa4c138f4bd352a9e":
+  description: "Кран холодной воды"
+  homeassistant:
+    name: "0xa4c138f4bd352a9e"
+
+"0xa4c13868bf742ed6":
+  description: "Кран горячей воды"
+  homeassistant:
+    name: "0xa4c13868bf742ed6"
+
+"0xa4c13860e81bacd1":
+  description: "Счетчик электроэнергии в щитке"
+  homeassistant:
+    name: "0xa4c13860e81bacd1"
+
+"0x54ef4410007076ce":
+  description: "Термостат в спальне"
+  homeassistant:
+    name: "0x54ef4410007076ce"
+
+"0x54ef4410007012e6":
+  description: "Термостат в зале"
+  homeassistant:
+    name: "0x54ef4410007012e6"
+
+"0xa4c1383efb0fff4f":
+  description: "Основное освещение на лоджии"
+  homeassistant:
+    name: "0xa4c1383efb0fff4f"
+
+"0x7cb94c77ef400000":
+  description: "Основное освещение в ванной"
+  homeassistant:
+    name: "0x7cb94c77ef400000"
+
+"0x54ef441000070ae3":
+  description: "Шторы в зале"
+  homeassistant:
+    name: "0x54ef441000070ae3"
+
+"0x54ef4410007125a4":
+  description: "Кормушка для котов"
+  homeassistant:
+    name: "0x54ef4410007125a4"
+
+"0xa4c1386b925972e1":
+  description: "Датчик пожара в коридоре"
+  homeassistant:
+    name: "0xa4c1386b925972e1"
+
+"0xa4c13811d3a5a0f3":
+  description: "Питание зеркала в ванной"
+  homeassistant:
+    name: "0xa4c13811d3a5a0f3"
