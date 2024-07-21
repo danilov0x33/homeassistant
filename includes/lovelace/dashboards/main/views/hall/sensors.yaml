@@ -21,16 +21,16 @@ cards:
         hour24: true
         entities:
           - entity: sensor.0x00124b00252193c2_humidity
-  - type: horizontal-stack
-    cards:
-      - type: custom:mini-graph-card
-        hour24: true
-        entities:
-          - entity: sensor.0xa4c1389466b02c9b_co2
-        color_thresholds:
-          - value: 0
-            color: "#008000"
-          - value: 800
-            color: "#FFFF00"
-          - value: 1000
-            color: "#FF0000"
+  # - type: horizontal-stack
+  #   cards:
+  #     - type: custom:mini-graph-card
+  #       hour24: true
+  #       entities:
+  #         - entity: sensor.0xa4c1389466b02c9b_co2
+  #       color_thresholds:
+  #         - value: 0
+  #           color: "#008000"
+  #         - value: 800
+  #           color: "#FFFF00"
+  #         - value: 1000
+  #           color: "#FF0000"

@@ -17,27 +17,31 @@ filter:
     # - sensor.0x00124b002520c648_temperature # Датчик температуры на лоджии
 
     - light.yeelight_arwen_550c # Основной свет в зале
-    # - light.yeelight_arwen_550c_ambilight # Дополнительный свет в зале
+    - light.yeelight_arwen_550c_ambilight # Дополнительный свет в зале
     - light.yeelight_450c_0 # Основной свет на кухне
-    # - light.yeelight_450c_0_ambilight # Дополнительный свет на кухне
+    - light.yeelight_450c_0_ambilight # Дополнительный свет на кухне
     - light.0xa4c1383efb0fff4f # Основной свет на лоджии
     - light.yeelight_450c_1 # Основной свет в коридоре
-    # - light.yeelight_450c_1_ambilight # Дополнительный свет в коридоре
+    - light.yeelight_450c_1_ambilight # Дополнительный свет в коридоре
     - light.0x00158d0007504210 # Торшер у дивана
     - light.yeelight_450c_2 # Основной свет в спальне
-    # - light.yeelight_450c_2_ambilight # Дополнительный свет в спальне
+    - light.yeelight_450c_2_ambilight # Дополнительный свет в спальне
     - light.0x7cb94c77ef400000 # Основной свет в ванной
 
     - cover.0x54ef441000070ae3 # Шторы в зале
-    - cover.0x54ef44100044454b # Шторы в спальне
+    - cover.0x54ef44100044454b # Шторы в спальне (Правая)
+    - cover.0x54ef441000a02f4e # Шторы в спальне (Левая)
 
     - climate.0x54ef4410007012e6 # Термостат в зале
     - climate.0x54ef4410007076ce # Термостат в спальне
+    - climate.0xa4c1386da010b99d # Теплый пол на лоджии
     - climate.zhimi_mc2a_8777_heater # Обогреватель в зале
 
     - switch.tuya_switch_002_1 # Ночник у кровати
 
     - fan.xiaomi_mp4_ce97_air_purifier # Очиститель воздуха
+    - fan.dmaker_p45_520a_fan # Вентелятор
+    - fan.dmaker_p44_7b60_fan # Вентелятор-увлажнитель
 
     # - switch.kasa_switch_001 # Свет над сторол Насти
 
@@ -48,14 +52,26 @@ entity_config:
   light.yeelight_arwen_550c:
     name: Основной свет
 
+  light.yeelight_arwen_550c_ambilight:
+    name: Подсветка
+
   light.yeelight_450c_0:
     name: Основной свет
+
+  light.yeelight_450c_0_ambilight:
+    name: Подсветка
 
   light.yeelight_450c_1:
     name: Основной свет
 
+  light.yeelight_450c_1_ambilight:
+    name: Подсветка
+
   light.yeelight_450c_2:
     name: Основной свет
+
+  light.yeelight_450c_2_ambilight:
+    name: Подсветка
 
   light.0x7cb94c77ef400000:
     name: Основной свет
@@ -67,7 +83,10 @@ entity_config:
     name: Шторы
 
   cover.0x54ef44100044454b:
-    name: Шторы
+    name: Правая штора
+
+  cover.0x54ef441000a02f4e:
+    name: Левая штора
 
   light.0x00158d0007504210:
     name: Торшер
@@ -90,6 +109,15 @@ entity_config:
 
   climate.zhimi_mc2a_8777_heater:
     name: Обогреватель
+
+  climate.0xa4c1386da010b99d:
+    name: Теплый пол
+
+  fan.dmaker_p45_520a_fan:
+    name: Вентилятор
+
+  fan.dmaker_p44_7b60_fan:
+    name: Мокрый вентилятор
 
   fan.xiaomi_mp4_ce97_air_purifier:
     name: Очиститель воздуха

@@ -9,5 +9,6 @@ common_notify_washing_machine_package:
       object_id: washing_started_counter
       command_topic: "custom/washing_started_counter/set"
       state_topic: "custom/washing_started_counter/set"
+      payload_reset: 0
       min: 0
       max: 100

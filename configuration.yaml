@@ -11,8 +11,8 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Moscow
 
-  # allowlist_external_dirs:
-  #   - /config
+  allowlist_external_dirs:
+    - /config/www/downloads
 
   # customize: !include_dir_merge_named includes/entities/customizations
   packages: !include_dir_merge_named includes/packages
@@ -41,6 +41,18 @@ zone: ~
 cloud: ~
 # energy: ~
 ffmpeg: ~
+logger:
+  default: warn
+  logs:
+    homeassistant.components.mqtt.light.schema_json: error
+    homeassistant.components.androidtv_remote: error
+    homeassistant.components.sensor.recorder: error
+    homeassistant.components.onvif: error
+    custom_components.localtuya.common: error
+    custom_components.xiaomi_miot.sensor: error
+    custom_components.dreame_vacuum.dreame.device: error
+    custom_components.dreame_vacuum.dreame.protocol: error
+    custom_components.dreame_vacuum.dreame.map: error
 
 # Integrations
 #hacs: !include integrations/hacs.yaml
@@ -48,7 +60,6 @@ influxdb: !include integrations/influxdb.yaml
 telegram_bot: !include integrations/telegram_bot.yaml
 yandex_smart_home: !include integrations/yandex_smart_home.yaml
 yandex_station_intents: !include integrations/yandex_station_intents.yaml
-adaptive_lighting: !include integrations/adaptive_lighting.yaml
 # downloader:
 #   download_dir: www/downloads
 # automation: !include automations.yaml

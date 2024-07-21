@@ -17,7 +17,7 @@ common_backup_package:
       alias: common_clear_attibutes
       trigger:
         - platform: time
-          at: "01:00:00"
+          at: "04:00:00"
       action:
         - service: recorder.purge_entities
           data:

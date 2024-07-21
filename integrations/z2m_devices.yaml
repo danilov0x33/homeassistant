@@ -3,22 +3,6 @@
   homeassistant:
     name: "0x00158d0001bbf9cf"
 
-"0xa4c1389466b02c9b":
-  description: "Датчик CO2 в зале"
-  homeassistant:
-    name: "0xa4c1389466b02c9b"
-  debounce: 60
-  debounce_ignore:
-    - temperature
-
-"0xa4c138894b3790d2":
-  description: "Датчик CO2 в спальне"
-  homeassistant:
-    name: "0xa4c138894b3790d2"
-  debounce: 60
-  debounce_ignore:
-    - temperature
-
 "0xa4c138cf24d9a98d":
   description: "Датчик освещенности в спальне"
   homeassistant:
@@ -41,7 +25,7 @@
     - local_temperature
 
 "0x54ef44100044454b":
-  description: "Правое окно в спальне"
+  description: "Штора в спальне (Правое)"
   homeassistant:
     name: "0x54ef44100044454b"
 
@@ -112,6 +96,11 @@
   homeassistant:
     name: "0x60a423fffeb047dd"
 
+"0x54ef4410005e60c8":
+  description: "Переключатель основного освещение в ванной и туалете"
+  homeassistant:
+    name: "0x54ef4410005e60c8"
+
 "0x00124b002520c648":
   description: "Датчик температуры и влажности на лоджии"
   homeassistant:
@@ -142,10 +131,10 @@
   homeassistant:
     name: "0x54ef4410004db308"
 
-"0x54ef4410005e60c8":
-  description: "Переключатель основного освещение в туалете и ванной"
-  homeassistant:
-    name: "0x54ef4410005e60c8"
+# "0x54ef4410005e60c8":
+#   description: "Переключатель основного освещение в туалете и ванной"
+#   homeassistant:
+#     name: "0x54ef4410005e60c8"
 
 "0x54ef4410004da26c":
   description: "Переключатель основного освещение в зале"
@@ -181,6 +170,8 @@
   description: "Датчик TVOC на лоджии"
   homeassistant:
     name: "0x54ef4410004461a2"
+  availability:
+    timeout: 4320
 
 "0xa4c138f4dfe7903d":
   description: "Питание стиральной машины"
@@ -246,3 +237,8 @@
   description: "Питание зеркала в ванной"
   homeassistant:
     name: "0xa4c13811d3a5a0f3"
+
+"0x54ef441000a02f4e":
+  description: "Штора в спальне (Левая)"
+  homeassistant:
+    name: "0x54ef441000a02f4e"
