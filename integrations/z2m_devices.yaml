@@ -5,6 +5,7 @@
 
 "0xa4c138cf24d9a98d":
   description: "Датчик освещенности в спальне"
+  friendly_name: "0xa4c138cf24d9a98d"
   homeassistant:
     name: "0xa4c138cf24d9a98d"
 
@@ -42,6 +43,7 @@
     timeout: 4320
 
 "0x00158d00026b429b":
+  friendly_name: "0x00158d00026b429b"
   description: "Датчик протечки на стояке"
   homeassistant:
     name: "0x00158d00026b429b"
@@ -204,6 +206,7 @@
     name: "0x54ef4410007076ce"
 
 "0x54ef4410007012e6":
+  friendly_name: "0x54ef4410007012e6"
   description: "Термостат в зале"
   homeassistant:
     name: "0x54ef4410007012e6"
